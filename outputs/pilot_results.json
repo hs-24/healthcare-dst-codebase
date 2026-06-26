@@ -1,0 +1,361 @@
+{
+  "simulation_config": {
+    "duration_days": 30,
+    "site": "Central Distribution Hub",
+    "num_skus": 16
+  },
+  "data_quality_metrics": {
+    "total_records": 505,
+    "inconsistent_records": 46,
+    "missing_records": 19,
+    "duplicate_records": 50,
+    "inconsistency_rate_pct": 12.87
+  },
+  "forecast_accuracy_summary": {
+    "avg_manual_baseline_WMAPE_pct": 49.81,
+    "avg_digital_twin_WMAPE_pct": 29.66,
+    "forecast_accuracy_improvement_pct": 40.46
+  },
+  "operational_comparison": {
+    "digital_twin_fill_rate_pct": 99.88,
+    "manual_baseline_fill_rate_pct": 99.57,
+    "fill_rate_improvement_pct_points": 0.31,
+    "digital_twin_stockout_days": 4,
+    "manual_baseline_stockout_days": 7,
+    "stockout_days_avoided": 3
+  },
+  "kpi_summary_digital_twin": {
+    "per_sku": [
+      {
+        "sku_id": "MED-001",
+        "sku_name": "Surgical Gloves, Nitrile (Box of 100)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 644.4,
+        "total_fulfilled": 644.4
+      },
+      {
+        "sku_id": "MED-007",
+        "sku_name": "N95 Respirator Masks (Box of 20)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 752.8,
+        "total_fulfilled": 752.8
+      },
+      {
+        "sku_id": "MED-002",
+        "sku_name": "IV Cannulas, 20G (Pack of 50)",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 479.0,
+        "total_fulfilled": 479.0
+      },
+      {
+        "sku_id": "MED-008",
+        "sku_name": "IV Fluid Bags, Normal Saline 1L",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 591.4,
+        "total_fulfilled": 591.4
+      },
+      {
+        "sku_id": "MED-003",
+        "sku_name": "Paracetamol 500mg (Box of 1000 tablets)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 283.4,
+        "total_fulfilled": 283.4
+      },
+      {
+        "sku_id": "MED-009",
+        "sku_name": "Amoxicillin 500mg (Box of 500 capsules)",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 203.4,
+        "total_fulfilled": 203.4
+      },
+      {
+        "sku_id": "MED-012",
+        "sku_name": "Influenza Vaccine (Vial Pack of 10, cold-chain 2-8\u00c2\u00b0C)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 47.8,
+        "total_fulfilled": 47.8
+      },
+      {
+        "sku_id": "MED-005",
+        "sku_name": "Insulin Syringes (Pack of 100, cold-chain)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 141.7,
+        "total_fulfilled": 141.7
+      },
+      {
+        "sku_id": "MED-004",
+        "sku_name": "Wound Dressing Kits, Sterile",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 212.9,
+        "total_fulfilled": 212.9
+      },
+      {
+        "sku_id": "MED-010",
+        "sku_name": "Surgical Sutures, Absorbable (Box of 12)",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 165.0,
+        "total_fulfilled": 165.0
+      },
+      {
+        "sku_id": "MED-014",
+        "sku_name": "Urinary Catheters (Pack of 10)",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 162.7,
+        "total_fulfilled": 162.7
+      },
+      {
+        "sku_id": "MED-015",
+        "sku_name": "Blood Collection Tubes, EDTA (Box of 100)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 355.6,
+        "total_fulfilled": 355.6
+      },
+      {
+        "sku_id": "MED-011",
+        "sku_name": "Rapid Antigen Test Kits (Box of 25)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 95.2,
+        "total_fulfilled": 95.2
+      },
+      {
+        "sku_id": "MED-006",
+        "sku_name": "Defibrillator Pads, Adult (Pair)",
+        "abc_class": "C",
+        "xyz_class": "Z",
+        "fill_rate_pct": 88.29,
+        "stockout_days": 4,
+        "total_demand": 45.3,
+        "total_fulfilled": 40.0
+      },
+      {
+        "sku_id": "MED-013",
+        "sku_name": "Oxygen Masks, Adult Non-Rebreather",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 169.9,
+        "total_fulfilled": 169.9
+      },
+      {
+        "sku_id": "MED-016",
+        "sku_name": "Ventilator Circuit Kits, Single-Use",
+        "abc_class": "C",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 26.4,
+        "total_fulfilled": 26.4
+      }
+    ],
+    "site_fill_rate_pct": 99.88,
+    "total_stockout_days": 4,
+    "total_reorders_placed": 19
+  },
+  "kpi_summary_manual_baseline": {
+    "per_sku": [
+      {
+        "sku_id": "MED-001",
+        "sku_name": "Surgical Gloves, Nitrile (Box of 100)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 644.4,
+        "total_fulfilled": 644.4
+      },
+      {
+        "sku_id": "MED-007",
+        "sku_name": "N95 Respirator Masks (Box of 20)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 752.8,
+        "total_fulfilled": 752.8
+      },
+      {
+        "sku_id": "MED-002",
+        "sku_name": "IV Cannulas, 20G (Pack of 50)",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 479.0,
+        "total_fulfilled": 479.0
+      },
+      {
+        "sku_id": "MED-008",
+        "sku_name": "IV Fluid Bags, Normal Saline 1L",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 99.11,
+        "stockout_days": 1,
+        "total_demand": 591.4,
+        "total_fulfilled": 586.2
+      },
+      {
+        "sku_id": "MED-003",
+        "sku_name": "Paracetamol 500mg (Box of 1000 tablets)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 99.16,
+        "stockout_days": 1,
+        "total_demand": 283.4,
+        "total_fulfilled": 281.0
+      },
+      {
+        "sku_id": "MED-009",
+        "sku_name": "Amoxicillin 500mg (Box of 500 capsules)",
+        "abc_class": "A",
+        "xyz_class": "Y",
+        "fill_rate_pct": 97.14,
+        "stockout_days": 1,
+        "total_demand": 203.4,
+        "total_fulfilled": 197.6
+      },
+      {
+        "sku_id": "MED-012",
+        "sku_name": "Influenza Vaccine (Vial Pack of 10, cold-chain 2-8\u00c2\u00b0C)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 47.8,
+        "total_fulfilled": 47.8
+      },
+      {
+        "sku_id": "MED-005",
+        "sku_name": "Insulin Syringes (Pack of 100, cold-chain)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 141.7,
+        "total_fulfilled": 141.7
+      },
+      {
+        "sku_id": "MED-004",
+        "sku_name": "Wound Dressing Kits, Sterile",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 212.9,
+        "total_fulfilled": 212.9
+      },
+      {
+        "sku_id": "MED-010",
+        "sku_name": "Surgical Sutures, Absorbable (Box of 12)",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 165.0,
+        "total_fulfilled": 165.0
+      },
+      {
+        "sku_id": "MED-014",
+        "sku_name": "Urinary Catheters (Pack of 10)",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 162.7,
+        "total_fulfilled": 162.7
+      },
+      {
+        "sku_id": "MED-015",
+        "sku_name": "Blood Collection Tubes, EDTA (Box of 100)",
+        "abc_class": "A",
+        "xyz_class": "X",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 355.6,
+        "total_fulfilled": 355.6
+      },
+      {
+        "sku_id": "MED-011",
+        "sku_name": "Rapid Antigen Test Kits (Box of 25)",
+        "abc_class": "B",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 95.2,
+        "total_fulfilled": 95.2
+      },
+      {
+        "sku_id": "MED-006",
+        "sku_name": "Defibrillator Pads, Adult (Pair)",
+        "abc_class": "C",
+        "xyz_class": "Z",
+        "fill_rate_pct": 88.29,
+        "stockout_days": 4,
+        "total_demand": 45.3,
+        "total_fulfilled": 40.0
+      },
+      {
+        "sku_id": "MED-013",
+        "sku_name": "Oxygen Masks, Adult Non-Rebreather",
+        "abc_class": "B",
+        "xyz_class": "Y",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 169.9,
+        "total_fulfilled": 169.9
+      },
+      {
+        "sku_id": "MED-016",
+        "sku_name": "Ventilator Circuit Kits, Single-Use",
+        "abc_class": "C",
+        "xyz_class": "Z",
+        "fill_rate_pct": 100.0,
+        "stockout_days": 0,
+        "total_demand": 26.4,
+        "total_fulfilled": 26.4
+      }
+    ],
+    "site_fill_rate_pct": 99.57,
+    "total_stockout_days": 7,
+    "total_reorders_placed": 28
+  }
+}

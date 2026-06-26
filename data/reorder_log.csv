@@ -1,0 +1,7 @@
+day,site_id,sku_id,order_qty,expected_arrival_day
+15,SITE_A,MED-001,400,18
+15,SITE_A,MED-002,250,19
+15,SITE_A,MED-003,150,20
+16,SITE_A,MED-006,30,24
+18,SITE_A,MED-004,120,21
+19,SITE_A,MED-005,100,25

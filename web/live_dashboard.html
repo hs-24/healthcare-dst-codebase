@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Healthcare Warehouse — Digital Supply Chain Twin (Live)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b1320; color: #e6edf3; overflow: hidden; }
+  #app { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 64px 1fr; height: 100vh; }
+  header { grid-column: 1 / 3; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: #101a2c; border-bottom: 1px solid #1f2c45; }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  header .sub { font-size: 12px; color: #7d8aa3; }
+  #scene-wrap { position: relative; }
+  #scene-wrap canvas { display: block; }
+  #controls { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; align-items: center; background: rgba(16,26,44,0.85); padding: 8px 12px; border-radius: 8px; border: 1px solid #1f2c45; }
+  #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; }
+  #controls button:hover { background: #2c4a82; }
+  #day-label { font-size: 12px; color: #9fb3d8; min-width: 90px; }
+  #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
+  #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
+  #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow: hidden; }
+  .panel { padding: 14px 16px; border-bottom: 1px solid #1f2c45; }
+  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #7d8aa3; margin: 0 0 10px; }
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi { background: #131f33; border-radius: 8px; padding: 8px 10px; }
+  .kpi .v { font-size: 18px; font-weight: 700; }
+  .kpi .l { font-size: 10.5px; color: #7d8aa3; margin-top: 2px; }
+  .kpi .v.good { color: #5fd685; }
+  .kpi .v.warn { color: #ffb454; }
+  #agent-feed { flex: 1; overflow-y: auto; padding: 10px 14px; }
+  .ev { border-radius: 6px; padding: 7px 9px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.4; border-left: 3px solid #3a4d72; background: #131f33; }
+  .ev.info { border-left-color: #3a8df0; }
+  .ev.warning { border-left-color: #ffb454; }
+  .ev.critical { border-left-color: #ff5f6d; }
+  .ev .meta { color: #7d8aa3; font-size: 10px; margin-bottom: 2px; }
+  .ev .agent-tag { color: #9fb3d8; font-weight: 600; }
+  #sku-table { width: 100%; font-size: 11.5px; border-collapse: collapse; }
+  #sku-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 4px 2px; border-bottom: 1px solid #1f2c45; }
+  #sku-table td { padding: 5px 2px; border-bottom: 1px solid #182338; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <h1>Healthcare Warehouse — Digital Supply Chain Twin</h1>
+      <div class="sub">DSC2205 Group 3 · Central Distribution Hub (Pilot Site A) · Live agentic replay</div>
+    </div>
+    <div class="sub" id="header-day">Day — / —</div>
+  </header>
+
+  <div id="scene-wrap">
+    <div id="legend">
+      <div class="row"><span class="swatch" style="background:#5fd685"></span> Healthy stock (pallets lit)</div>
+      <div class="row"><span class="swatch" style="background:#ffb454"></span> Approaching reorder point</div>
+      <div class="row"><span class="swatch" style="background:#ff5f6d"></span> At/below reorder point</div>
+      <div class="row" style="margin-top:6px; padding-top:6px; border-top:1px solid #223252;"><span class="swatch" style="background:#3a8df0"></span> VNA pallet racking (reach/turret truck)</div>
+      <div class="row"><span class="swatch" style="background:#7fd1ff"></span> Cold-chain vault (VNV, 2–8°C)</div>
+      <div class="row"><span class="swatch" style="background:#c98cff"></span> Secure cage (critical equipment)</div>
+    </div>
+    <div id="controls">
+      <button id="btn-play">⏸ Pause</button>
+      <button id="btn-reset">⟲ Reset</button>
+      <span id="day-label">Day 0 / 29</span>
+    </div>
+  </div>
+
+  <aside>
+    <div class="panel">
+      <h2>Operational KPIs (30-day pilot)</h2>
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </div>
+    <div class="panel">
+      <h2>Bay status (pallets)</h2>
+      <table id="sku-table">
+        <thead><tr><th>SKU</th><th>Zone</th><th>Pallets</th><th>Status</th></tr></thead>
+        <tbody id="sku-table-body"></tbody>
+      </table>
+    </div>
+    <div class="panel" style="border-bottom:none; flex:1; display:flex; flex-direction:column; min-height:0;">
+      <h2>Agentic AI workflow — live event feed</h2>
+      <div id="agent-feed"></div>
+    </div>
+  </aside>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from "three";
+
+const sceneWrap = document.getElementById("scene-wrap");
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b1320);
+scene.fog = new THREE.Fog(0x0b1320, 20, 60);
+
+const camera = new THREE.PerspectiveCamera(45, sceneWrap.clientWidth / sceneWrap.clientHeight, 0.1, 200);
+camera.position.set(34, 28, 40);
+camera.lookAt(0, 2, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(sceneWrap.clientWidth, sceneWrap.clientHeight);
+sceneWrap.appendChild(renderer.domElement);
+
+window.addEventListener("resize", () => {
+  camera.aspect = sceneWrap.clientWidth / sceneWrap.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(sceneWrap.clientWidth, sceneWrap.clientHeight);
+});
+
+// lighting
+scene.add(new THREE.AmbientLight(0x8899bb, 0.6));
+const dirLight = new THREE.DirectionalLight(0xffffff, 1.1);
+dirLight.position.set(10, 20, 10);
+scene.add(dirLight);
+
+// floor — sized for a large-scale DC footprint (VNA zone + cold vault + cage)
+const FLOOR_SIZE = 90;
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(FLOOR_SIZE, FLOOR_SIZE),
+  new THREE.MeshStandardMaterial({ color: 0x10192c, roughness: 1 })
+);
+floor.rotation.x = -Math.PI / 2;
+scene.add(floor);
+
+const grid = new THREE.GridHelper(FLOOR_SIZE, FLOOR_SIZE, 0x223252, 0x162032);
+grid.position.y = 0.01;
+scene.add(grid);
+
+// orbit-less manual rotate via drag (lightweight, no extra import)
+let isDragging = false, prevX = 0, prevY = 0;
+let camAngle = Math.atan2(camera.position.x, camera.position.z);
+let camHeight = camera.position.y;
+let camDist = Math.hypot(camera.position.x, camera.position.z);
+renderer.domElement.addEventListener("pointerdown", (e) => { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
+window.addEventListener("pointerup", () => isDragging = false);
+window.addEventListener("pointermove", (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - prevX, dy = e.clientY - prevY;
+  prevX = e.clientX; prevY = e.clientY;
+  camAngle -= dx * 0.005;
+  camHeight = Math.max(4, Math.min(45, camHeight + dy * 0.08));
+  camera.position.x = Math.sin(camAngle) * camDist;
+  camera.position.z = Math.cos(camAngle) * camDist;
+  camera.position.y = camHeight;
+  camera.lookAt(0, 2, 0);
+});
+renderer.domElement.addEventListener("wheel", (e) => {
+  camDist = Math.max(10, Math.min(85, camDist + e.deltaY * 0.03));
+  camera.position.x = Math.sin(camAngle) * camDist;
+  camera.position.z = Math.cos(camAngle) * camDist;
+});
+
+// ---------------------------------------------------------------------
+// Warehouse model: bays (one per SKU) grouped into three physical zones
+// that mirror a real large-scale healthcare distribution centre:
+//   VNA zone   - Very Narrow Aisle high-bay pallet racking, multiple
+//                aisles served by reach/turret trucks, bulk consumables
+//                and pharmaceuticals
+//   COLD_VAULT - a Very Narrow Vault: enclosed, blue-lit 2-8°C cage for
+//                cold-chain pharmaceuticals (vaccines, insulin)
+//   SECURE_CAGE - enclosed, wire-fenced bay for low-volume, clinically
+//                critical equipment consumables
+// Stock is rendered as discrete pallets (a fixed-capacity instanced
+// grid per bay) rather than a single bar, so the twin shows physical
+// pallet occupancy, not just an abstract stock level.
+// ---------------------------------------------------------------------
+
+const PALLET_LEVELS = 6;        // rack height in VNA/bulk bays
+const PALLET_PER_LEVEL = 2;     // pallets stored deep per level
+const PALLET_SLOTS = PALLET_LEVELS * PALLET_PER_LEVEL; // fixed visual capacity per bay
+const LEVEL_HEIGHT = 1.35;
+const PALLET_SIZE = { w: 1.0, h: 1.05, d: 1.0 };
+const BAY_WIDTH = 2.6;
+const BAY_DEPTH = 2.6;
+
+const racks = {}; // sku_id -> { instancedMesh, litCount, statusColor, glow }
+const zoneGroups = []; // for camera/labelling reference only
+
+function colorForStatus(stock, reorderPoint) {
+  if (stock <= reorderPoint) return 0xff5f6d;
+  if (stock <= reorderPoint * 1.6) return 0xffb454;
+  return 0x5fd685;
+}
+
+function makeLabelSprite(text, sizeScale = 1) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 320; canvas.height = 80;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.fillRect(0, 0, 320, 80);
+  ctx.font = "bold 30px Segoe UI";
+  ctx.fillStyle = "#e6edf3";
+  ctx.textAlign = "center";
+  ctx.fillText(text, 160, 48);
+  const tex = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(3.6 * sizeScale, 0.9 * sizeScale, 1);
+  return sprite;
+}
+
+function makeZoneSign(text, x, z, color) {
+  const sprite = makeLabelSprite(text, 1.4);
+  sprite.position.set(x, 8.2, z);
+  scene.add(sprite);
+  const haloMat = new THREE.SpriteMaterial({ color, transparent: true, opacity: 0.0 });
+  return sprite;
+}
+
+const pallSlotOffsets = (() => {
+  // local offsets within a bay for each of PALLET_SLOTS pallet positions
+  const offs = [];
+  for (let lvl = 0; lvl < PALLET_LEVELS; lvl++) {
+    for (let p = 0; p < PALLET_PER_LEVEL; p++) {
+      const dz = (p - (PALLET_PER_LEVEL - 1) / 2) * (PALLET_SIZE.d + 0.05);
+      offs.push({ y: 0.4 + lvl * LEVEL_HEIGHT, z: dz });
+    }
+  }
+  return offs;
+})();
+
+function buildRackFrame(x, z, color) {
+  const postMat = new THREE.MeshStandardMaterial({ color: 0x33415e, metalness: 0.4, roughness: 0.6 });
+  const beamMat = new THREE.MeshStandardMaterial({ color, metalness: 0.3, roughness: 0.5 });
+  const totalHeight = PALLET_LEVELS * LEVEL_HEIGHT + 0.6;
+
+  const corners = [
+    [-BAY_WIDTH / 2, -BAY_DEPTH / 2], [BAY_WIDTH / 2, -BAY_DEPTH / 2],
+    [-BAY_WIDTH / 2, BAY_DEPTH / 2], [BAY_WIDTH / 2, BAY_DEPTH / 2],
+  ];
+  corners.forEach(([dx, dz]) => {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, totalHeight, 0.12), postMat);
+    post.position.set(x + dx, totalHeight / 2, z + dz);
+    scene.add(post);
+  });
+  for (let lvl = 0; lvl <= PALLET_LEVELS; lvl++) {
+    const beam = new THREE.Mesh(new THREE.BoxGeometry(BAY_WIDTH, 0.08, 0.08), beamMat);
+    beam.position.set(x, lvl * LEVEL_HEIGHT + 0.4, z - BAY_DEPTH / 2);
+    scene.add(beam);
+    const beam2 = beam.clone();
+    beam2.position.z = z + BAY_DEPTH / 2;
+    scene.add(beam2);
+  }
+  // status beacon on top
+  const beacon = new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 12, 12),
+    new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x5fd685, emissiveIntensity: 0.8 })
+  );
+  beacon.position.set(x, totalHeight + 0.4, z);
+  scene.add(beacon);
+  return beacon;
+}
+
+function buildBay(skuId, x, z, zoneColor) {
+  const beacon = buildRackFrame(x, z, zoneColor);
+
+  const palletGeo = new THREE.BoxGeometry(PALLET_SIZE.w, PALLET_SIZE.h, PALLET_SIZE.d);
+  const palletMat = new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x102015 });
+  const inst = new THREE.InstancedMesh(palletGeo, palletMat, PALLET_SLOTS);
+  inst.position.set(x, 0, z);
+  scene.add(inst);
+
+  const dummy = new THREE.Object3D();
+  pallSlotOffsets.forEach((off, i) => {
+    dummy.position.set(0, off.y, off.z);
+    dummy.scale.set(1, 1, 1);
+    dummy.updateMatrix();
+    inst.setMatrixAt(i, dummy.matrix);
+  });
+  inst.instanceMatrix.needsUpdate = true;
+
+  const label = makeLabelSprite(skuId);
+  label.position.set(x, PALLET_LEVELS * LEVEL_HEIGHT + 1.3, z);
+  scene.add(label);
+
+  racks[skuId] = { inst, beacon, litCount: -1 };
+}
+
+function updateBay(skuId, s) {
+  const rack = racks[skuId];
+  if (!rack) return;
+
+  const litCount = Math.max(0, Math.min(PALLET_SLOTS, Math.round(
+    (s.pallet_count / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
+  )));
+  const color = colorForStatus(s.reconciled_stock, s.reorder_point);
+
+  if (litCount === rack.litCount && rack._lastColor === color) return;
+  rack.litCount = litCount;
+  rack._lastColor = color;
+
+  const dummy = new THREE.Object3D();
+  const c = new THREE.Color(color);
+  for (let i = 0; i < PALLET_SLOTS; i++) {
+    const off = pallSlotOffsets[i];
+    const lit = i < litCount;
+    dummy.position.set(0, off.y, off.z);
+    dummy.scale.setScalar(lit ? 1 : 0.001); // empty slots collapse to invisible
+    dummy.updateMatrix();
+    rack.inst.setMatrixAt(i, dummy.matrix);
+    rack.inst.setColorAt(i, lit ? c : new THREE.Color(0x1a2235));
+  }
+  rack.inst.instanceMatrix.needsUpdate = true;
+  if (rack.inst.instanceColor) rack.inst.instanceColor.needsUpdate = true;
+
+  rack.beacon.material.color.set(color);
+  rack.beacon.material.emissive.set(color);
+}
+
+// ---- Zone layout -----------------------------------------------------
+const AISLE_WIDTH = 2.8;     // narrow aisle (VNA truck width) between facing rows
+const AISLE_PITCH = 8.5;     // spacing between aisle centres
+const BAY_PITCH = 3.2;       // spacing between bays along an aisle
+const ROW_OFFSET = AISLE_WIDTH / 2 + BAY_DEPTH / 2;
+
+function layoutVNA(skuIds, originX) {
+  // 3 aisles x (2 rows x 2 bays) = up to 12 bays
+  const baysPerAisle = 4;
+  skuIds.forEach((skuId, i) => {
+    const aisleIdx = Math.floor(i / baysPerAisle);
+    const withinAisle = i % baysPerAisle;
+    const side = withinAisle < 2 ? -1 : 1; // left/right row
+    const bayIdx = withinAisle % 2;
+
+    const aisleCenterX = originX + aisleIdx * AISLE_PITCH;
+    const x = aisleCenterX + side * ROW_OFFSET;
+    const z = (bayIdx - 0.5) * BAY_PITCH;
+    buildBay(skuId, x, z, 0x3a8df0);
+  });
+  const nAisles = Math.ceil(skuIds.length / baysPerAisle);
+  for (let a = 0; a < nAisles; a++) {
+    const aisleCenterX = originX + a * AISLE_PITCH;
+    const sign = makeZoneSign(`VNA AISLE ${a + 1}`, aisleCenterX, -6.5, 0x3a8df0);
+  }
+  return originX + (nAisles - 1) * AISLE_PITCH;
+}
+
+function layoutEnclosedZone(skuIds, centerX, centerZ, label, tint) {
+  // small enclosed room: bays in a single facing row, tinted floor + wire walls
+  const roomW = Math.max(8, skuIds.length * BAY_PITCH + 4);
+  const roomD = 7;
+  const floorPatch = new THREE.Mesh(
+    new THREE.PlaneGeometry(roomW, roomD),
+    new THREE.MeshStandardMaterial({ color: tint, transparent: true, opacity: 0.18 })
+  );
+  floorPatch.rotation.x = -Math.PI / 2;
+  floorPatch.position.set(centerX, 0.02, centerZ);
+  scene.add(floorPatch);
+
+  const wireMat = new THREE.LineBasicMaterial({ color: tint, transparent: true, opacity: 0.7 });
+  const wallHeight = 5.5;
+  const corners = [
+    [-roomW / 2, -roomD / 2], [roomW / 2, -roomD / 2],
+    [roomW / 2, roomD / 2], [-roomW / 2, roomD / 2], [-roomW / 2, -roomD / 2],
+  ];
+  const pts = corners.map(([dx, dz]) => new THREE.Vector3(centerX + dx, 0, centerZ + dz));
+  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), wireMat));
+  corners.slice(0, 4).forEach(([dx, dz]) => {
+    const pts2 = [new THREE.Vector3(centerX + dx, 0, centerZ + dz), new THREE.Vector3(centerX + dx, wallHeight, centerZ + dz)];
+    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), wireMat));
+  });
+
+  const startX = centerX - ((skuIds.length - 1) * BAY_PITCH) / 2;
+  skuIds.forEach((skuId, i) => {
+    buildBay(skuId, startX + i * BAY_PITCH, centerZ, tint);
+  });
+  makeZoneSign(label, centerX, centerZ - roomD / 2 - 1, tint);
+}
+
+function buildWarehouse(skus) {
+  const vnaIds = [], coldIds = [], cageIds = [];
+  for (const [id, s] of Object.entries(skus)) {
+    if (s.storage_mode === "COLD_VAULT") coldIds.push(id);
+    else if (s.storage_mode === "SECURE_CAGE") cageIds.push(id);
+    else vnaIds.push(id);
+  }
+  const vnaEndX = layoutVNA(vnaIds, -((Math.ceil(vnaIds.length / 4) - 1) * AISLE_PITCH) / 2 - AISLE_PITCH);
+  layoutEnclosedZone(coldIds, vnaEndX + AISLE_PITCH * 1.6, -7, "COLD VAULT · 2–8°C (VNV)", 0x7fd1ff);
+  layoutEnclosedZone(cageIds, vnaEndX + AISLE_PITCH * 1.6, 7, "SECURE CAGE · CRITICAL EQUIPMENT", 0xc98cff);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+animate();
+
+// ---- live data polling ----
+let warehouseBuilt = false;
+let playing = true;
+
+function statusLabel(stock, rp) {
+  if (stock <= rp) return ["At/below reorder", "#ff5f6d"];
+  if (stock <= rp * 1.6) return ["Watch", "#ffb454"];
+  return ["Healthy", "#5fd685"];
+}
+
+const ZONE_LABELS = { VNA: "VNA aisle", COLD_VAULT: "Cold vault (VNV)", SECURE_CAGE: "Secure cage" };
+
+async function refreshState() {
+  const res = await fetch("/api/state");
+  const data = await res.json();
+
+  if (!warehouseBuilt) {
+    buildWarehouse(data.skus);
+    warehouseBuilt = true;
+  }
+  for (const [skuId, s] of Object.entries(data.skus)) {
+    updateBay(skuId, s);
+  }
+
+  document.getElementById("day-label").textContent = `Day ${data.day} / ${data.n_days - 1}`;
+  document.getElementById("header-day").textContent = `Day ${data.day} / ${data.n_days - 1}`;
+  playing = data.playing;
+  document.getElementById("btn-play").textContent = playing ? "⏸ Pause" : "▶ Play";
+
+  const kpis = data.site_summary;
+  document.getElementById("kpi-grid").innerHTML = `
+    <div class="kpi"><div class="v good">${kpis.digital_twin_fill_rate_pct.toFixed(2)}%</div><div class="l">Digital twin fill rate</div></div>
+    <div class="kpi"><div class="v warn">${kpis.manual_baseline_fill_rate_pct.toFixed(2)}%</div><div class="l">Manual baseline fill rate</div></div>
+    <div class="kpi"><div class="v good">${kpis.stockout_days_avoided}</div><div class="l">Stockout days avoided</div></div>
+    <div class="kpi"><div class="v good">${kpis.forecast_accuracy_improvement_pct.toFixed(1)}%</div><div class="l">Forecast accuracy gain</div></div>
+    <div class="kpi" style="grid-column:1/3"><div class="v warn">${kpis.data_inconsistency_rate_pct.toFixed(1)}%</div><div class="l">Source spreadsheet inconsistency rate (validated away by agents below)</div></div>
+  `;
+
+  const tbody = document.getElementById("sku-table-body");
+  tbody.innerHTML = Object.entries(data.skus).map(([id, s]) => {
+    const [label, color] = statusLabel(s.reconciled_stock, s.reorder_point);
+    return `<tr>
+      <td>${id}</td>
+      <td>${ZONE_LABELS[s.storage_mode] || s.storage_mode}</td>
+      <td>${s.pallet_count.toFixed(1)} / ${s.pallet_capacity}</td>
+      <td><span class="dot" style="background:${color}"></span>${label}</td>
+    </tr>`;
+  }).join("");
+}
+
+async function refreshAgentLog() {
+  const res = await fetch("/api/agent-log");
+  const events = await res.json();
+  const feed = document.getElementById("agent-feed");
+  feed.innerHTML = events.map(e => `
+    <div class="ev ${e.severity}">
+      <div class="meta"><span class="agent-tag">${e.agent}</span> · ${e.sku_id} · ${e.timestamp}</div>
+      ${e.message}
+    </div>
+  `).join("");
+}
+
+document.getElementById("btn-play").addEventListener("click", async () => {
+  await fetch("/api/control", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: playing ? "pause" : "play" }),
+  });
+  refreshState();
+});
+document.getElementById("btn-reset").addEventListener("click", async () => {
+  await fetch("/api/control", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "reset" }),
+  });
+  refreshState();
+});
+
+refreshState();
+refreshAgentLog();
+setInterval(refreshState, 1500);
+setInterval(refreshAgentLog, 1500);
+</script>
+</body>
+</html>

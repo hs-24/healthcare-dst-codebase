@@ -1,0 +1,257 @@
+simulation:
+  name: Healthcare Warehouse PoC - Site A Pilot
+  duration_days: 30
+  random_seed: 42
+  time_step_hours: 24
+sites:
+- site_id: SITE_A
+  site_name: Central Distribution Hub
+  description: Pilot site selected for PoC due to highest spreadsheet volume.
+    Representative of the multi-site, multi-category catalogue described in
+    Section 1 (PPE/consumables, pharmaceuticals, cold-chain, diagnostics,
+    equipment consumables) rather than a single-category store.
+# SKU catalogue is illustrative/mock data, sized and parameterised to be
+# representative of a real hospital central distribution hub (typical
+# consumption volumes, ABC/XYZ mix, and lead times drawn from public WHO/NHS
+# essential-medicines and hospital-logistics guidance) -- not derived from
+# any live production system, consistent with the pilot's agreed scope.
+#
+# storage_mode reflects the physical storage zone each SKU is racked in at
+# a real large-scale healthcare DC:
+#   VNA          - Very Narrow Aisle high-bay pallet racking (bulk A/B-class
+#                  consumables and pharmaceuticals, reach/turret-truck served)
+#   COLD_VAULT   - Very Narrow Vault: a refrigerated 2-8°C narrow-aisle cage
+#                  for cold-chain pharmaceuticals (vaccines, insulin)
+#   SECURE_CAGE  - caged, access-controlled bay for low-volume, clinically
+#                  critical equipment consumables
+#
+# units_per_pallet is the physical pallet build quantity used to convert
+# stock units into pallet counts for the 3D twin and floor operations.
+skus:
+# --- PPE / general consumables (highest volume, A-class, VNA racking) ---
+- sku_id: MED-001
+  name: Surgical Gloves, Nitrile (Box of 100)
+  category: PPE / Consumables
+  abc_class: A
+  xyz_class: X
+  storage_mode: VNA
+  units_per_pallet: 60
+  initial_stock: 500
+  reorder_point: 150
+  reorder_qty: 400
+  lead_time_days: 3
+  demand_mean: 22
+  demand_std: 4
+- sku_id: MED-007
+  name: N95 Respirator Masks (Box of 20)
+  category: PPE / Consumables
+  abc_class: A
+  xyz_class: X
+  storage_mode: VNA
+  units_per_pallet: 80
+  initial_stock: 600
+  reorder_point: 180
+  reorder_qty: 450
+  lead_time_days: 4
+  demand_mean: 26
+  demand_std: 6
+
+# --- IV therapy / general consumables (VNA racking) ---
+- sku_id: MED-002
+  name: IV Cannulas, 20G (Pack of 50)
+  category: Consumables
+  abc_class: A
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 100
+  initial_stock: 300
+  reorder_point: 100
+  reorder_qty: 250
+  lead_time_days: 4
+  demand_mean: 14
+  demand_std: 6
+- sku_id: MED-008
+  name: IV Fluid Bags, Normal Saline 1L
+  category: Consumables / Fluids
+  abc_class: A
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 48
+  initial_stock: 450
+  reorder_point: 140
+  reorder_qty: 350
+  lead_time_days: 5
+  demand_mean: 19
+  demand_std: 7
+
+# --- Pharmaceuticals, ambient (VNA racking) ---
+- sku_id: MED-003
+  name: Paracetamol 500mg (Box of 1000 tablets)
+  category: Pharmaceuticals
+  abc_class: A
+  xyz_class: X
+  storage_mode: VNA
+  units_per_pallet: 40
+  initial_stock: 200
+  reorder_point: 60
+  reorder_qty: 150
+  lead_time_days: 5
+  demand_mean: 9
+  demand_std: 2
+- sku_id: MED-009
+  name: Amoxicillin 500mg (Box of 500 capsules)
+  category: Pharmaceuticals
+  abc_class: A
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 50
+  initial_stock: 160
+  reorder_point: 50
+  reorder_qty: 120
+  lead_time_days: 6
+  demand_mean: 7.5
+  demand_std: 3
+
+# --- Cold-chain pharmaceuticals (strict 2-8°C -> COLD_VAULT / VNV) ---
+- sku_id: MED-012
+  name: Influenza Vaccine (Vial Pack of 10, cold-chain 2-8°C)
+  category: Pharmaceuticals / Cold-chain
+  abc_class: B
+  xyz_class: Z
+  storage_mode: COLD_VAULT
+  units_per_pallet: 8
+  initial_stock: 60
+  reorder_point: 20
+  reorder_qty: 50
+  lead_time_days: 10
+  demand_mean: 1.8
+  demand_std: 2.2
+- sku_id: MED-005
+  name: Insulin Syringes (Pack of 100, cold-chain)
+  category: Pharmaceuticals / Cold-chain
+  abc_class: B
+  xyz_class: Z
+  storage_mode: COLD_VAULT
+  units_per_pallet: 20
+  initial_stock: 120
+  reorder_point: 40
+  reorder_qty: 100
+  lead_time_days: 6
+  demand_mean: 4
+  demand_std: 5
+
+# --- Wound care / surgical consumables (VNA racking) ---
+- sku_id: MED-004
+  name: Wound Dressing Kits, Sterile
+  category: Surgical Consumables
+  abc_class: B
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 30
+  initial_stock: 180
+  reorder_point: 50
+  reorder_qty: 120
+  lead_time_days: 3
+  demand_mean: 7
+  demand_std: 3
+- sku_id: MED-010
+  name: Surgical Sutures, Absorbable (Box of 12)
+  category: Surgical Consumables
+  abc_class: B
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 40
+  initial_stock: 140
+  reorder_point: 45
+  reorder_qty: 100
+  lead_time_days: 5
+  demand_mean: 5.5
+  demand_std: 2.5
+- sku_id: MED-014
+  name: Urinary Catheters (Pack of 10)
+  category: Surgical Consumables
+  abc_class: B
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 35
+  initial_stock: 130
+  reorder_point: 40
+  reorder_qty: 90
+  lead_time_days: 4
+  demand_mean: 5
+  demand_std: 2.4
+
+# --- Diagnostics (VNA racking) ---
+- sku_id: MED-015
+  name: Blood Collection Tubes, EDTA (Box of 100)
+  category: Diagnostics
+  abc_class: A
+  xyz_class: X
+  storage_mode: VNA
+  units_per_pallet: 50
+  initial_stock: 250
+  reorder_point: 80
+  reorder_qty: 180
+  lead_time_days: 4
+  demand_mean: 11
+  demand_std: 3
+- sku_id: MED-011
+  name: Rapid Antigen Test Kits (Box of 25)
+  category: Diagnostics
+  abc_class: B
+  xyz_class: Z
+  storage_mode: VNA
+  units_per_pallet: 25
+  initial_stock: 90
+  reorder_point: 30
+  reorder_qty: 80
+  lead_time_days: 7
+  demand_mean: 3.2
+  demand_std: 4.1
+
+# --- Equipment consumables (low volume, erratic, clinically critical -> SECURE_CAGE) ---
+- sku_id: MED-006
+  name: Defibrillator Pads, Adult (Pair)
+  category: Equipment Consumables
+  abc_class: C
+  xyz_class: Z
+  storage_mode: SECURE_CAGE
+  units_per_pallet: 10
+  initial_stock: 40
+  reorder_point: 12
+  reorder_qty: 30
+  lead_time_days: 8
+  demand_mean: 1.5
+  demand_std: 1.5
+- sku_id: MED-013
+  name: Oxygen Masks, Adult Non-Rebreather
+  category: Equipment Consumables
+  abc_class: B
+  xyz_class: Y
+  storage_mode: VNA
+  units_per_pallet: 40
+  initial_stock: 110
+  reorder_point: 35
+  reorder_qty: 90
+  lead_time_days: 4
+  demand_mean: 5.8
+  demand_std: 2.8
+- sku_id: MED-016
+  name: Ventilator Circuit Kits, Single-Use
+  category: Equipment Consumables
+  abc_class: C
+  xyz_class: Z
+  storage_mode: SECURE_CAGE
+  units_per_pallet: 12
+  initial_stock: 35
+  reorder_point: 10
+  reorder_qty: 25
+  lead_time_days: 9
+  demand_mean: 1.1
+  demand_std: 1.4
+
+data_quality:
+  duplicate_entry_rate: 0.05
+  missing_entry_rate: 0.04
+  manual_entry_error_rate: 0.06
+  reporting_lag_days: 1

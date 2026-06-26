@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Warehouse Digital Twin — Pilot Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.32.0/plotly.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/examples/js/controls/OrbitControls.js"></script>
+  <style>
+    :root {
+      --ink: #13202b;
+      --paper: #f6f4ef;
+      --panel: #ffffff;
+      --line: #dcd6c8;
+      --slate: #5b6b76;
+      /* manual baseline accent (muted, "before") */
+      --slate-soft: #5b6b7622;
+      --teal: #0e7c66;
+      /* digital twin accent (clear, "after") */
+      --teal-soft: #0e7c6618;
+      --amber: #b3641a;
+      /* risk / stockout accent */
+      --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+      --sans: "Inter", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 28px 80px;
+    }
+
+    header.top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--slate);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ---- Toggle ---- */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .toggle {
+      display: inline-flex;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .toggle button {
+      border: none;
+      background: transparent;
+      padding: 9px 20px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink);
+      transition: background .15s, color .15s;
+    }
+
+    .toggle button.active.before {
+      background: var(--slate);
+      color: #fff;
+    }
+
+    .toggle button.active.after {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .toggle-hint {
+      font-size: 12px;
+      color: var(--slate);
+    }
+
+    /* ---- KPI cards ---- */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    @media(max-width:900px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi .bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
+
+    .kpi.before .bar {
+      background: var(--slate);
+    }
+
+    .kpi.after .bar {
+      background: var(--teal);
+    }
+
+    .kpi .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--slate);
+      font-family: var(--mono);
+      margin-bottom: 8px;
+    }
+
+    .kpi .value {
+      font-size: 30px;
+      font-weight: 700;
+      font-family: var(--mono);
+      line-height: 1;
+    }
+
+    .kpi .sub {
+      font-size: 12px;
+      color: var(--slate);
+      margin-top: 6px;
+    }
+
+    .kpi .delta {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .delta.good {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .delta.bad {
+      background: #b3641a18;
+      color: var(--amber);
+    }
+
+    /* ---- Panels ---- */
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px 22px 10px;
+      margin-bottom: 24px;
+    }
+
+    .panel h2 {
+      font-size: 15px;
+      margin: 0 0 4px;
+      font-weight: 700;
+    }
+
+    .panel .desc {
+      font-size: 13px;
+      color: var(--slate);
+      margin-bottom: 14px;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+    }
+
+    @media(max-width:980px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- SKU selector chips ---- */
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      cursor: pointer;
+      color: var(--ink);
+      transition: all .12s;
+    }
+
+    .chip.active {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* ---- Tables ---- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--slate);
+      border-bottom: 1.5px solid var(--ink);
+      padding: 8px 10px;
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+    }
+
+    tr:hover td {
+      background: #00000005;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: var(--mono);
+    }
+
+    .badge.a {
+      background: #0e7c6618;
+      color: #0e7c66;
+    }
+
+    .badge.b {
+      background: #b3641a18;
+      color: #b3641a;
+    }
+
+    .badge.c {
+      background: #5b6b7622;
+      color: #5b6b76;
+    }
+
+    .stockout-row td {
+      background: #b3641a0d;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    .grid-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media(max-width:900px) {
+      .grid-charts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .graphic-panel {
+      margin-bottom: 28px;
+    }
+
+    .illustration {
+      margin-top: 18px;
+      width: 100%;
+      overflow: auto;
+    }
+
+    .illustration svg {
+      width: 100%;
+      max-width: 760px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .illustration text {
+      font-family: var(--sans);
+    }
+
+    .warehouse-3d {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: linear-gradient(180deg, #eef0ea 0%, #f6f4ef 60%);
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .warehouse-3d canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .warehouse-3d .legend {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--ink);
+      line-height: 1.6;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .warehouse-3d .legend .lk {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      margin-right: 6px;
+    }
+
+    .warehouse-3d .hud {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink);
+      line-height: 1.5;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      text-align: right;
+    }
+
+    .warehouse-3d .hud .stockout-flag {
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    .dt-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .dt-btn {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      border: 1.5px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      border-radius: 999px;
+      padding: 7px 16px;
+      cursor: pointer;
+    }
+
+    .dt-btn.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    #dt-day-slider {
+      flex: 1;
+      min-width: 160px;
+      accent-color: var(--teal);
+    }
+
+    .dt-day-label {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--slate);
+      min-width: 92px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="top">
+      <div>
+        <div class="eyebrow">DSC2205 · Group 3 · Healthcare Warehousing PoC</div>
+        <h1>Digital Supply Chain Twin — Pilot Dashboard</h1>
+      </div>
+      <div class="meta">
+        Site: __SITE_NAME__<br>
+        Pilot window: __DURATION_DAYS__ days · __NUM_SKUS__ SKUs<br>
+        Method: discrete-event simulation (simpy)
+      </div>
+    </header>
+
+    <div class="panel graphic-panel">
+      <h2>Digital Twin Illustration</h2>
+      <div class="desc">A digital twin mirrors the warehouse inventory state and decision logic in real time, turning
+        siloed stock counts into an integrated, data-driven warehouse view.</div>
+      <div class="illustration">
+        <svg viewBox="0 0 760 240" role="img" aria-label="Digital twin illustration">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8" fill="#13202b" />
+            </marker>
+          </defs>
+          <rect x="20" y="40" width="220" height="140" rx="16" fill="#0e7c6614" stroke="#0e7c66" stroke-width="2" />
+          <path d="M30 40 L240 40 L240 20 L190 20 L150 0 L110 20 L60 20 L60 40 Z" fill="#0e7c66" />
+          <rect x="50" y="90" width="40" height="40" rx="6" fill="#0e7c66" />
+          <rect x="105" y="90" width="40" height="40" rx="6" fill="#0e7c66" />
+          <rect x="160" y="90" width="40" height="40" rx="6" fill="#0e7c66" />
+          <text x="130" y="200" text-anchor="middle" font-size="16" fill="#13202b">Warehouse</text>
+
+          <path d="M240 120 L330 120" stroke="#13202b" stroke-width="4" marker-end="url(#arrow)" fill="none" />
+          <circle cx="290" cy="120" r="8" fill="#0e7c66" />
+
+          <rect x="360" y="50" width="180" height="140" rx="18" fill="#ffffff" stroke="#13202b" stroke-width="2" />
+          <rect x="380" y="70" width="140" height="36" rx="8" fill="#0e7c66" />
+          <text x="450" y="95" text-anchor="middle" font-size="14" fill="#ffffff">Digital Twin</text>
+          <line x1="385" y1="120" x2="515" y2="120" stroke="#0e7c66" stroke-width="4" />
+          <line x1="385" y1="145" x2="515" y2="145" stroke="#5b6b76" stroke-width="4" />
+          <line x1="385" y1="170" x2="485" y2="170" stroke="#5b6b76" stroke-width="4" />
+          <text x="450" y="210" text-anchor="middle" font-size="16" fill="#13202b">Centralized Inventory Model</text>
+
+          <path d="M540 120 L630 120" stroke="#13202b" stroke-width="4" marker-end="url(#arrow)" fill="none" />
+          <rect x="640" y="40" width="100" height="120" rx="16" fill="#f6f4ef" stroke="#13202b" stroke-width="2" />
+          <rect x="660" y="60" width="60" height="40" rx="10" fill="#0e7c6614" />
+          <rect x="650" y="115" width="80" height="10" rx="5" fill="#5b6b76" />
+          <rect x="660" y="95" width="40" height="8" rx="4" fill="#5b6b76" />
+          <text x="690" y="190" text-anchor="middle" font-size="16" fill="#13202b">Dashboard View</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Digital Twin — Live Warehouse Model</h2>
+      <div class="desc">Each rack mirrors one pilot SKU's real-time stock as a fill level inside a fixed-capacity
+        bay (like a tank gauge), colour-coded against its reorder point. Scrub through the 30-day pilot or hit Play
+        to watch the same demand sequence drain stock under each visibility condition — this is the centralised,
+        real-time view the problem statement says today's spreadsheets cannot provide.</div>
+      <div id="warehouse-3d-container" class="warehouse-3d"></div>
+      <div class="dt-controls">
+        <button id="dt-play" class="dt-btn" onclick="toggleDtPlay()">▶ Play</button>
+        <input type="range" id="dt-day-slider" min="0" max="29" value="0" step="1" oninput="onDaySlider(this.value)">
+        <span id="dt-day-label" class="dt-day-label">Day 1 / 30</span>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <div class="toggle">
+        <button id="btn-before" class="active before" onclick="setMode('before')">Before · Manual Spreadsheets</button>
+        <button id="btn-after" class="after" onclick="setMode('after')">After · Digital Twin</button>
+      </div>
+      <span class="toggle-hint">Same 30-day demand sequence replayed under both visibility conditions — toggle to
+        compare.</span>
+    </div>
+
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="panel">
+      <h2>Total On-Hand Stock — Site Level</h2>
+      <div class="desc">Aggregate stock across all 6 pilot SKUs over the 30-day window. The manual-baseline line
+        reflects true physical stock when reorder decisions are driven by lagged, error-prone spreadsheet readings
+        rather than real on-hand counts.</div>
+      <div id="chart-total-stock" style="height:320px;"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Stock Level by SKU</h2>
+      <div class="desc">Select an item to compare true stock under each condition against its reorder point.
+        Defibrillator Pads (erratic, low-volume demand) is where the manual baseline's lagged visibility causes a
+        stockout.</div>
+      <div class="chip-row" id="sku-chips"></div>
+      <div id="chart-sku-detail" style="height:300px;"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <h2>Forecast Accuracy by SKU (WMAPE)</h2>
+        <div class="desc">Identical 7-day moving-average method applied to both data conditions — isolating data
+          quality, not modelling technique, as the source of forecast error.</div>
+        <div id="chart-forecast" style="height:300px;"></div>
+      </div>
+      <div class="panel">
+        <h2>Data Quality — Spreadsheet Sample</h2>
+        <div class="desc">A sample of the simulated fragmented spreadsheet export, showing the kind of duplicate,
+          missing and miskeyed entries detected during reconciliation against the digital twin's ground truth.</div>
+        <div style="max-height:300px; overflow:auto;">
+          <table id="frag-table"></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Reconciliation Summary</h2>
+      <div class="desc">Result of comparing the simulated spreadsheet exports back against ground truth — the basis for
+        the pilot's data-inconsistency SMART target.</div>
+      <table id="dq-table"></table>
+    </div>
+
+    <footer>
+      DSC2205 Group 3 — Healthcare Warehousing Pilot PoC · Digital Supply Chain Twin<br>
+      Simulation engine pattern adapted from AndreVale69/simulator-automatic-warehouse (simpy discrete-event
+      architecture)<br>
+      Synthetic data — generated for academic demonstration purposes, Site A pilot scope only.
+    </footer>
+
+  </div>
+
+  <script>
+    const DATA = __DATA_JSON__;
+
+    let mode = 'before'; // 'before' = manual baseline, 'after' = digital twin
+    let activeSku = Object.keys(DATA.per_sku_series)[0];
+
+    const COLOR_BEFORE = '#5b6b76';
+    const COLOR_AFTER = '#0e7c66';
+    const COLOR_RISK = '#b3641a';
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('btn-before').classList.toggle('active', m === 'before');
+      document.getElementById('btn-after').classList.toggle('active', m === 'after');
+      renderKPIs();
+      renderTotalStockChart();
+      renderSkuDetailChart();
+      renderWarehouseSpatialPrototype();
+    }
+
+    function renderKPIs() {
+      const r = DATA.results;
+      const oc = r.operational_comparison;
+      const dq = r.data_quality_metrics;
+      const fc = r.forecast_accuracy_summary;
+
+      const isAfter = mode === 'after';
+      const cls = isAfter ? 'after' : 'before';
+
+      const cards = [
+        {
+          label: 'Site Fill Rate',
+          value: (isAfter ? oc.digital_twin_fill_rate_pct : oc.manual_baseline_fill_rate_pct).toFixed(2) + '%',
+          sub: isAfter ? '0 stockout days' : oc.manual_baseline_stockout_days + ' stockout day(s)',
+          delta: isAfter ? `+${oc.fill_rate_improvement_pct_points}pp vs manual` : null,
+          good: true
+        },
+        {
+          label: 'Forecast Error (WMAPE)',
+          value: (isAfter ? fc.avg_digital_twin_WMAPE_pct : fc.avg_manual_baseline_WMAPE_pct).toFixed(1) + '%',
+          sub: '7-day moving average method',
+          delta: isAfter ? `−${fc.forecast_accuracy_improvement_pct}% error` : null,
+          good: true
+        },
+        {
+          label: 'Reorders Triggered',
+          value: isAfter ? r.kpi_summary_digital_twin.total_reorders_placed : r.kpi_summary_manual_baseline.total_reorders_placed,
+          sub: isAfter ? 'Planned, threshold-based' : 'Reactive, often late',
+          delta: isAfter ? `−${r.kpi_summary_manual_baseline.total_reorders_placed - r.kpi_summary_digital_twin.total_reorders_placed} reorders` : null,
+          good: true
+        },
+        {
+          label: 'Data Inconsistency Rate',
+          value: isAfter ? '0%' : dq.inconsistency_rate_pct + '%',
+          sub: isAfter ? 'Single source of truth' : dq.duplicate_records + ' duplicate records found',
+          delta: isAfter ? `−${dq.inconsistency_rate_pct}pp vs manual` : null,
+          good: true
+        }
+      ];
+
+      document.getElementById('kpi-grid').innerHTML = cards.map(c => `
+    <div class="kpi ${cls}">
+      <div class="bar"></div>
+      <div class="label">${c.label}</div>
+      <div class="value">${c.value}</div>
+      <div class="sub">${c.sub}</div>
+      ${c.delta ? `<div class="delta good">${c.delta}</div>` : ''}
+    </div>
+  `).join('');
+    }
+
+    function renderTotalStockChart() {
+      const d = DATA.daily_stock;
+      const traces = [];
+
+      if (mode === 'before') {
+        traces.push({
+          x: d.days, y: d.manual_baseline_true_stock, name: 'True stock (manual baseline)',
+          mode: 'lines', line: { color: COLOR_BEFORE, width: 2.5 }
+        });
+        traces.push({
+          x: d.days, y: d.manual_baseline_perceived_stock, name: 'Perceived stock (spreadsheet)',
+          mode: 'lines', line: { color: COLOR_BEFORE, width: 1.5, dash: 'dot' }
+        });
+      } else {
+        traces.push({
+          x: d.days, y: d.digital_twin_total_stock, name: 'True stock (digital twin)',
+          mode: 'lines', line: { color: COLOR_AFTER, width: 2.5 }, fill: 'tozeroy',
+          fillcolor: 'rgba(14,124,102,0.06)'
+        });
+      }
+
+      Plotly.newPlot('chart-total-stock', traces, layoutBase('Day of pilot', 'Total units on hand'), plotConfig());
+    }
+
+    function renderSkuChips() {
+      const chips = Object.entries(DATA.per_sku_series).map(([id, s]) => `
+    <div class="chip ${id === activeSku ? 'active' : ''}" onclick="selectSku('${id}')">${id} — ${s.sku_name.split('(')[0].trim()}</div>
+  `).join('');
+      document.getElementById('sku-chips').innerHTML = chips;
+    }
+
+    function selectSku(id) {
+      activeSku = id;
+      renderSkuChips();
+      renderSkuDetailChart();
+    }
+
+    function renderSkuDetailChart() {
+      const s = DATA.per_sku_series[activeSku];
+      const traces = [];
+
+      if (mode === 'before') {
+        traces.push({ x: s.days, y: s.manual_baseline_true_stock, name: 'True stock', mode: 'lines', line: { color: COLOR_BEFORE, width: 2.5 } });
+        traces.push({ x: s.days, y: s.manual_baseline_perceived_stock, name: 'Perceived (spreadsheet)', mode: 'lines', line: { color: COLOR_BEFORE, width: 1.5, dash: 'dot' } });
+      } else {
+        traces.push({ x: s.days, y: s.digital_twin_stock, name: 'True stock', mode: 'lines', line: { color: COLOR_AFTER, width: 2.5 } });
+      }
+
+      traces.push({
+        x: s.days, y: s.days.map(() => s.reorder_point), name: 'Reorder point',
+        mode: 'lines', line: { color: COLOR_RISK, width: 1, dash: 'dash' }
+      });
+
+      Plotly.newPlot('chart-sku-detail', traces,
+        layoutBase('Day of pilot', 'Units on hand', `${s.sku_name} · ABC-${s.abc_class} / XYZ-${s.xyz_class}`),
+        plotConfig());
+    }
+
+    function renderForecastChart() {
+      const rows = DATA.forecast_table;
+      const traces = [
+        {
+          x: rows.map(r => r.sku_id), y: rows.map(r => r.manual_baseline_WMAPE_pct),
+          name: 'Manual baseline', type: 'bar', marker: { color: COLOR_BEFORE }
+        },
+        {
+          x: rows.map(r => r.sku_id), y: rows.map(r => r.digital_twin_WMAPE_pct),
+          name: 'Digital twin', type: 'bar', marker: { color: COLOR_AFTER }
+        }
+      ];
+      Plotly.newPlot('chart-forecast', traces,
+        { ...layoutBase('SKU', 'WMAPE (%)'), barmode: 'group' }, plotConfig());
+    }
+
+    let warehouseScene, warehouseCamera, warehouseRenderer, warehouseControls, warehouseGroup;
+    let rackRegistry = {}; // sku_id -> { fill, frame, label, maxCap, basePos }
+    const RACK_HEIGHT = 4.2;
+    const RACK_W = 1.3, RACK_D = 1.3;
+    let dtDay = 0; // 0-indexed current pilot day
+    let dtPlaying = false;
+    let dtPlayTimer = null;
+    const DT_DAYS = DATA.daily_stock.days.length;
+
+    function initWarehouse3D() {
+      const container = document.getElementById('warehouse-3d-container');
+      warehouseScene = new THREE.Scene();
+      warehouseScene.background = new THREE.Color(0xeef0ea);
+      warehouseScene.fog = new THREE.Fog(0xeef0ea, 18, 34);
+
+      warehouseCamera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
+      warehouseCamera.position.set(11, 9, 12);
+
+      warehouseRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      warehouseRenderer.setPixelRatio(window.devicePixelRatio);
+      warehouseRenderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(warehouseRenderer.domElement);
+
+      warehouseControls = new THREE.OrbitControls(warehouseCamera, warehouseRenderer.domElement);
+      warehouseControls.enableDamping = true;
+      warehouseControls.dampingFactor = 0.06;
+      warehouseControls.maxPolarAngle = Math.PI / 2.05;
+      warehouseControls.target.set(4, 1, 3);
+
+      const ambient = new THREE.HemisphereLight(0xffffff, 0x4a4a44, 0.9);
+      warehouseScene.add(ambient);
+      const directional = new THREE.DirectionalLight(0xffffff, 0.85);
+      directional.position.set(8, 14, 6);
+      warehouseScene.add(directional);
+      const backLight = new THREE.DirectionalLight(0xffffff, 0.35);
+      backLight.position.set(-6, 8, -8);
+      warehouseScene.add(backLight);
+
+      // Floor
+      const floorGeo = new THREE.PlaneGeometry(20, 16);
+      const floorMat = new THREE.MeshStandardMaterial({ color: 0xd9d6c8, roughness: 0.95 });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.set(4, 0, 3);
+      warehouseScene.add(floor);
+
+      const grid = new THREE.GridHelper(20, 20, 0xb9b4a0, 0xc9c5b4);
+      grid.position.set(4, 0.01, 3);
+      warehouseScene.add(grid);
+
+      // Building shell: back + 2 side walls, low opacity
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.12, side: THREE.DoubleSide });
+      const wallH = 6.5;
+      const backWall = new THREE.Mesh(new THREE.PlaneGeometry(20, wallH), wallMat);
+      backWall.position.set(4, wallH / 2, -5);
+      warehouseScene.add(backWall);
+      const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(16, wallH), wallMat);
+      leftWall.rotation.y = Math.PI / 2;
+      leftWall.position.set(-6, wallH / 2, 3);
+      warehouseScene.add(leftWall);
+      const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(16, wallH), wallMat);
+      rightWall.rotation.y = Math.PI / 2;
+      rightWall.position.set(14, wallH / 2, 3);
+      warehouseScene.add(rightWall);
+
+      warehouseGroup = new THREE.Group();
+      warehouseScene.add(warehouseGroup);
+
+      buildRacks();
+      window.addEventListener('resize', resizeWarehouse3D);
+    }
+
+    function resizeWarehouse3D() {
+      const container = document.getElementById('warehouse-3d-container');
+      if (!warehouseCamera || !warehouseRenderer) return;
+      warehouseCamera.aspect = container.clientWidth / container.clientHeight;
+      warehouseCamera.updateProjectionMatrix();
+      warehouseRenderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    function statusColor(stock, reorderPoint) {
+      if (stock <= 0) return 0xb3641a;          // stockout — amber/red
+      if (stock <= reorderPoint) return 0xd98c1f; // at/below reorder point
+      return 0x0e7c66;                            // healthy
+    }
+
+    function makeLabelSprite(text) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 96;
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), depthTest: false }));
+      sprite.scale.set(2.6, 1.0, 1);
+      sprite.userData.canvas = canvas;
+      updateLabelSprite(sprite, text);
+      return sprite;
+    }
+
+    function updateLabelSprite(sprite, lines) {
+      const canvas = sprite.userData.canvas;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(19,32,43,0.92)';
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(2, 2, canvas.width - 4, canvas.height - 4, 14) : ctx.rect(2, 2, canvas.width - 4, canvas.height - 4);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 26px monospace';
+      ctx.fillText(lines[0], 14, 36);
+      ctx.font = '20px monospace';
+      ctx.fillStyle = '#d7d2c2';
+      ctx.fillText(lines[1], 14, 68);
+      sprite.material.map.needsUpdate = true;
+    }
+
+    function buildRacks() {
+      const skuIds = Object.keys(DATA.per_sku_series);
+      const cols = 3;
+      const spacingX = 3.4, spacingZ = 3.4;
+
+      skuIds.forEach((sku_id, i) => {
+        const s = DATA.per_sku_series[sku_id];
+        const col = i % cols, row = Math.floor(i / cols);
+        const x = col * spacingX, z = row * spacingZ;
+        const maxCap = Math.max(...s.digital_twin_stock, ...s.manual_baseline_true_stock, s.reorder_point) * 1.15;
+
+        const rack = new THREE.Group();
+        rack.position.set(x, 0, z);
+
+        // Rack frame (static outline at max capacity height)
+        const frameGeo = new THREE.BoxGeometry(RACK_W, RACK_HEIGHT, RACK_D);
+        const frame = new THREE.LineSegments(
+          new THREE.EdgesGeometry(frameGeo),
+          new THREE.LineBasicMaterial({ color: 0x13202b })
+        );
+        frame.position.set(0, RACK_HEIGHT / 2, 0);
+        rack.add(frame);
+
+        // Shelf rungs every ~1/3 height
+        for (let lvl = 1; lvl <= 2; lvl++) {
+          const rung = new THREE.Mesh(
+            new THREE.BoxGeometry(RACK_W * 1.04, 0.03, RACK_D * 1.04),
+            new THREE.MeshStandardMaterial({ color: 0x5b6b76 })
+          );
+          rung.position.set(0, (RACK_HEIGHT / 3) * lvl, 0);
+          rack.add(rung);
+        }
+
+        // Fill mesh (unit-height box, scaled per day)
+        const fillGeo = new THREE.BoxGeometry(RACK_W * 0.92, 1, RACK_D * 0.92);
+        const fillMat = new THREE.MeshStandardMaterial({ color: 0x0e7c66, transparent: true, opacity: 0.88 });
+        const fill = new THREE.Mesh(fillGeo, fillMat);
+        fill.position.set(0, 0, 0);
+        rack.add(fill);
+
+        // Base pallet
+        const base = new THREE.Mesh(
+          new THREE.BoxGeometry(RACK_W * 1.1, 0.12, RACK_D * 1.1),
+          new THREE.MeshStandardMaterial({ color: 0x8a6f4c })
+        );
+        base.position.set(0, 0.06, 0);
+        rack.add(base);
+
+        const label = makeLabelSprite([sku_id, '']);
+        label.position.set(0, RACK_HEIGHT + 0.7, 0);
+        rack.add(label);
+
+        warehouseGroup.add(rack);
+        rackRegistry[sku_id] = { fill, label, maxCap, reorderPoint: s.reorder_point, sku_id, name: s.sku_name };
+      });
+    }
+
+    function animateWarehouse3D() {
+      requestAnimationFrame(animateWarehouse3D);
+      if (warehouseControls) warehouseControls.update();
+      if (warehouseRenderer && warehouseCamera) warehouseRenderer.render(warehouseScene, warehouseCamera);
+    }
+
+    function renderWarehouseSpatialPrototype() {
+      if (!warehouseScene) {
+        initWarehouse3D();
+        animateWarehouse3D();
+      }
+      updateWarehouseDay(dtDay);
+    }
+
+    function updateWarehouseDay(day) {
+      dtDay = Math.max(0, Math.min(DT_DAYS - 1, day));
+      let stockoutCount = 0;
+      let totalStock = 0;
+
+      Object.entries(rackRegistry).forEach(([sku_id, r]) => {
+        const s = DATA.per_sku_series[sku_id];
+        const stock = Math.max(0, mode === 'after' ? s.digital_twin_stock[dtDay] : s.manual_baseline_true_stock[dtDay]);
+        const ratio = Math.min(1, stock / r.maxCap);
+        const fillHeight = Math.max(ratio * RACK_HEIGHT, 0.03);
+        r.fill.scale.y = fillHeight;
+        r.fill.position.y = fillHeight / 2;
+        const color = statusColor(stock, r.reorderPoint);
+        r.fill.material.color.setHex(color);
+        updateLabelSprite(r.label, [r.sku_id, `${stock.toFixed(0)} units`]);
+        if (stock <= 0) stockoutCount++;
+        totalStock += stock;
+      });
+
+      const dayLabel = document.getElementById('dt-day-label');
+      if (dayLabel) dayLabel.textContent = `Day ${dtDay + 1} / ${DT_DAYS}`;
+      const slider = document.getElementById('dt-day-slider');
+      if (slider && Number(slider.value) !== dtDay) slider.value = dtDay;
+
+      updateWarehouseHUD(totalStock, stockoutCount);
+      updateStockChartMarker(dtDay);
+    }
+
+    function updateWarehouseHUD(totalStock, stockoutCount) {
+      const container = document.getElementById('warehouse-3d-container');
+      if (!container) return;
+      let hud = container.querySelector('.hud');
+      let legend = container.querySelector('.legend');
+      if (!hud) {
+        hud = document.createElement('div');
+        hud.className = 'hud';
+        container.appendChild(hud);
+      }
+      if (!legend) {
+        legend = document.createElement('div');
+        legend.className = 'legend';
+        legend.innerHTML = `
+          <div><span class="lk" style="background:#0e7c66"></span>Healthy stock</div>
+          <div><span class="lk" style="background:#d98c1f"></span>At/below reorder point</div>
+          <div><span class="lk" style="background:#b3641a"></span>Stockout</div>`;
+        container.appendChild(legend);
+      }
+      hud.innerHTML = `
+        Mode: <strong>${mode === 'after' ? 'Digital Twin' : 'Manual Baseline'}</strong><br>
+        Site stock (live): ${totalStock.toFixed(0)} units<br>
+        ${stockoutCount > 0 ? `<span class="stockout-flag">${stockoutCount} SKU(s) stocked out</span>` : 'No stockouts'}`;
+    }
+
+    function onDaySlider(val) {
+      stopDtPlay();
+      updateWarehouseDay(Number(val));
+    }
+
+    function toggleDtPlay() {
+      if (dtPlaying) { stopDtPlay(); return; }
+      dtPlaying = true;
+      document.getElementById('dt-play').textContent = '⏸ Pause';
+      dtPlayTimer = setInterval(() => {
+        let next = dtDay + 1;
+        if (next >= DT_DAYS) next = 0;
+        updateWarehouseDay(next);
+      }, 450);
+    }
+
+    function stopDtPlay() {
+      dtPlaying = false;
+      if (dtPlayTimer) clearInterval(dtPlayTimer);
+      dtPlayTimer = null;
+      const btn = document.getElementById('dt-play');
+      if (btn) btn.textContent = '▶ Play';
+    }
+
+    function updateStockChartMarker(day) {
+      const el = document.getElementById('chart-total-stock');
+      if (!el || !el.layout) return;
+      try {
+        Plotly.relayout('chart-total-stock', {
+          shapes: [{
+            type: 'line', x0: day, x1: day, y0: 0, y1: 1, yref: 'paper',
+            line: { color: '#b3641a', width: 1.5, dash: 'dot' }
+          }]
+        });
+      } catch (e) { /* chart not yet drawn */ }
+    }
+
+    function renderFragTable() {
+      const rows = DATA.fragmented_sample;
+      const head = `<tr><th>Day</th><th>True Day</th><th>SKU</th><th>Stock (reported)</th><th>Source Sheet</th></tr>`;
+      const body = rows.map(r => `
+    <tr>
+      <td>${r.day}</td>
+      <td>${r.true_day}</td>
+      <td>${r.sku_id}</td>
+      <td>${r.stock_level === '—' ? '<span style="color:#b3641a">missing</span>' : r.stock_level}</td>
+      <td style="font-size:11px;">${r.source_sheet}</td>
+    </tr>
+  `).join('');
+      document.getElementById('frag-table').innerHTML = head + body;
+    }
+
+    function renderDQTable() {
+      const dq = DATA.results.data_quality_metrics;
+      document.getElementById('dq-table').innerHTML = `
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>Total simulated spreadsheet records</td><td>${dq.total_records}</td></tr>
+    <tr><td>Records with value inconsistencies</td><td>${dq.inconsistent_records}</td></tr>
+    <tr><td>Missing / blank entries</td><td>${dq.missing_records}</td></tr>
+    <tr><td>Duplicate entries across source sheets</td><td>${dq.duplicate_records}</td></tr>
+    <tr><td><strong>Overall inconsistency rate</strong></td><td><strong>${dq.inconsistency_rate_pct}%</strong></td></tr>
+  `;
+    }
+
+    function layoutBase(xTitle, yTitle, title) {
+      return {
+        title: title ? { text: title, font: { size: 13, family: 'IBM Plex Mono, monospace', color: '#13202b' } } : undefined,
+        margin: { l: 50, r: 20, t: title ? 36 : 16, b: 40 },
+        xaxis: { title: xTitle, gridcolor: '#eee8d8', zeroline: false },
+        yaxis: { title: yTitle, gridcolor: '#eee8d8', zeroline: false },
+        legend: { orientation: 'h', y: -0.25 },
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        font: { family: 'Inter, sans-serif', size: 12, color: '#13202b' }
+      };
+    }
+    function plotConfig() { return { displayModeBar: false, responsive: true }; }
+
+    // --- Init ---
+    renderKPIs();
+    renderTotalStockChart();
+    renderSkuChips();
+    renderSkuDetailChart();
+    renderForecastChart();
+    renderFragTable();
+    renderDQTable();
+    const dtSliderEl = document.getElementById('dt-day-slider');
+    if (dtSliderEl) dtSliderEl.max = String(DT_DAYS - 1);
+    renderWarehouseSpatialPrototype();
+  </script>
+</body>
+
+</html>
