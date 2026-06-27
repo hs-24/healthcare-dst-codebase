@@ -1,0 +1,2618 @@
+{
+  "building_envelope": {
+    "footprint_m": {
+      "x": 120.0,
+      "y": 200.0
+    },
+    "floor_count": 4,
+    "floor_heights_m": {
+      "1": 15.0,
+      "2": 12.0,
+      "3": 12.0,
+      "4": 12.0
+    },
+    "vertical_circulation": "external circular vehicle ramps"
+  },
+  "structural_columns": {
+    "grid": {
+      "x_lines": [
+        0.0,
+        12.0,
+        24.0,
+        36.0,
+        48.0,
+        60.0,
+        72.0,
+        84.0,
+        96.0,
+        108.0,
+        120.0
+      ],
+      "y_lines": [
+        0.0,
+        12.0,
+        24.0,
+        36.0,
+        48.0,
+        60.0,
+        72.0,
+        84.0,
+        96.0,
+        108.0,
+        120.0,
+        132.0,
+        144.0,
+        156.0,
+        168.0,
+        180.0,
+        192.0
+      ],
+      "note": "y=200 rear wall is 8m beyond the last column line (192m) -- 200/12 does not divide evenly; standard tolerance for a ramp-up shell."
+    },
+    "radius_m": 0.4,
+    "count": 187,
+    "positions": [
+      {
+        "center": [
+          0.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          0.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          12.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          24.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          36.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          48.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          60.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          72.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          84.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          96.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          108.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          0.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          12.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          24.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          36.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          48.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          60.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          72.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          84.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          96.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          108.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          120.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          132.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          144.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          156.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          168.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          180.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "center": [
+          120.0,
+          192.0
+        ],
+        "radius": 0.4,
+        "spans_floors": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  "pallet_spec": {
+    "length_mm": 1200,
+    "width_mm": 1000,
+    "height_mm": 1400
+  },
+  "rack_bay_width_mm": 2700,
+  "sku_color_taxonomy": {
+    "PHARMA": {
+      "hex": "#2ecc71",
+      "name": "Emerald Green",
+      "use": "Pharmaceuticals & Prescription Medications (batch-controlled, high security)"
+    },
+    "MEDICAL_DEVICE": {
+      "hex": "#6fb7ff",
+      "name": "Light Blue",
+      "use": "Medical Devices & Electronics (fragile, humidity-sensitive)"
+    },
+    "BULK_PPE": {
+      "hex": "#9aa5b1",
+      "name": "Slate Grey",
+      "use": "Bulk PPE & Consumables (high volume, low stack-sensitivity)"
+    },
+    "ULTRA_COLD_VACCINE": {
+      "hex": "#5b2a86",
+      "name": "Deep Violet",
+      "use": "mRNA Vaccines, -70C to -80C"
+    },
+    "STANDARD_VACCINE": {
+      "hex": "#c0152f",
+      "name": "Ruby Red",
+      "use": "Standard Vaccines / Biologics, 2C to 8C"
+    }
+  },
+  "level_1_zones": {
+    "SAS_AUTOMATED_STORAGE": {
+      "min_point": [
+        0,
+        100,
+        0.0
+      ],
+      "max_point": [
+        60,
+        200,
+        14.0
+      ],
+      "description": "Automated Storage & Retrieval (SAS) -- high-velocity pharmaceuticals",
+      "rack_tiers": 10,
+      "rack_height_m": 14.0,
+      "crane_aisle_width_m": 1.1,
+      "fire_buffer_clearance_m": 1.0,
+      "sku_taxonomy": [
+        "PHARMA"
+      ]
+    },
+    "VNA_VERY_NARROW_AISLE": {
+      "min_point": [
+        60,
+        100,
+        0.0
+      ],
+      "max_point": [
+        120,
+        200,
+        12.5
+      ],
+      "description": "Very Narrow Aisle (VNA) racking -- bulk medical products & devices",
+      "rack_tiers": 8,
+      "rack_height_m": 12.5,
+      "aisle_width_m": 1.65,
+      "fire_buffer_clearance_m": 2.5,
+      "sku_taxonomy": [
+        "MEDICAL_DEVICE",
+        "BULK_PPE"
+      ]
+    },
+    "VAS_VALUE_ADDED_SERVICES": {
+      "min_point": [
+        0,
+        0,
+        0.0
+      ],
+      "max_point": [
+        60,
+        100,
+        3.0
+      ],
+      "description": "Value-Added Services -- healthcare kitting, HSA labeling, cross-dock sorting",
+      "workbench_count": 20,
+      "workbench_dims_m": {
+        "width": 2.0,
+        "depth": 1.2,
+        "height": 0.9
+      },
+      "sku_taxonomy": []
+    },
+    "COLD_CHAIN_ENCLOSURE": {
+      "min_point": [
+        80,
+        40,
+        0.0
+      ],
+      "max_point": [
+        120,
+        100,
+        6.0
+      ],
+      "description": "Insulated cold-chain room -- vaccines & biologics deep-freeze",
+      "wall_construction": "insulated sandwich panel (off-white / silver metallic)",
+      "airlock_doors": 2,
+      "subzones": {
+        "ULTRA_COLD_FREEZERS": {
+          "temp_c": "-70 to -80",
+          "sku_taxonomy": [
+            "ULTRA_COLD_VACCINE"
+          ]
+        },
+        "CHILLED_RACKING": {
+          "temp_c": "2 to 8",
+          "sku_taxonomy": [
+            "STANDARD_VACCINE"
+          ]
+        }
+      }
+    }
+  },
+  "compliance": {
+    "fire_buffer_top_clearance_m": 0.5,
+    "egress_walkway_width_m": 1.5,
+    "egress_walkway_note": "Continuous clear perimeter walkway around the interior building shell and around the cold-chain enclosure walls."
+  }
+}

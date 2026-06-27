@@ -16,6 +16,10 @@
   #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; }
   #controls button:hover { background: #2c4a82; }
   #day-label { font-size: 12px; color: #9fb3d8; min-width: 90px; }
+  #model-switcher { position: absolute; bottom: 16px; right: 16px; display: flex; gap: 6px; background: rgba(16,26,44,0.85); padding: 8px; border-radius: 8px; border: 1px solid #1f2c45; }
+  .model-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 11px; }
+  .model-btn:hover { background: #1f3358; }
+  .model-btn.active { background: #2c4a82; color: #e6edf3; border-color: #3a8df0; }
   #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
   #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
   #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
@@ -65,6 +69,11 @@
       <button id="btn-reset">⟲ Reset</button>
       <span id="day-label">Day 0 / 29</span>
     </div>
+    <div id="model-switcher">
+      <button id="model-a" class="model-btn active">A · Live Operational Twin</button>
+      <button id="model-b" class="model-btn">B · GDP Singapore BIM</button>
+      <button id="model-c" class="model-btn">C · Compliance Schematic</button>
+    </div>
   </div>
 
   <aside>
@@ -91,13 +100,14 @@
 </script>
 <script type="module">
 import * as THREE from "three";
+import { buildModelB, buildModelC, clearGroup } from "./warehouse_models.js";
 
 const sceneWrap = document.getElementById("scene-wrap");
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0b1320);
-scene.fog = new THREE.Fog(0x0b1320, 20, 60);
+scene.fog = new THREE.Fog(0x0b1320, 150, 500);
 
-const camera = new THREE.PerspectiveCamera(45, sceneWrap.clientWidth / sceneWrap.clientHeight, 0.1, 200);
+const camera = new THREE.PerspectiveCamera(45, sceneWrap.clientWidth / sceneWrap.clientHeight, 0.1, 600);
 camera.position.set(34, 28, 40);
 camera.lookAt(0, 2, 0);
 
@@ -130,6 +140,41 @@ const grid = new THREE.GridHelper(FLOOR_SIZE, FLOOR_SIZE, 0x223252, 0x162032);
 grid.position.y = 0.01;
 scene.add(grid);
 
+// three switchable warehouse models, sharing the lights/floor/grid above
+const groupA = new THREE.Group(); // existing operational VNA/cold-vault/cage twin
+const groupB = new THREE.Group(); // GDP Singapore ramp-up BIM
+const groupC = new THREE.Group(); // compliance bounding-box schematic
+scene.add(groupA, groupB, groupC);
+groupB.visible = false;
+groupC.visible = false;
+floor.visible = true; // shared ground plane; Model B/C draw their own floor inside their group
+let currentModel = "A";
+let bimData = null;
+let modelBuiltFor = { B: -1, C: -1 }; // tracks which sim "day" each model was last rebuilt for
+
+async function ensureBimData() {
+  if (!bimData) {
+    const res = await fetch("/web/warehouse_bim_layout.json");
+    bimData = await res.json();
+  }
+  return bimData;
+}
+
+const CAMERA_PRESETS = {
+  A: { pos: [34, 28, 40], look: [0, 2, 0] },
+  B: { pos: [95, 75, 150], look: [0, 12, 0] },
+  C: { pos: [0.001, 150, 65], look: [0, 0, 0] }, // tiny x offset avoids a degenerate atan2(0,0)-adjacent angle
+};
+
+function applyCameraPreset(name) {
+  const p = CAMERA_PRESETS[name];
+  camAngle = Math.atan2(p.pos[0], p.pos[2]);
+  camHeight = p.pos[1];
+  camDist = Math.hypot(p.pos[0], p.pos[2]);
+  camera.position.set(...p.pos);
+  camera.lookAt(...p.look);
+}
+
 // orbit-less manual rotate via drag (lightweight, no extra import)
 let isDragging = false, prevX = 0, prevY = 0;
 let camAngle = Math.atan2(camera.position.x, camera.position.z);
@@ -142,14 +187,14 @@ window.addEventListener("pointermove", (e) => {
   const dx = e.clientX - prevX, dy = e.clientY - prevY;
   prevX = e.clientX; prevY = e.clientY;
   camAngle -= dx * 0.005;
-  camHeight = Math.max(4, Math.min(45, camHeight + dy * 0.08));
+  camHeight = Math.max(2, Math.min(200, camHeight + dy * 0.15));
   camera.position.x = Math.sin(camAngle) * camDist;
   camera.position.z = Math.cos(camAngle) * camDist;
   camera.position.y = camHeight;
   camera.lookAt(0, 2, 0);
 });
 renderer.domElement.addEventListener("wheel", (e) => {
-  camDist = Math.max(10, Math.min(85, camDist + e.deltaY * 0.03));
+  camDist = Math.max(10, Math.min(350, camDist + e.deltaY * 0.06));
   camera.position.x = Math.sin(camAngle) * camDist;
   camera.position.z = Math.cos(camAngle) * camDist;
 });
@@ -206,7 +251,7 @@ function makeLabelSprite(text, sizeScale = 1) {
 function makeZoneSign(text, x, z, color) {
   const sprite = makeLabelSprite(text, 1.4);
   sprite.position.set(x, 8.2, z);
-  scene.add(sprite);
+  groupA.add(sprite);
   const haloMat = new THREE.SpriteMaterial({ color, transparent: true, opacity: 0.0 });
   return sprite;
 }
@@ -235,15 +280,15 @@ function buildRackFrame(x, z, color) {
   corners.forEach(([dx, dz]) => {
     const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, totalHeight, 0.12), postMat);
     post.position.set(x + dx, totalHeight / 2, z + dz);
-    scene.add(post);
+    groupA.add(post);
   });
   for (let lvl = 0; lvl <= PALLET_LEVELS; lvl++) {
     const beam = new THREE.Mesh(new THREE.BoxGeometry(BAY_WIDTH, 0.08, 0.08), beamMat);
     beam.position.set(x, lvl * LEVEL_HEIGHT + 0.4, z - BAY_DEPTH / 2);
-    scene.add(beam);
+    groupA.add(beam);
     const beam2 = beam.clone();
     beam2.position.z = z + BAY_DEPTH / 2;
-    scene.add(beam2);
+    groupA.add(beam2);
   }
   // status beacon on top
   const beacon = new THREE.Mesh(
@@ -251,7 +296,7 @@ function buildRackFrame(x, z, color) {
     new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x5fd685, emissiveIntensity: 0.8 })
   );
   beacon.position.set(x, totalHeight + 0.4, z);
-  scene.add(beacon);
+  groupA.add(beacon);
   return beacon;
 }
 
@@ -262,7 +307,7 @@ function buildBay(skuId, x, z, zoneColor) {
   const palletMat = new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x102015 });
   const inst = new THREE.InstancedMesh(palletGeo, palletMat, PALLET_SLOTS);
   inst.position.set(x, 0, z);
-  scene.add(inst);
+  groupA.add(inst);
 
   const dummy = new THREE.Object3D();
   pallSlotOffsets.forEach((off, i) => {
@@ -275,7 +320,7 @@ function buildBay(skuId, x, z, zoneColor) {
 
   const label = makeLabelSprite(skuId);
   label.position.set(x, PALLET_LEVELS * LEVEL_HEIGHT + 1.3, z);
-  scene.add(label);
+  groupA.add(label);
 
   racks[skuId] = { inst, beacon, litCount: -1 };
 }
@@ -349,7 +394,7 @@ function layoutEnclosedZone(skuIds, centerX, centerZ, label, tint) {
   );
   floorPatch.rotation.x = -Math.PI / 2;
   floorPatch.position.set(centerX, 0.02, centerZ);
-  scene.add(floorPatch);
+  groupA.add(floorPatch);
 
   const wireMat = new THREE.LineBasicMaterial({ color: tint, transparent: true, opacity: 0.7 });
   const wallHeight = 5.5;
@@ -358,10 +403,10 @@ function layoutEnclosedZone(skuIds, centerX, centerZ, label, tint) {
     [roomW / 2, roomD / 2], [-roomW / 2, roomD / 2], [-roomW / 2, -roomD / 2],
   ];
   const pts = corners.map(([dx, dz]) => new THREE.Vector3(centerX + dx, 0, centerZ + dz));
-  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), wireMat));
+  groupA.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), wireMat));
   corners.slice(0, 4).forEach(([dx, dz]) => {
     const pts2 = [new THREE.Vector3(centerX + dx, 0, centerZ + dz), new THREE.Vector3(centerX + dx, wallHeight, centerZ + dz)];
-    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), wireMat));
+    groupA.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), wireMat));
   });
 
   const startX = centerX - ((skuIds.length - 1) * BAY_PITCH) / 2;
@@ -400,10 +445,23 @@ function statusLabel(stock, rp) {
 }
 
 const ZONE_LABELS = { VNA: "VNA aisle", COLD_VAULT: "Cold vault (VNV)", SECURE_CAGE: "Secure cage" };
+let latestSkus = null;
+
+async function rebuildModel(name) {
+  if (!latestSkus) return;
+  const bim = await ensureBimData();
+  if (name === "B") buildModelB(groupB, bim, latestSkus);
+  if (name === "C") buildModelC(groupC, bim, latestSkus);
+  modelBuiltFor[name] = latestDay;
+}
+
+let latestDay = -1;
 
 async function refreshState() {
   const res = await fetch("/api/state");
   const data = await res.json();
+  latestSkus = data.skus;
+  latestDay = data.day;
 
   if (!warehouseBuilt) {
     buildWarehouse(data.skus);
@@ -411,6 +469,12 @@ async function refreshState() {
   }
   for (const [skuId, s] of Object.entries(data.skus)) {
     updateBay(skuId, s);
+  }
+
+  // Model B/C are heavier procedural rebuilds; only regenerate them when
+  // actively selected, and only once per simulated day (not every 1.5s poll)
+  if ((currentModel === "B" || currentModel === "C") && modelBuiltFor[currentModel] !== data.day) {
+    rebuildModel(currentModel);
   }
 
   document.getElementById("day-label").textContent = `Day ${data.day} / ${data.n_days - 1}`;
@@ -465,6 +529,21 @@ document.getElementById("btn-reset").addEventListener("click", async () => {
   });
   refreshState();
 });
+
+function selectModel(name) {
+  currentModel = name;
+  groupA.visible = name === "A";
+  groupB.visible = name === "B";
+  groupC.visible = name === "C";
+  document.querySelectorAll(".model-btn").forEach((b) => b.classList.remove("active"));
+  document.getElementById(`model-${name.toLowerCase()}`).classList.add("active");
+  applyCameraPreset(name);
+  if (name !== "A" && modelBuiltFor[name] !== latestDay) rebuildModel(name);
+}
+
+document.getElementById("model-a").addEventListener("click", () => selectModel("A"));
+document.getElementById("model-b").addEventListener("click", () => selectModel("B"));
+document.getElementById("model-c").addEventListener("click", () => selectModel("C"));
 
 refreshState();
 refreshAgentLog();
