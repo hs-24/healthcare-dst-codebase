@@ -1,0 +1,31 @@
+{
+  "sites": [
+    {
+      "site_id": "SITE_A",
+      "site_name": "Central Distribution Hub (Site 1)",
+      "digital_twin_fill_rate_pct": 99.88,
+      "manual_baseline_fill_rate_pct": 99.57,
+      "stockout_days_avoided": 3,
+      "data_inconsistency_rate_pct": 12.87,
+      "forecast_accuracy_improvement_pct": 40.46
+    },
+    {
+      "site_id": "SITE_B",
+      "site_name": "North Regional Hub (Site 2)",
+      "digital_twin_fill_rate_pct": 99.94,
+      "manual_baseline_fill_rate_pct": 99.66,
+      "stockout_days_avoided": 4,
+      "data_inconsistency_rate_pct": 11.0,
+      "forecast_accuracy_improvement_pct": 13.85
+    },
+    {
+      "site_id": "SITE_C",
+      "site_name": "East Satellite Depot (Site 3)",
+      "digital_twin_fill_rate_pct": 99.44,
+      "manual_baseline_fill_rate_pct": 98.71,
+      "stockout_days_avoided": 9,
+      "data_inconsistency_rate_pct": 13.47,
+      "forecast_accuracy_improvement_pct": 38.86
+    }
+  ]
+}

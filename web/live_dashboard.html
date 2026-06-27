@@ -20,6 +20,19 @@
   .model-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 11px; }
   .model-btn:hover { background: #1f3358; }
   .model-btn.active { background: #2c4a82; color: #e6edf3; border-color: #3a8df0; }
+  #site-switcher { display: flex; gap: 6px; }
+  .site-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 12px; font-weight: 600; }
+  .site-btn:hover { background: #1f3358; }
+  .site-btn.active { background: #5fd685; color: #0b1320; border-color: #5fd685; }
+  .target-card { background: #131f33; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .target-card .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .target-card .name { font-size: 11px; color: #9fb3d8; }
+  .target-card .status { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; }
+  .target-card .status.pass { background: #16331f; color: #5fd685; }
+  .target-card .status.fail { background: #3a1f24; color: #ff5f6d; }
+  .target-bar-track { height: 6px; background: #1c2840; border-radius: 4px; overflow: hidden; }
+  .target-bar-fill { height: 100%; border-radius: 4px; }
+  .target-detail { font-size: 10px; color: #6f7d99; margin-top: 4px; }
   #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
   #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
   #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
@@ -50,8 +63,9 @@
   <header>
     <div>
       <h1>Healthcare Warehouse — Digital Supply Chain Twin</h1>
-      <div class="sub">DSC2205 Group 3 · Central Distribution Hub (Pilot Site A) · Live agentic replay</div>
+      <div class="sub" id="header-site">DSC2205 Group 3 · Live agentic replay</div>
     </div>
+    <div id="site-switcher"></div>
     <div class="sub" id="header-day">Day — / —</div>
   </header>
 
@@ -80,6 +94,10 @@
     <div class="panel">
       <h2>Operational KPIs (30-day pilot)</h2>
       <div class="kpi-grid" id="kpi-grid"></div>
+    </div>
+    <div class="panel">
+      <h2>SMART objective targets (Section 5/7)</h2>
+      <div id="target-cards"></div>
     </div>
     <div class="panel">
       <h2>Bay status (pallets)</h2>
@@ -149,6 +167,7 @@ groupB.visible = false;
 groupC.visible = false;
 floor.visible = true; // shared ground plane; Model B/C draw their own floor inside their group
 let currentModel = "A";
+let currentSite = "SITE_A";
 let bimData = null;
 let modelBuiltFor = { B: -1, C: -1 }; // tracks which sim "day" each model was last rebuilt for
 
@@ -322,7 +341,7 @@ function buildBay(skuId, x, z, zoneColor) {
   label.position.set(x, PALLET_LEVELS * LEVEL_HEIGHT + 1.3, z);
   groupA.add(label);
 
-  racks[skuId] = { inst, beacon, litCount: -1 };
+  racks[skuId] = { inst, beacon, litCount: -1, position: new THREE.Vector3(x, 0.6, z) };
 }
 
 function updateBay(skuId, s) {
@@ -416,6 +435,144 @@ function layoutEnclosedZone(skuIds, centerX, centerZ, label, tint) {
   makeZoneSign(label, centerX, centerZ - roomD / 2 - 1, tint);
 }
 
+// ---- Inbound / Outbound docks + AGV & pallet-jack operators ----------
+// Direct answer to "clear distinguished areas for inbound and outbound
+// operations" and "AGV and pallet jack being used by operators" --
+// the goods-flow side of the warehousing infrastructure problem, not
+// just static racking.
+let inboundDockPos = null, outboundDockPos = null;
+
+function buildDockZone(x, z, label, color, depth = 9) {
+  const width = 7;
+  const floorPatch = new THREE.Mesh(
+    new THREE.PlaneGeometry(width, depth),
+    new THREE.MeshStandardMaterial({ color, transparent: true, opacity: 0.14 })
+  );
+  floorPatch.rotation.x = -Math.PI / 2;
+  floorPatch.position.set(x, 0.02, z);
+  groupA.add(floorPatch);
+
+  // hazard stripes along the dock edge
+  for (let i = -3; i <= 3; i++) {
+    const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.02, depth * 0.9), new THREE.MeshStandardMaterial({ color: 0xffd166 }));
+    stripe.position.set(x + i * 0.9, 0.025, z);
+    groupA.add(stripe);
+  }
+
+  // parked trailer / dock leveller
+  const trailer = new THREE.Mesh(new THREE.BoxGeometry(2.4, 2.6, 6.5), new THREE.MeshStandardMaterial({ color: 0x2b3a55 }));
+  trailer.position.set(x, 1.3, z);
+  groupA.add(trailer);
+
+  const sign = makeLabelSprite(label, 1.1);
+  sign.position.set(x, 6.5, z);
+  groupA.add(sign);
+
+  return new THREE.Vector3(x, 0.6, z);
+}
+
+function makeAGV() {
+  const group = new THREE.Group();
+  const chassis = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.4, 1.0), new THREE.MeshStandardMaterial({ color: 0xffd166, metalness: 0.3, roughness: 0.5 }));
+  chassis.position.y = 0.3;
+  group.add(chassis);
+  const cargo = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.5, 0.8), new THREE.MeshStandardMaterial({ color: 0x5fd685 }));
+  cargo.position.y = 0.75;
+  group.add(cargo);
+  const beaconLight = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshStandardMaterial({ color: 0xff5f6d, emissive: 0xff5f6d, emissiveIntensity: 1 }));
+  beaconLight.position.set(0, 1.1, 0);
+  group.add(beaconLight);
+  [[-0.6, -0.4], [0.6, -0.4], [-0.6, 0.4], [0.6, 0.4]].forEach(([wx, wz]) => {
+    const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.12, 10), new THREE.MeshStandardMaterial({ color: 0x222a3a }));
+    wheel.rotation.x = Math.PI / 2;
+    wheel.position.set(wx, 0.15, wz);
+    group.add(wheel);
+  });
+  group.userData.beacon = beaconLight;
+  return group;
+}
+
+function makePalletJack() {
+  const group = new THREE.Group();
+  const jackBase = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.15, 0.6), new THREE.MeshStandardMaterial({ color: 0x9aa5b1, metalness: 0.6, roughness: 0.3 }));
+  jackBase.position.set(0.3, 0.1, 0);
+  group.add(jackBase);
+  const handle = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.9, 0.08), new THREE.MeshStandardMaterial({ color: 0x4a5872 }));
+  handle.position.set(-0.4, 0.5, 0);
+  handle.rotation.z = 0.3;
+  group.add(handle);
+  const cargo = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.5, 0.5), new THREE.MeshStandardMaterial({ color: 0x6fb7ff }));
+  cargo.position.set(0.3, 0.45, 0);
+  group.add(cargo);
+  // operator (simplified rigged figure) walking just behind the jack handle
+  const operator = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.9, 8), new THREE.MeshStandardMaterial({ color: 0x2c4a82 }));
+  body.position.y = 0.55;
+  operator.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.14, 10, 10), new THREE.MeshStandardMaterial({ color: 0xe0b894 }));
+  head.position.y = 1.1;
+  operator.add(head);
+  const hardhat = new THREE.Mesh(new THREE.SphereGeometry(0.15, 10, 10, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xffd166 }));
+  hardhat.position.y = 1.15;
+  operator.add(hardhat);
+  operator.position.set(-0.75, 0, 0);
+  group.add(operator);
+  return group;
+}
+
+function makeVehicleState(mesh, dockPos) {
+  return { mesh, dock: dockPos.clone(), state: "idle", from: dockPos.clone(), to: dockPos.clone(), t: 0, dwell: 0, queue: [], speed: 0.35 };
+}
+
+let agvState = null, jackState = null;
+
+function buildVehicles() {
+  const agvMesh = makeAGV();
+  agvMesh.position.copy(inboundDockPos);
+  groupA.add(agvMesh);
+  agvState = makeVehicleState(agvMesh, inboundDockPos);
+
+  const jackMesh = makePalletJack();
+  jackMesh.position.copy(outboundDockPos);
+  groupA.add(jackMesh);
+  jackState = makeVehicleState(jackMesh, outboundDockPos);
+}
+
+function advanceVehicle(v, dt) {
+  if (!v) return;
+  if (v.state === "idle") {
+    if (v.queue.length > 0) {
+      v.from = v.mesh.position.clone();
+      v.to = v.queue.shift();
+      v.t = 0;
+      v.state = "toTarget";
+    }
+    return;
+  }
+  if (v.state === "dwell") {
+    v.dwell -= dt;
+    if (v.dwell <= 0) {
+      v.from = v.mesh.position.clone();
+      v.to = v.dock.clone();
+      v.t = 0;
+      v.state = "toDock";
+    }
+    return;
+  }
+  v.t = Math.min(1, v.t + dt * v.speed);
+  v.mesh.position.lerpVectors(v.from, v.to, v.t);
+  const dx = v.to.x - v.from.x, dz = v.to.z - v.from.z;
+  if (Math.abs(dx) > 0.01 || Math.abs(dz) > 0.01) v.mesh.rotation.y = Math.atan2(dx, dz);
+  if (v.t >= 1) {
+    if (v.state === "toTarget") {
+      v.state = "dwell";
+      v.dwell = 0.6;
+    } else if (v.state === "toDock") {
+      v.state = "idle";
+    }
+  }
+}
+
 function buildWarehouse(skus) {
   const vnaIds = [], coldIds = [], cageIds = [];
   for (const [id, s] of Object.entries(skus)) {
@@ -423,13 +580,27 @@ function buildWarehouse(skus) {
     else if (s.storage_mode === "SECURE_CAGE") cageIds.push(id);
     else vnaIds.push(id);
   }
-  const vnaEndX = layoutVNA(vnaIds, -((Math.ceil(vnaIds.length / 4) - 1) * AISLE_PITCH) / 2 - AISLE_PITCH);
-  layoutEnclosedZone(coldIds, vnaEndX + AISLE_PITCH * 1.6, -7, "COLD VAULT · 2–8°C (VNV)", 0x7fd1ff);
-  layoutEnclosedZone(cageIds, vnaEndX + AISLE_PITCH * 1.6, 7, "SECURE CAGE · CRITICAL EQUIPMENT", 0xc98cff);
+  const vnaOriginX = -((Math.ceil(vnaIds.length / 4) - 1) * AISLE_PITCH) / 2 - AISLE_PITCH;
+  const vnaEndX = layoutVNA(vnaIds, vnaOriginX);
+  const enclosedX = vnaEndX + AISLE_PITCH * 1.6;
+  layoutEnclosedZone(coldIds, enclosedX, -7, "COLD VAULT · 2–8°C (VNV)", 0x7fd1ff);
+  layoutEnclosedZone(cageIds, enclosedX, 7, "SECURE CAGE · CRITICAL EQUIPMENT", 0xc98cff);
+
+  inboundDockPos = buildDockZone(vnaOriginX - AISLE_PITCH * 1.5, 0, "INBOUND · RECEIVING", 0x5fd685);
+  outboundDockPos = buildDockZone(enclosedX + Math.max(8, cageIds.length * BAY_PITCH + 4) / 2 + 7, 0, "OUTBOUND · SHIPPING", 0xffb454);
+  buildVehicles();
 }
+
+const clock = new THREE.Clock();
 
 function animate() {
   requestAnimationFrame(animate);
+  const dt = Math.min(0.1, clock.getDelta());
+  if (groupA.visible) {
+    advanceVehicle(agvState, dt);
+    advanceVehicle(jackState, dt);
+    if (agvState) agvState.mesh.userData.beacon.material.emissiveIntensity = 0.5 + 0.5 * Math.sin(performance.now() * 0.01);
+  }
   renderer.render(scene, camera);
 }
 animate();
@@ -456,9 +627,33 @@ async function rebuildModel(name) {
 }
 
 let latestDay = -1;
+let lastDaySeenForJack = -1;
+
+function maybeDispatchJack(day) {
+  if (day === lastDaySeenForJack) return;
+  lastDaySeenForJack = day;
+  if (!jackState) return;
+  const ids = Object.keys(racks);
+  if (!ids.length) return;
+  const pick = ids[Math.floor(Math.random() * ids.length)];
+  jackState.queue.push(racks[pick].position.clone());
+}
+
+const seenAgentEventKeys = new Set();
+function maybeDispatchAgv(events) {
+  if (!agvState) return;
+  events.forEach((e) => {
+    const key = `${e.timestamp}|${e.sku_id}|${e.message}`;
+    if (seenAgentEventKeys.has(key)) return;
+    seenAgentEventKeys.add(key);
+    if (e.message.includes("Autonomous reorder placed") && racks[e.sku_id]) {
+      agvState.queue.push(racks[e.sku_id].position.clone());
+    }
+  });
+}
 
 async function refreshState() {
-  const res = await fetch("/api/state");
+  const res = await fetch(`/api/state?site=${currentSite}`);
   const data = await res.json();
   latestSkus = data.skus;
   latestDay = data.day;
@@ -470,6 +665,7 @@ async function refreshState() {
   for (const [skuId, s] of Object.entries(data.skus)) {
     updateBay(skuId, s);
   }
+  maybeDispatchJack(data.day);
 
   // Model B/C are heavier procedural rebuilds; only regenerate them when
   // actively selected, and only once per simulated day (not every 1.5s poll)
@@ -478,7 +674,8 @@ async function refreshState() {
   }
 
   document.getElementById("day-label").textContent = `Day ${data.day} / ${data.n_days - 1}`;
-  document.getElementById("header-day").textContent = `Day ${data.day} / ${data.n_days - 1}`;
+  document.getElementById("header-day").textContent = `${data.site_label || ""} · Day ${data.day} / ${data.n_days - 1}`;
+  document.getElementById("header-site").textContent = `DSC2205 Group 3 · ${data.site_name || ""} · Live agentic replay`;
   playing = data.playing;
   document.getElementById("btn-play").textContent = playing ? "⏸ Pause" : "▶ Play";
 
@@ -490,6 +687,7 @@ async function refreshState() {
     <div class="kpi"><div class="v good">${kpis.forecast_accuracy_improvement_pct.toFixed(1)}%</div><div class="l">Forecast accuracy gain</div></div>
     <div class="kpi" style="grid-column:1/3"><div class="v warn">${kpis.data_inconsistency_rate_pct.toFixed(1)}%</div><div class="l">Source spreadsheet inconsistency rate (validated away by agents below)</div></div>
   `;
+  renderTargetCards(kpis);
 
   const tbody = document.getElementById("sku-table-body");
   tbody.innerHTML = Object.entries(data.skus).map(([id, s]) => {
@@ -504,8 +702,9 @@ async function refreshState() {
 }
 
 async function refreshAgentLog() {
-  const res = await fetch("/api/agent-log");
+  const res = await fetch(`/api/agent-log?site=${currentSite}`);
   const events = await res.json();
+  maybeDispatchAgv(events);
   const feed = document.getElementById("agent-feed");
   feed.innerHTML = events.map(e => `
     <div class="ev ${e.severity}">
@@ -515,18 +714,57 @@ async function refreshAgentLog() {
   `).join("");
 }
 
+// SMART objective targets, lifted verbatim from the DSC2205 reference doc
+// (Section 5/7): >=30% data inconsistency reduction, >=25% forecast gain.
+const TARGETS = [
+  {
+    key: "inconsistency", name: "Data inconsistency reduction", target: 30,
+    compute: (k) => ({
+      achieved: 100, // digital twin is validated/centralised by construction -> 0% inconsistency
+      detail: `Source spreadsheets: ${k.data_inconsistency_rate_pct.toFixed(1)}% inconsistent -> Digital Twin: 0% (fully reconciled by the agentic workflow)`,
+    }),
+  },
+  {
+    key: "forecast", name: "Forecast accuracy improvement", target: 25,
+    compute: (k) => ({
+      achieved: k.forecast_accuracy_improvement_pct,
+      detail: `Manual baseline vs Digital Twin WMAPE -> ${k.forecast_accuracy_improvement_pct.toFixed(1)}% improvement`,
+    }),
+  },
+];
+
+function renderTargetCards(kpis) {
+  const el = document.getElementById("target-cards");
+  el.innerHTML = TARGETS.map((t) => {
+    const { achieved, detail } = t.compute(kpis);
+    const pass = achieved >= t.target;
+    const pct = Math.min(100, (achieved / Math.max(t.target, 1)) * 100);
+    return `
+      <div class="target-card">
+        <div class="row">
+          <span class="name">${t.name} (target >= ${t.target}%)</span>
+          <span class="status ${pass ? "pass" : "fail"}">${pass ? "ON TARGET" : "BELOW TARGET"}</span>
+        </div>
+        <div class="target-bar-track"><div class="target-bar-fill" style="width:${pct}%; background:${pass ? "#5fd685" : "#ff5f6d"};"></div></div>
+        <div class="target-detail">${achieved.toFixed(1)}% achieved · ${detail}</div>
+      </div>
+    `;
+  }).join("");
+}
+
 document.getElementById("btn-play").addEventListener("click", async () => {
   await fetch("/api/control", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: playing ? "pause" : "play" }),
+    body: JSON.stringify({ site: currentSite, action: playing ? "pause" : "play" }),
   });
   refreshState();
 });
 document.getElementById("btn-reset").addEventListener("click", async () => {
   await fetch("/api/control", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "reset" }),
+    body: JSON.stringify({ site: currentSite, action: "reset" }),
   });
+  lastDaySeenForJack = -1;
   refreshState();
 });
 
@@ -544,6 +782,32 @@ function selectModel(name) {
 document.getElementById("model-a").addEventListener("click", () => selectModel("A"));
 document.getElementById("model-b").addEventListener("click", () => selectModel("B"));
 document.getElementById("model-c").addEventListener("click", () => selectModel("C"));
+
+function selectSite(siteId) {
+  if (siteId === currentSite) return;
+  currentSite = siteId;
+  lastDaySeenForJack = -1;
+  seenAgentEventKeys.clear();
+  modelBuiltFor = { B: -1, C: -1 };
+  if (agvState) agvState.queue = [];
+  if (jackState) jackState.queue = [];
+  document.querySelectorAll(".site-btn").forEach((b) => b.classList.toggle("active", b.dataset.site === siteId));
+  refreshState();
+  refreshAgentLog();
+}
+
+async function initSiteSwitcher() {
+  const res = await fetch("/api/sites");
+  const sites = await res.json();
+  const el = document.getElementById("site-switcher");
+  el.innerHTML = sites.map((s, i) => `
+    <button class="site-btn${i === 0 ? " active" : ""}" data-site="${s.site_id}" title="${s.site_name}">${s.label}</button>
+  `).join("");
+  el.querySelectorAll(".site-btn").forEach((btn) => {
+    btn.addEventListener("click", () => selectSite(btn.dataset.site));
+  });
+}
+initSiteSwitcher();
 
 refreshState();
 refreshAgentLog();

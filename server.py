@@ -2,17 +2,20 @@
 server.py
 
 Real-time backend for the Healthcare Warehouse Digital Supply Chain
-Twin. Replays the 30-day pilot (already computed by run_pilot.py /
-export_dashboard_data.py into outputs/dashboard_data.json) one
-simulated day per tick, on a background thread, and runs every tick
-through the agentic AI workflow (src/digital_twin/agents.py) before
-publishing the result.
+Twin. Runs three independent sites (Site 1/2/3 -- SITE_A/B/C), each
+replaying its own 30-day pilot (computed by
+build/generate_multi_site_pilot.py into outputs/dashboard_data_<SITE>.json)
+one simulated day per tick, on its own background thread, through the
+agentic AI workflow (src/digital_twin/agents.py). Serving all three
+sites from a single dashboard is the literal "unified oversight"
+answer to the Warehousing Infrastructure problem in the report.
 
 Endpoints:
-  GET /                  three.js live digital twin dashboard
-  GET /api/state         current day's per-SKU twin state + KPIs
-  GET /api/agent-log      latest agentic workflow events
-  POST /api/control       {"action": "play"|"pause"|"reset"|"speed", "value": ...}
+  GET /                       three.js live digital twin dashboard
+  GET /api/sites              site list + latest snapshot KPIs (multi-site overview)
+  GET /api/state?site=ID      current day's per-SKU twin state + KPIs for one site
+  GET /api/agent-log?site=ID  latest agentic workflow events for one site
+  POST /api/control           {"site": "SITE_A", "action": "play"|"pause"|"reset"|"speed", "value": ...}
 
 Run:
   python server.py
@@ -37,8 +40,9 @@ app = Flask(__name__, static_folder=None)
 
 
 class LiveTwin:
-    def __init__(self, data: dict):
+    def __init__(self, data: dict, site_meta: dict | None = None):
         self.data = data
+        self.site_meta = site_meta or {}
         self.per_sku = data["per_sku_series"]
         self.results = data["results"]
         self.sku_ids = list(self.per_sku.keys())
@@ -112,6 +116,9 @@ class LiveTwin:
             "day": day,
             "n_days": self.n_days,
             "playing": self.playing,
+            "site_id": self.site_meta.get("site_id"),
+            "site_name": self.site_meta.get("site_name"),
+            "site_label": self.site_meta.get("label"),
             "skus": per_sku_state,
             "site_summary": {
                 "manual_baseline_fill_rate_pct": self.results["operational_comparison"]["manual_baseline_fill_rate_pct"],
@@ -160,11 +167,27 @@ def _background_loop(twin: LiveTwin) -> None:
         twin.tick()
 
 
-with open(DASHBOARD_DATA_PATH, "r", encoding="utf-8") as f:
-    _data = json.load(f)
+SITE_META = [
+    {"site_id": "SITE_A", "site_name": "Central Distribution Hub", "label": "Site 1"},
+    {"site_id": "SITE_B", "site_name": "North Regional Hub", "label": "Site 2"},
+    {"site_id": "SITE_C", "site_name": "East Satellite Depot", "label": "Site 3"},
+]
 
-twin = LiveTwin(_data)
-threading.Thread(target=_background_loop, args=(twin,), daemon=True).start()
+twins: dict[str, LiveTwin] = {}
+for meta in SITE_META:
+    data_path = ROOT / "outputs" / f"dashboard_data_{meta['site_id']}.json"
+    if not data_path.exists():
+        data_path = DASHBOARD_DATA_PATH  # fallback to the single-site file
+    with open(data_path, "r", encoding="utf-8") as f:
+        site_data = json.load(f)
+    site_twin = LiveTwin(site_data, site_meta=meta)
+    twins[meta["site_id"]] = site_twin
+    threading.Thread(target=_background_loop, args=(site_twin,), daemon=True).start()
+
+
+def _get_twin(req) -> LiveTwin:
+    site_id = req.args.get("site", "SITE_A")
+    return twins.get(site_id, twins["SITE_A"])
 
 
 @app.get("/")
@@ -177,21 +200,33 @@ def web_assets(filename):
     return send_from_directory(ROOT / "web", filename)
 
 
+@app.get("/api/sites")
+def api_sites():
+    out = []
+    for meta in SITE_META:
+        t = twins[meta["site_id"]]
+        state = t.state()
+        out.append({**meta, "summary": state.get("site_summary"), "day": state.get("day"), "n_days": state.get("n_days")})
+    return jsonify(out)
+
+
 @app.get("/api/state")
 def api_state():
-    return jsonify(twin.state())
+    return jsonify(_get_twin(request).state())
 
 
 @app.get("/api/agent-log")
 def api_agent_log():
-    return jsonify(twin.agent_log())
+    return jsonify(_get_twin(request).agent_log())
 
 
 @app.post("/api/control")
 def api_control():
     body = request.get_json(force=True) or {}
-    twin.control(body.get("action"), body.get("value"))
-    return jsonify({"ok": True, "playing": twin.playing, "speed": twin.speed})
+    site_id = body.get("site", "SITE_A")
+    t = twins.get(site_id, twins["SITE_A"])
+    t.control(body.get("action"), body.get("value"))
+    return jsonify({"ok": True, "site": site_id, "playing": t.playing, "speed": t.speed})
 
 
 if __name__ == "__main__":
