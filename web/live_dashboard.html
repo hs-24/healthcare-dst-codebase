@@ -15,11 +15,20 @@
   #controls { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; align-items: center; background: rgba(16,26,44,0.85); padding: 8px 12px; border-radius: 8px; border: 1px solid #1f2c45; }
   #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; }
   #controls button:hover { background: #2c4a82; }
+  #controls button.active { background: #3a8df0; border-color: #7fb2ff; }
+  #day-slider { width: 110px; accent-color: #3a8df0; }
+  #day-dots { display: flex; gap: 3px; align-items: center; }
+  .day-dot { width: 6px; height: 6px; border-radius: 50%; background: #5fd685; opacity: 0.55; }
+  .day-dot.stockout { background: #ff5f6d; opacity: 0.9; }
+  .day-dot.current { transform: scale(1.75); box-shadow: 0 0 0 4px rgba(58,141,240,0.22); opacity: 1; }
   #day-label { font-size: 12px; color: #9fb3d8; min-width: 90px; }
+  #mode-banner { display: none; position: absolute; top: 16px; right: 16px; z-index: 3; background: rgba(58,31,36,0.92); color: #ff5f6d; border: 1px solid #813744; border-radius: 8px; padding: 9px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.03em; }
+  #view-toggle { background: #16331f; color: #5fd685; border: 1px solid #2d6a3d; border-radius: 6px; padding: 7px 12px; cursor: pointer; font-size: 12px; }
+  #view-toggle.manual { background: #3a1f24; color: #ff5f6d; border-color: #813744; }
   #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
   #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
   #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
-  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow: hidden; }
+  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow-y: auto; }
   .panel { padding: 14px 16px; border-bottom: 1px solid #1f2c45; }
   .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #7d8aa3; margin: 0 0 10px; }
   .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -28,6 +37,18 @@
   .kpi .l { font-size: 10.5px; color: #7d8aa3; margin-top: 2px; }
   .kpi .v.good { color: #5fd685; }
   .kpi .v.warn { color: #ffb454; }
+  .kpi .good { color: #5fd685; }
+  .kpi .warn { color: #ffb454; }
+  .kpi-note { display: none; margin-top: 10px; color: #ffb454; font-size: 12px; }
+  .trace-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .trace-table th { color: #7d8aa3; text-align: left; font-weight: 600; padding: 6px; border-bottom: 1px solid #1f2c45; }
+  .trace-table td { padding: 8px 6px; border-bottom: 1px solid #182338; vertical-align: top; color: #9fb3d8; }
+  .trace-table td:first-child { color: #e6edf3; font-weight: 700; }
+  .check { color: #5fd685; font-weight: 700; }
+  .model-note { color: #9fb3d8; font-size: 12px; line-height: 1.55; margin: 0; padding-left: 18px; }
+  .panel-control { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  #sku-selector { background: #131f33; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 8px; max-width: 220px; }
+  #stock-chart { width: 100%; height: 170px; background: #101a2c; border: 1px solid #1f2c45; border-radius: 8px; }
   #agent-feed { flex: 1; overflow-y: auto; padding: 10px 14px; }
   .ev { border-radius: 6px; padding: 7px 9px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.4; border-left: 3px solid #3a4d72; background: #131f33; }
   .ev.info { border-left-color: #3a8df0; }
@@ -38,6 +59,7 @@
   #sku-table { width: 100%; font-size: 11.5px; border-collapse: collapse; }
   #sku-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 4px 2px; border-bottom: 1px solid #1f2c45; }
   #sku-table td { padding: 5px 2px; border-bottom: 1px solid #182338; }
+  #sku-table tr.critical-row td { background: rgba(255,95,109,0.12); color: #ff5f6d; font-weight: 700; }
   .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
 </style>
 </head>
@@ -48,10 +70,14 @@
       <h1>Healthcare Warehouse — Digital Supply Chain Twin</h1>
       <div class="sub">DSC2205 Group 3 · Central Distribution Hub (Pilot Site A) · Live agentic replay</div>
     </div>
-    <div class="sub" id="header-day">Day — / —</div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="view-toggle" title="Toggle warehouse colours between validated digital twin stock and corrupted manual readings">View: Digital Twin</button>
+      <div class="sub" id="header-day">Day — / —</div>
+    </div>
   </header>
 
   <div id="scene-wrap">
+    <div id="mode-banner">MANUAL BASELINE VIEW - Corrupted and lagged data</div>
     <div id="legend">
       <div class="row"><span class="swatch" style="background:#5fd685"></span> Healthy stock (pallets lit)</div>
       <div class="row"><span class="swatch" style="background:#ffb454"></span> Approaching reorder point</div>
@@ -63,7 +89,13 @@
     <div id="controls">
       <button id="btn-play">⏸ Pause</button>
       <button id="btn-reset">⟲ Reset</button>
+      <button class="speed-btn" data-speed="3.0">0.5x</button>
+      <button class="speed-btn active" data-speed="1.5">1x</button>
+      <button class="speed-btn" data-speed="0.75">2x</button>
+      <button class="speed-btn" data-speed="0.2">Fast</button>
+      <input id="day-slider" type="range" min="0" max="29" value="0" disabled title="Simulation day (read-only)" />
       <span id="day-label">Day 0 / 29</span>
+      <div id="day-dots" title="Manual baseline stockout days"></div>
     </div>
   </div>
 
@@ -71,6 +103,34 @@
     <div class="panel">
       <h2>Operational KPIs (30-day pilot)</h2>
       <div class="kpi-grid" id="kpi-grid"></div>
+      <div class="kpi-note" id="mode-note">Showing manual baseline stock levels</div>
+    </div>
+    <div class="panel">
+      <h2>Problem to Solution Traceability</h2>
+      <table class="trace-table">
+        <thead><tr><th>Problem</th><th>Root Cause</th><th>Dashboard Proof</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Data Management</td><td>12.87% spreadsheet inconsistency</td><td>Validation agent plus live feed</td><td>0% inconsistency in twin <span class="check">OK</span></td></tr>
+          <tr><td>Forecasting</td><td>Manual forecasts on corrupted data</td><td>AR(2) daily demand forecast</td><td>40.46% WMAPE improvement <span class="check">OK</span></td></tr>
+          <tr><td>Warehousing</td><td>Lagged reorder decisions</td><td>Validated stock drives replenishment</td><td>3 stockout days avoided</td></tr>
+          <tr><td>Oversight</td><td>Siloed manual spreadsheets</td><td>3D twin plus agent event stream</td><td>Single operational view</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-control">
+        <h2 style="margin:0;">Stock Trajectory - DT vs Manual</h2>
+        <select id="sku-selector"></select>
+      </div>
+      <svg id="stock-chart" viewBox="0 0 500 170" role="img" aria-label="Stock trajectory chart"></svg>
+    </div>
+    <div class="panel">
+      <h2>ML Forecasting Model</h2>
+      <div style="font-size:13px; color:#e6edf3; font-weight:700; margin-bottom:8px;">Why AR(2) live, ARIMA offline?</div>
+      <ul class="model-note">
+        <li>AR(2) is lightweight enough for the live agent loop because each SKU only needs recent demand observations.</li>
+        <li>ARIMA-style batch fitting is better suited for offline benchmarking, where the full history can be evaluated after the simulation.</li>
+      </ul>
     </div>
     <div class="panel">
       <h2>Bay status (pallets)</h2>
@@ -284,14 +344,17 @@ function updateBay(skuId, s) {
   const rack = racks[skuId];
   if (!rack) return;
 
+  const stock = stockForMode(s);
+  const palletCount = stock / Math.max(1, Number(s.units_per_pallet || 1));
   const litCount = Math.max(0, Math.min(PALLET_SLOTS, Math.round(
-    (s.pallet_count / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
+    (palletCount / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
   )));
-  const color = colorForStatus(s.reconciled_stock, s.reorder_point);
+  const color = colorForStatus(stock, s.reorder_point);
 
-  if (litCount === rack.litCount && rack._lastColor === color) return;
+  if (litCount === rack.litCount && rack._lastColor === color && rack._lastMode === viewMode) return;
   rack.litCount = litCount;
   rack._lastColor = color;
+  rack._lastMode = viewMode;
 
   const dummy = new THREE.Object3D();
   const c = new THREE.Color(color);
@@ -392,6 +455,20 @@ animate();
 // ---- live data polling ----
 let warehouseBuilt = false;
 let playing = true;
+let latestSkus = {};
+let latestDay = 0;
+let latestNdays = 30;
+let viewMode = "dt";
+let selectedSku = null;
+const MANUAL_STOCKOUT_DAYS = [3, 7, 14, 18, 21, 23, 24];
+
+function stockForMode(s) {
+  return viewMode === "manual" ? Number(s.perceived_stock || 0) : Number(s.reconciled_stock || 0);
+}
+
+function palletCountForMode(s) {
+  return stockForMode(s) / Math.max(1, Number(s.units_per_pallet || 1));
+}
 
 function statusLabel(stock, rp) {
   if (stock <= rp) return ["At/below reorder", "#ff5f6d"];
@@ -401,9 +478,91 @@ function statusLabel(stock, rp) {
 
 const ZONE_LABELS = { VNA: "VNA aisle", COLD_VAULT: "Cold vault (VNV)", SECURE_CAGE: "Secure cage" };
 
+function renderDayDots() {
+  const wrap = document.getElementById("day-dots");
+  wrap.innerHTML = "";
+  for (let day = 0; day < latestNdays; day++) {
+    const dot = document.createElement("span");
+    dot.className = "day-dot";
+    if (MANUAL_STOCKOUT_DAYS.includes(day)) dot.classList.add("stockout");
+    if (day === latestDay) dot.classList.add("current");
+    dot.title = `Day ${day}${MANUAL_STOCKOUT_DAYS.includes(day) ? " - manual stockout" : ""}`;
+    wrap.appendChild(dot);
+  }
+}
+
+function refreshAllBays() {
+  for (const [skuId, s] of Object.entries(latestSkus)) {
+    updateBay(skuId, s);
+  }
+}
+
+function renderSkuOptions() {
+  const selector = document.getElementById("sku-selector");
+  if (selector.options.length || !Object.keys(latestSkus).length) return;
+  selector.innerHTML = Object.entries(latestSkus).map(([id, s]) =>
+    `<option value="${id}">${id} - ${s.sku_name}</option>`
+  ).join("");
+  selectedSku = selector.value;
+  loadSkuSeries(selectedSku);
+}
+
+function pointsFor(values, days, minY, maxY, width, height, pad) {
+  const xSpan = Math.max(1, days[days.length - 1] - days[0]);
+  const ySpan = Math.max(1, maxY - minY);
+  return values.map((value, i) => {
+    const x = pad + ((days[i] - days[0]) / xSpan) * (width - pad * 2);
+    const y = height - pad - ((value - minY) / ySpan) * (height - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+}
+
+async function loadSkuSeries(skuId) {
+  if (!skuId) return;
+  const res = await fetch(`/api/sku-series?sku=${encodeURIComponent(skuId)}`);
+  if (!res.ok) return;
+  drawStockChart(await res.json());
+}
+
+function drawStockChart(series) {
+  const svg = document.getElementById("stock-chart");
+  const width = 500, height = 170, pad = 28;
+  const maxY = Math.ceil(Math.max(...series.dt_stock, ...series.manual_stock, series.reorder_point) / 10) * 10;
+  const minY = 0;
+  const dtPts = pointsFor(series.dt_stock, series.days, minY, maxY, width, height, pad);
+  const manualPts = pointsFor(series.manual_stock, series.days, minY, maxY, width, height, pad);
+  const rpY = height - pad - ((series.reorder_point - minY) / Math.max(1, maxY - minY)) * (height - pad * 2);
+  const redDots = series.manual_stock.map((v, i) => ({ v, day: series.days[i] }))
+    .filter(p => p.v <= series.reorder_point)
+    .map(p => {
+      const x = pad + (p.day / Math.max(1, series.days[series.days.length - 1])) * (width - pad * 2);
+      const y = height - pad - ((p.v - minY) / Math.max(1, maxY - minY)) * (height - pad * 2);
+      return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="#ff5f6d" />`;
+    }).join("");
+
+  svg.innerHTML = `
+    <line x1="${pad}" y1="${height - pad}" x2="${width - pad}" y2="${height - pad}" stroke="#2c4a82" />
+    <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${height - pad}" stroke="#2c4a82" />
+    <text x="${pad}" y="${height - 8}" fill="#7d8aa3" font-size="10">Day 0</text>
+    <text x="${width - pad - 38}" y="${height - 8}" fill="#7d8aa3" font-size="10">Day 29</text>
+    <text x="6" y="${height - pad + 3}" fill="#7d8aa3" font-size="10">0</text>
+    <text x="6" y="${pad + 3}" fill="#7d8aa3" font-size="10">${maxY}</text>
+    <line x1="${pad}" y1="${rpY.toFixed(1)}" x2="${width - pad}" y2="${rpY.toFixed(1)}" stroke="#ff5f6d" stroke-dasharray="5 4" />
+    <polyline points="${dtPts}" fill="none" stroke="#3a8df0" stroke-width="2.5" />
+    <polyline points="${manualPts}" fill="none" stroke="#ff8c42" stroke-width="2.5" />
+    ${redDots}
+    <circle cx="318" cy="18" r="4" fill="#3a8df0" /><text x="328" y="22" fill="#9fb3d8" font-size="11">DT Stock</text>
+    <circle cx="388" cy="18" r="4" fill="#ff8c42" /><text x="398" y="22" fill="#9fb3d8" font-size="11">Manual</text>
+    <line x1="318" y1="34" x2="338" y2="34" stroke="#ff5f6d" stroke-dasharray="4 3" /><text x="344" y="38" fill="#9fb3d8" font-size="11">Reorder point</text>
+  `;
+}
+
 async function refreshState() {
   const res = await fetch("/api/state");
   const data = await res.json();
+  latestSkus = data.skus;
+  latestDay = data.day;
+  latestNdays = data.n_days;
 
   if (!warehouseBuilt) {
     buildWarehouse(data.skus);
@@ -415,28 +574,43 @@ async function refreshState() {
 
   document.getElementById("day-label").textContent = `Day ${data.day} / ${data.n_days - 1}`;
   document.getElementById("header-day").textContent = `Day ${data.day} / ${data.n_days - 1}`;
+  document.getElementById("day-slider").max = data.n_days - 1;
+  document.getElementById("day-slider").value = data.day;
+  renderDayDots();
+  renderSkuOptions();
   playing = data.playing;
   document.getElementById("btn-play").textContent = playing ? "⏸ Pause" : "▶ Play";
 
   const kpis = data.site_summary;
+  const dtReorders = Number(kpis.digital_twin_total_reorders || 19);
+  const manualReorders = Number(kpis.manual_baseline_total_reorders || 28);
+  const reorderReduction = ((manualReorders - dtReorders) / Math.max(1, manualReorders)) * 100;
   document.getElementById("kpi-grid").innerHTML = `
     <div class="kpi"><div class="v good">${kpis.digital_twin_fill_rate_pct.toFixed(2)}%</div><div class="l">Digital twin fill rate</div></div>
     <div class="kpi"><div class="v warn">${kpis.manual_baseline_fill_rate_pct.toFixed(2)}%</div><div class="l">Manual baseline fill rate</div></div>
     <div class="kpi"><div class="v good">${kpis.stockout_days_avoided}</div><div class="l">Stockout days avoided</div></div>
     <div class="kpi"><div class="v good">${kpis.forecast_accuracy_improvement_pct.toFixed(1)}%</div><div class="l">Forecast accuracy gain</div></div>
     <div class="kpi" style="grid-column:1/3"><div class="v warn">${kpis.data_inconsistency_rate_pct.toFixed(1)}%</div><div class="l">Source spreadsheet inconsistency rate (validated away by agents below)</div></div>
+    <div class="kpi" style="grid-column:1/3"><div class="v"><span class="good">${dtReorders} DT</span> vs <span class="warn">${manualReorders} Manual</span></div><div class="l">Reorders placed (${reorderReduction.toFixed(0)}% reduction)</div></div>
   `;
+  document.getElementById("mode-note").style.display = viewMode === "manual" ? "block" : "none";
 
   const tbody = document.getElementById("sku-table-body");
-  tbody.innerHTML = Object.entries(data.skus).map(([id, s]) => {
-    const [label, color] = statusLabel(s.reconciled_stock, s.reorder_point);
+  const criticalRows = Object.entries(data.skus)
+    .filter(([, s]) => ["COLD_VAULT", "SECURE_CAGE"].includes(s.storage_mode) && s.reconciled_stock <= s.reorder_point)
+    .map(([id, s]) => `<tr class="critical-row"><td colspan="4">ALERT: ${ZONE_LABELS[s.storage_mode]} - ${id} at critical validated stock</td></tr>`)
+    .join("");
+  const skuRows = Object.entries(data.skus).map(([id, s]) => {
+    const stock = stockForMode(s);
+    const [label, color] = statusLabel(stock, s.reorder_point);
     return `<tr>
       <td>${id}</td>
       <td>${ZONE_LABELS[s.storage_mode] || s.storage_mode}</td>
-      <td>${s.pallet_count.toFixed(1)} / ${s.pallet_capacity}</td>
+      <td>${palletCountForMode(s).toFixed(1)} / ${s.pallet_capacity}</td>
       <td><span class="dot" style="background:${color}"></span>${label}</td>
     </tr>`;
   }).join("");
+  tbody.innerHTML = criticalRows + skuRows;
 }
 
 async function refreshAgentLog() {
@@ -464,6 +638,34 @@ document.getElementById("btn-reset").addEventListener("click", async () => {
     body: JSON.stringify({ action: "reset" }),
   });
   refreshState();
+});
+
+document.querySelectorAll(".speed-btn").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const value = Number(btn.dataset.speed);
+    await fetch("/api/control", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "speed", value }),
+    });
+    document.querySelectorAll(".speed-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+
+document.getElementById("view-toggle").addEventListener("click", () => {
+  viewMode = viewMode === "dt" ? "manual" : "dt";
+  const btn = document.getElementById("view-toggle");
+  btn.textContent = viewMode === "manual" ? "View: Manual Baseline" : "View: Digital Twin";
+  btn.classList.toggle("manual", viewMode === "manual");
+  document.getElementById("mode-banner").style.display = viewMode === "manual" ? "block" : "none";
+  document.getElementById("mode-note").style.display = viewMode === "manual" ? "block" : "none";
+  refreshAllBays();
+  refreshState();
+});
+
+document.getElementById("sku-selector").addEventListener("change", (e) => {
+  selectedSku = e.target.value;
+  loadSkuSeries(selectedSku);
 });
 
 refreshState();
