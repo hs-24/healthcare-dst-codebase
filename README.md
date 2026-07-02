@@ -54,6 +54,42 @@ python3 build/generate_report_charts_mpl.py
 All outputs land in `data/` (raw simulation CSVs) and `outputs/`
 (dashboard, charts, JSON summaries).
 
+## Using the SCMS delivery history dataset
+
+The project can also parameterise SKU demand from the SCMS Delivery
+History dataset. Put the raw file at:
+
+```text
+data/raw/SCMS_Delivery_History_Dataset.csv
+```
+
+Then generate a real-data config and run the dashboard pipeline:
+
+```powershell
+python build/import_scms_data.py
+$env:WAREHOUSE_CONFIG_PATH="config\warehouse_config_scms.yaml"
+python run_pilot.py
+python export_dashboard_data.py
+python server.py
+```
+
+Open the live dashboard at `http://127.0.0.1:5000/`.
+
+The importer creates:
+
+```text
+config/warehouse_config_scms.yaml   SCMS-derived simulation config
+data/scms_sku_master.csv            SKU code, description, UOM, quantity, storage zone, expiry, batch, site
+data/scms_demand_profile.csv        Monthly demand profile by selected SKU
+outputs/scms_import_summary.json    Source coverage and modelling notes
+```
+
+SCMS provides real product, site/project, delivery date, quantity, and
+value fields. It does not provide live stock-on-hand, expiry date, batch
+number, or storage-zone fields, so those warehouse attributes are
+generated deterministically for the proof-of-concept and documented in
+the import summary.
+
 ## File structure
 
 ```

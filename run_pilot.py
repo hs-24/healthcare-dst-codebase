@@ -26,7 +26,10 @@ from digital_twin.simulation import WarehouseSimulation, ManualBaselineSimulatio
 from digital_twin.fragmentation import fragment_dataset, compute_data_quality_metrics
 from digital_twin.forecasting import forecast_accuracy_comparison, summarize_accuracy_improvement
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config", "warehouse_config.yaml")
+CONFIG_PATH = os.environ.get(
+    "WAREHOUSE_CONFIG_PATH",
+    os.path.join(os.path.dirname(__file__), "config", "warehouse_config.yaml"),
+)
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "outputs")
 

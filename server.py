@@ -20,6 +20,7 @@ Run:
 """
 
 import json
+import os
 import threading
 import time
 from pathlib import Path
@@ -32,6 +33,7 @@ from digital_twin.agents import AgentWorkflow  # noqa: E402
 
 ROOT = Path(__file__).parent
 DASHBOARD_DATA_PATH = ROOT / "outputs" / "dashboard_data.json"
+CONFIG_PATH = Path(os.environ.get("WAREHOUSE_CONFIG_PATH", ROOT / "config" / "warehouse_config.yaml"))
 
 app = Flask(__name__, static_folder=None)
 
@@ -44,8 +46,7 @@ class LiveTwin:
         self.sku_ids = list(self.per_sku.keys())
         self.n_days = len(self.per_sku[self.sku_ids[0]]["days"])
 
-        cfg_path = ROOT / "config" / "warehouse_config.yaml"
-        self.sku_config = self._load_sku_config(cfg_path)
+        self.sku_config = self._load_sku_config(CONFIG_PATH)
 
         self.workflow = AgentWorkflow()
         self.current_day = 0
