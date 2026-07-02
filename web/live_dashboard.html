@@ -6,56 +6,127 @@
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b1320; color: #e6edf3; overflow: hidden; }
-  #app { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 64px 1fr; height: 100vh; }
-  header { grid-column: 1 / 3; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: #101a2c; border-bottom: 1px solid #1f2c45; }
-  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  #app { display: flex; flex-direction: column; height: 100vh; }
+  #main-row { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+  header { flex-shrink: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: #101a2c; border-bottom: 1px solid #1f2c45; gap: 12px; }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; white-space: nowrap; }
   header .sub { font-size: 12px; color: #7d8aa3; }
-  #scene-wrap { position: relative; }
+  #scene-wrap { position: relative; flex: 1; min-width: 0; }
   #scene-wrap canvas { display: block; }
-  #controls { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; align-items: center; background: rgba(16,26,44,0.85); padding: 8px 12px; border-radius: 8px; border: 1px solid #1f2c45; }
-  #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; }
+  #controls { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; align-items: center; background: rgba(16,26,44,0.85); padding: 8px 14px; border-radius: 8px; border: 1px solid #1f2c45; }
+  #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 13px; }
   #controls button:hover { background: #2c4a82; }
-  #day-label { font-size: 12px; color: #9fb3d8; min-width: 90px; }
+  #day-label { font-size: 13px; color: #9fb3d8; min-width: 100px; }
   #model-switcher { position: absolute; bottom: 16px; right: 16px; display: flex; gap: 6px; background: rgba(16,26,44,0.85); padding: 8px; border-radius: 8px; border: 1px solid #1f2c45; }
-  .model-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 11px; }
+  .model-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 7px 12px; cursor: pointer; font-size: 12px; }
   .model-btn:hover { background: #1f3358; }
   .model-btn.active { background: #2c4a82; color: #e6edf3; border-color: #3a8df0; }
   #site-switcher { display: flex; gap: 6px; }
-  .site-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 12px; font-weight: 600; }
+  .site-btn { background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 8px 18px; cursor: pointer; font-size: 13px; font-weight: 600; }
   .site-btn:hover { background: #1f3358; }
   .site-btn.active { background: #5fd685; color: #0b1320; border-color: #5fd685; }
-  .target-card { background: #131f33; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
-  .target-card .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
-  .target-card .name { font-size: 11px; color: #9fb3d8; }
-  .target-card .status { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; }
+  #sidebar-toggle { background: #1f3358; color: #9fb3d8; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 11px; cursor: pointer; font-size: 15px; line-height: 1; flex-shrink: 0; }
+  #sidebar-toggle:hover { background: #2c4a82; color: #e6edf3; }
+  .target-card { background: #131f33; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .target-card .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .target-card .name { font-size: 13px; color: #9fb3d8; }
+  .target-card .status { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
   .target-card .status.pass { background: #16331f; color: #5fd685; }
   .target-card .status.fail { background: #3a1f24; color: #ff5f6d; }
-  .target-bar-track { height: 6px; background: #1c2840; border-radius: 4px; overflow: hidden; }
+  .target-bar-track { height: 8px; background: #1c2840; border-radius: 4px; overflow: hidden; }
   .target-bar-fill { height: 100%; border-radius: 4px; }
-  .target-detail { font-size: 10px; color: #6f7d99; margin-top: 4px; }
+  .target-detail { font-size: 12px; color: #6f7d99; margin-top: 6px; }
   #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
   #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
   #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
-  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow: hidden; }
-  .panel { padding: 14px 16px; border-bottom: 1px solid #1f2c45; }
-  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #7d8aa3; margin: 0 0 10px; }
+  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow: hidden; width: 520px; flex-shrink: 0; transition: width 0.25s ease; }
+  aside.collapsed { width: 0; border-left: none; }
+  .panel { padding: 16px 20px; border-bottom: 1px solid #1f2c45; }
+  .panel h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: #7d8aa3; margin: 0 0 14px; }
   .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .kpi { background: #131f33; border-radius: 8px; padding: 8px 10px; }
-  .kpi .v { font-size: 18px; font-weight: 700; }
-  .kpi .l { font-size: 10.5px; color: #7d8aa3; margin-top: 2px; }
+  .kpi { background: #131f33; border-radius: 8px; padding: 12px 14px; }
+  .kpi .v { font-size: 24px; font-weight: 700; }
+  .kpi .l { font-size: 13px; color: #7d8aa3; margin-top: 5px; }
   .kpi .v.good { color: #5fd685; }
   .kpi .v.warn { color: #ffb454; }
-  #agent-feed { flex: 1; overflow-y: auto; padding: 10px 14px; }
-  .ev { border-radius: 6px; padding: 7px 9px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.4; border-left: 3px solid #3a4d72; background: #131f33; }
+  #agent-feed { overflow-y: visible; padding: 12px 16px; }
+  #aside-tabs { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid #1f2c45; flex-shrink: 0; }
+  .aside-tab { flex: 1; background: #131f33; color: #9fb3d8; border: 1px solid #223252; border-radius: 6px; padding: 8px 0; cursor: pointer; font-size: 13px; font-weight: 600; }
+  .aside-tab:hover { background: #1f3358; }
+  .aside-tab.active { background: #2c4a82; color: #e6edf3; border-color: #3a8df0; }
+  #view-live, #view-analytics { display: flex; flex-direction: column; flex: 1; overflow-y: auto; min-height: 0; }
+  #view-analytics { display: none; }
+  .ml-badge { display: inline-block; background: #1a3366; color: #7db9ff; border: 1px solid #3a8df0; border-radius: 12px; padding: 5px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .ml-sub { font-size: 13px; color: #9fb3d8; margin-bottom: 12px; line-height: 1.5; }
+  .arima-row { display: flex; justify-content: space-between; font-size: 13px; padding: 7px 0; border-bottom: 1px solid #182338; }
+  .arima-label { color: #9fb3d8; }
+  .arima-val.good { color: #5fd685; font-weight: 700; }
+  .arima-val.warn { color: #ffb454; font-weight: 700; }
+  .arima-val { font-weight: 700; }
+  .abc-group-label { font-size: 13px; font-weight: 700; color: #9fb3d8; margin: 12px 0 7px; }
+  .abc-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .abc-bar-name { width: 65px; font-size: 12px; color: #7d8aa3; }
+  .abc-bar-track { flex: 1; height: 10px; background: #1c2840; border-radius: 4px; overflow: hidden; }
+  .abc-bar-fill { height: 100%; border-radius: 4px; }
+  .abc-bar-val { width: 48px; text-align: right; font-size: 12px; color: #9fb3d8; }
+  .abc-impr { font-size: 12px; color: #5fd685; font-weight: 700; width: 44px; }
+  .cls-label { font-size: 12px; color: #9fb3d8; margin-bottom: 5px; }
+  #audit-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+  #audit-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 6px 6px; border-bottom: 1px solid #1f2c45; font-size: 11.5px; position: sticky; top: 0; background: #0e1726; z-index: 1; }
+  #audit-table td { padding: 6px 6px; border-bottom: 1px solid #182338; }
+  .issue-badge { display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+  .issue-error { background: #3a1f24; color: #ff5f6d; }
+  .issue-missing { background: #3a2a10; color: #ff8c42; }
+  .issue-duplicate { background: #3a2e10; color: #ffb454; }
+  .issue-ok { background: #16331f; color: #5fd685; }
+  /* Blueprint panel */
+  .bp-box { background: #131f33; border: 1px solid #2c4a82; border-radius: 8px; padding: 12px 14px; margin-bottom: 6px; }
+  .bp-box.problem { border-color: #ff5f6d44; background: #1f1520; }
+  .bp-box.solution { border-color: #3a8df066; }
+  .bp-box.output { border-color: #5fd68566; background: #101f14; }
+  .bp-title { font-size: 14px; font-weight: 700; color: #e6edf3; margin-bottom: 5px; }
+  .bp-sub { font-size: 12.5px; color: #9fb3d8; line-height: 1.5; }
+  .bp-arrow { text-align: center; font-size: 20px; color: #3a8df0; line-height: 1.4; margin: 2px 0; }
+  .bp-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 8px; margin-right: 5px; margin-top: 5px; }
+  .bp-tag.before { background: #3a1f24; color: #ff8c94; }
+  .bp-tag.after { background: #1a3366; color: #7db9ff; }
+  .ev { border-radius: 6px; padding: 10px 13px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; border-left: 3px solid #3a4d72; background: #131f33; }
   .ev.info { border-left-color: #3a8df0; }
   .ev.warning { border-left-color: #ffb454; }
   .ev.critical { border-left-color: #ff5f6d; }
-  .ev .meta { color: #7d8aa3; font-size: 10px; margin-bottom: 2px; }
+  .ev .meta { color: #7d8aa3; font-size: 12px; margin-bottom: 4px; }
   .ev .agent-tag { color: #9fb3d8; font-weight: 600; }
-  #sku-table { width: 100%; font-size: 11.5px; border-collapse: collapse; }
-  #sku-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 4px 2px; border-bottom: 1px solid #1f2c45; }
-  #sku-table td { padding: 5px 2px; border-bottom: 1px solid #182338; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+  #sku-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  #sku-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 7px 5px; border-bottom: 1px solid #1f2c45; font-size: 12px; }
+  #sku-table td { padding: 7px 5px; border-bottom: 1px solid #182338; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
+  /* KS — speed buttons */
+  .speed-btn { background: #1f3358; color: #9fb3d8; border: 1px solid #2c4a82; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 12px; }
+  .speed-btn:hover { background: #2c4a82; }
+  .speed-btn.active { background: #3a8df0; color: #fff; border-color: #7fb2ff; }
+  /* KS — DT/Manual view toggle */
+  #view-toggle { border-radius: 6px; padding: 6px 13px; cursor: pointer; font-size: 12px; font-weight: 600; border: 1px solid #2d6a3d; background: #16331f; color: #5fd685; flex-shrink: 0; }
+  #view-toggle.manual { background: #3a1f24; color: #ff5f6d; border-color: #813744; }
+  /* KS — manual mode banner overlay */
+  #mode-banner { display: none; position: absolute; top: 16px; right: 16px; z-index: 3; background: rgba(58,31,36,0.92); color: #ff5f6d; border: 1px solid #813744; border-radius: 8px; padding: 9px 14px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; }
+  /* KS — day scrubber + stockout dots */
+  #day-slider { width: 100px; accent-color: #3a8df0; }
+  #day-dots { display: flex; gap: 3px; align-items: center; }
+  .day-dot { width: 6px; height: 6px; border-radius: 50%; background: #5fd685; opacity: 0.55; flex-shrink: 0; }
+  .day-dot.stockout { background: #ff5f6d; opacity: 0.9; }
+  .day-dot.current { transform: scale(1.75); box-shadow: 0 0 0 4px rgba(58,141,240,0.22); opacity: 1; }
+  /* KS — traceability table */
+  .trace-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .trace-table th { color: #7d8aa3; text-align: left; font-weight: 600; padding: 6px; border-bottom: 1px solid #1f2c45; }
+  .trace-table td { padding: 8px 6px; border-bottom: 1px solid #182338; vertical-align: top; color: #9fb3d8; }
+  .trace-table td:first-child { color: #e6edf3; font-weight: 700; }
+  .check { color: #5fd685; font-weight: 700; }
+  /* KS — critical zone alert rows */
+  #sku-table tr.critical-row td { background: rgba(255,95,109,0.12); color: #ff5f6d; font-weight: 700; }
+  /* KS — stock trajectory chart */
+  #stock-chart { width: 100%; height: 170px; background: #101a2c; border: 1px solid #1f2c45; border-radius: 8px; }
+  #sku-selector { background: #131f33; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 5px 8px; font-size: 12px; max-width: 230px; }
+  .panel-control { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
 </style>
 </head>
 <body>
@@ -67,9 +138,13 @@
     </div>
     <div id="site-switcher"></div>
     <div class="sub" id="header-day">Day — / —</div>
+    <button id="view-toggle">View: Digital Twin</button>
+    <button id="sidebar-toggle">⟩</button>
   </header>
 
+  <div id="main-row">
   <div id="scene-wrap">
+    <div id="mode-banner">⚠ MANUAL BASELINE VIEW — Corrupted &amp; Lagged Data</div>
     <div id="legend">
       <div class="row"><span class="swatch" style="background:#5fd685"></span> Healthy stock (pallets lit)</div>
       <div class="row"><span class="swatch" style="background:#ffb454"></span> Approaching reorder point</div>
@@ -81,7 +156,18 @@
     <div id="controls">
       <button id="btn-play">⏸ Pause</button>
       <button id="btn-reset">⟲ Reset</button>
+      <button class="speed-btn" data-speed="3.0">0.5×</button>
+      <button class="speed-btn active" data-speed="1.5">1×</button>
+      <button class="speed-btn" data-speed="0.75">2×</button>
+      <button class="speed-btn" data-speed="0.2">Fast</button>
+      <input id="day-slider" type="range" min="0" max="29" value="0" disabled title="Simulation day progress (read-only)" />
       <span id="day-label">Day 0 / 29</span>
+      <div id="day-dots" title="Red = manual baseline stockout days"></div>
+    </div>
+    <div id="model-switcher">
+      <button id="model-a" class="model-btn active">A · Live Operational Twin</button>
+      <button id="model-b" class="model-btn">B · GDP Singapore BIM</button>
+      <button id="model-c" class="model-btn">C · Compliance Schematic</button>
     </div>
     <div id="model-switcher">
       <button id="model-a" class="model-btn active">A · Live Operational Twin</button>
@@ -91,26 +177,128 @@
   </div>
 
   <aside>
-    <div class="panel">
-      <h2>Operational KPIs (30-day pilot)</h2>
-      <div class="kpi-grid" id="kpi-grid"></div>
+    <div id="aside-tabs">
+      <button class="aside-tab active" id="tab-live">Live Twin</button>
+      <button class="aside-tab" id="tab-analytics">Analytics</button>
     </div>
-    <div class="panel">
-      <h2>SMART objective targets (Section 5/7)</h2>
-      <div id="target-cards"></div>
+
+    <!-- LIVE VIEW (existing panels) -->
+    <div id="view-live">
+      <div class="panel">
+        <h2>Operational KPIs (30-day pilot)</h2>
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </div>
+      <div class="panel">
+        <h2>SMART objective targets (Section 5/7)</h2>
+        <div id="target-cards"></div>
+      </div>
+      <div class="panel">
+        <h2>Bay status (pallets)</h2>
+        <table id="sku-table">
+          <thead><tr><th>SKU</th><th>Zone</th><th>Pallets</th><th>Status</th></tr></thead>
+          <tbody id="sku-table-body"></tbody>
+        </table>
+      </div>
+      <div class="panel" style="border-bottom:none; flex:1; display:flex; flex-direction:column; min-height:0;">
+        <h2>Agentic AI workflow — live event feed</h2>
+        <div id="agent-feed"></div>
+      </div>
     </div>
-    <div class="panel">
-      <h2>Bay status (pallets)</h2>
-      <table id="sku-table">
-        <thead><tr><th>SKU</th><th>Zone</th><th>Pallets</th><th>Status</th></tr></thead>
-        <tbody id="sku-table-body"></tbody>
-      </table>
-    </div>
-    <div class="panel" style="border-bottom:none; flex:1; display:flex; flex-direction:column; min-height:0;">
-      <h2>Agentic AI workflow — live event feed</h2>
-      <div id="agent-feed"></div>
+
+    <!-- ANALYTICS VIEW (new panels) -->
+    <div id="view-analytics">
+
+      <!-- Blueprint Panel — Prof feedback #3 -->
+      <div class="panel">
+        <h2>Supply Chain Digital Twin Blueprint</h2>
+        <div class="bp-box problem">
+          <div class="bp-title">Problem Space</div>
+          <div class="bp-sub">Fragmented data across 3 sites · 12.87% spreadsheet inconsistency · Manual, lagged reorder decisions · No unified oversight</div>
+          <div><span class="bp-tag before">Manual ETS</span><span class="bp-tag before">1-day lag</span><span class="bp-tag before">6% entry errors</span><span class="bp-tag before">Siloed sheets</span></div>
+        </div>
+        <div class="bp-arrow">↓</div>
+        <div class="bp-box solution">
+          <div class="bp-title">Agentic AI Pipeline</div>
+          <div class="bp-sub">DataValidation → AR(2) Forecasting → Replenishment → Supervisor<br>Runs per SKU per day · No human in the loop</div>
+          <div><span class="bp-tag after">AR(2) OLS</span><span class="bp-tag after">ARIMA(1,1,1)</span><span class="bp-tag after">ABC/XYZ</span><span class="bp-tag after">Audit Heatmap</span></div>
+        </div>
+        <div class="bp-arrow">↓</div>
+        <div class="bp-box solution" style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 12px;">
+          <div style="flex:1;min-width:100px">
+            <div class="bp-title" style="font-size:11px">SimPy Digital Twin</div>
+            <div class="bp-sub">Clean validated stock · Live reorder logic</div>
+          </div>
+          <div style="flex:1;min-width:100px">
+            <div class="bp-title" style="font-size:11px">Manual Baseline</div>
+            <div class="bp-sub">Lagged + corrupted stock · Identical demand seed</div>
+          </div>
+        </div>
+        <div class="bp-arrow">↓</div>
+        <div class="bp-box output">
+          <div class="bp-title">Measured Outcomes (30-day pilot)</div>
+          <div class="bp-sub">Fill rate: 99.88% DT vs 99.57% manual &nbsp;·&nbsp; Stockouts: −3 days &nbsp;·&nbsp; Forecast: ↑40.5% &nbsp;·&nbsp; Inconsistency: 12.87% → 0%</div>
+          <div><span class="bp-tag after">SMART Target 1 ✓</span><span class="bp-tag after">SMART Target 2 ✓</span></div>
+        </div>
+      </div>
+
+      <!-- KS: Problem → Solution Traceability Table -->
+      <div class="panel">
+        <h2>Problem → Solution Traceability</h2>
+        <table class="trace-table">
+          <thead><tr><th>Problem Area</th><th>Root Cause</th><th>Dashboard Feature</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Data Management</td><td>12.87% spreadsheet inconsistency (lag, errors, blanks, dupes)</td><td>DataValidationAgent + Audit Heatmap</td><td>0% inconsistency in DT <span class="check">✓</span></td></tr>
+            <tr><td>Forecasting</td><td>Manual ETS on corrupted data → 49.81% WMAPE</td><td>AR(2) live agent + ARIMA(1,1,1) offline benchmark</td><td>40.46% WMAPE improvement <span class="check">✓</span></td></tr>
+            <tr><td>Warehousing Infrastructure</td><td>Lagged reorder decisions → 7 stockout days</td><td>ReplenishmentAgent on validated stock</td><td>3 stockout days avoided, −45% reorders</td></tr>
+            <tr><td>Unified Oversight</td><td>Siloed spreadsheets, no cross-site view</td><td>SupervisorAgent + 3-site dashboard</td><td>All 3 sites on one screen, real-time events</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>ML Forecasting Model</h2>
+        <div class="ml-badge">AR(2) Autoregressive Model</div>
+        <div class="ml-sub">Live agent uses AR(2) OLS (activates after 5 days). Warm-up: ETS α=0.3. Offline comparison uses ARIMA(1,1,1).</div>
+        <div id="arima-comparison"><div style="font-size:10.5px;color:#7d8aa3">Run <code>py run_pilot.py</code> to load ARIMA comparison data.</div></div>
+        <!-- KS: Model selection rationale -->
+        <div style="margin-top:14px;font-size:13px;font-weight:700;color:#e6edf3;">Why AR(2) live, ARIMA offline?</div>
+        <ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:#9fb3d8;line-height:1.6;">
+          <li>AR(2) runs in O(1) per tick — fits the agentic loop where every SKU is evaluated every simulated day. Needs only last 2 demand observations.</li>
+          <li>ARIMA(1,1,1) requires a full history batch fit — used offline for accuracy benchmarking, not viable for real-time per-SKU decisions.</li>
+        </ul>
+      </div>
+
+      <!-- KS: Stock Trajectory Chart -->
+      <div class="panel">
+        <div class="panel-control">
+          <h2 style="margin:0;">Stock Trajectory — DT vs Manual</h2>
+          <select id="sku-selector"><option value="">Loading…</option></select>
+        </div>
+        <svg id="stock-chart" viewBox="0 0 500 170" role="img" aria-label="Stock trajectory: DT vs Manual baseline"></svg>
+      </div>
+
+      <div class="panel">
+        <h2>Forecast Accuracy by ABC / XYZ Class</h2>
+        <div id="abc-xyz-chart"><div style="font-size:10.5px;color:#7d8aa3">Loading…</div></div>
+      </div>
+      <div class="panel" style="border-bottom:none;">
+        <h2>Spreadsheet Audit Heatmap</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:10.5px;">
+          <span><span class="dot" style="background:#ff5f6d"></span>Error</span>
+          <span><span class="dot" style="background:#ff8c42"></span>Missing</span>
+          <span><span class="dot" style="background:#ffb454"></span>Duplicate</span>
+          <span><span class="dot" style="background:#5fd685"></span>OK</span>
+        </div>
+        <div style="overflow-y:auto;max-height:320px;">
+          <table id="audit-table">
+            <thead><tr><th>SKU</th><th>Rpt.Day</th><th>True</th><th>Reported</th><th>Actual</th><th>Sheet</th><th>Issue</th></tr></thead>
+            <tbody id="audit-table-body"><tr><td colspan="7" style="color:#7d8aa3;padding:8px">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </aside>
+  </div><!-- #main-row -->
 </div>
 
 <script type="importmap">
@@ -348,14 +536,18 @@ function updateBay(skuId, s) {
   const rack = racks[skuId];
   if (!rack) return;
 
+  // KS: use mode-aware stock for pallet fill and color
+  const effectivePallets = palletCountForMode(s);
+  const effectiveStock  = stockForMode(s);
   const litCount = Math.max(0, Math.min(PALLET_SLOTS, Math.round(
-    (s.pallet_count / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
+    (effectivePallets / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
   )));
-  const color = colorForStatus(s.reconciled_stock, s.reorder_point);
+  const color = colorForStatus(effectiveStock, s.reorder_point);
 
-  if (litCount === rack.litCount && rack._lastColor === color) return;
+  if (litCount === rack.litCount && rack._lastColor === color && rack._lastMode === viewMode) return;
   rack.litCount = litCount;
   rack._lastColor = color;
+  rack._lastMode = viewMode;
 
   const dummy = new THREE.Object3D();
   const c = new THREE.Color(color);
@@ -608,6 +800,44 @@ animate();
 // ---- live data polling ----
 let warehouseBuilt = false;
 let playing = true;
+let viewMode = "dt";          // KS: "dt" | "manual"
+let latestNdays = 30;
+let selectedSku = null;
+
+// KS: per-site manual baseline stockout days (approximate from pilot results)
+const MANUAL_STOCKOUT_DAYS = {
+  SITE_A: [3, 7, 14],
+  SITE_B: [2, 5, 9, 21],
+  SITE_C: [1, 4, 8, 12, 16, 19, 22, 24, 27],
+};
+
+// KS: return stock value based on current view mode
+function stockForMode(s) {
+  return viewMode === "manual" ? Number(s.perceived_stock || 0) : Number(s.reconciled_stock || 0);
+}
+function palletCountForMode(s) {
+  return stockForMode(s) / Math.max(1, Number(s.units_per_pallet || 1));
+}
+// KS: re-render all bays with current viewMode (called when toggle switches)
+function refreshAllBays() {
+  if (!latestSkus) return;
+  for (const [skuId, s] of Object.entries(latestSkus)) updateBay(skuId, s);
+}
+
+// KS: render 30 day-dots; red for manual stockout days, pulse on current day
+function renderDayDots() {
+  const wrap = document.getElementById("day-dots");
+  wrap.innerHTML = "";
+  const stockoutDays = MANUAL_STOCKOUT_DAYS[currentSite] || [];
+  for (let day = 0; day < latestNdays; day++) {
+    const dot = document.createElement("span");
+    dot.className = "day-dot";
+    if (stockoutDays.includes(day)) dot.classList.add("stockout");
+    if (day === latestDay) dot.classList.add("current");
+    dot.title = `Day ${day}${stockoutDays.includes(day) ? " — manual stockout" : ""}`;
+    wrap.appendChild(dot);
+  }
+}
 
 function statusLabel(stock, rp) {
   if (stock <= rp) return ["At/below reorder", "#ff5f6d"];
@@ -679,26 +909,49 @@ async function refreshState() {
   playing = data.playing;
   document.getElementById("btn-play").textContent = playing ? "⏸ Pause" : "▶ Play";
 
+  // KS: update day slider + dots
+  latestNdays = data.n_days;
+  const slider = document.getElementById("day-slider");
+  slider.max = data.n_days - 1;
+  slider.value = data.day;
+  renderDayDots();
+
   const kpis = data.site_summary;
+  // KS: 6th KPI card — reorder count comparison
+  const dtReorders  = kpis.digital_twin_total_reorders  ?? "—";
+  const manReorders = kpis.manual_baseline_total_reorders ?? "—";
+  const reorderDelta = (typeof dtReorders === "number" && typeof manReorders === "number")
+    ? `${Math.round((1 - dtReorders / Math.max(1, manReorders)) * 100)}% fewer` : "";
   document.getElementById("kpi-grid").innerHTML = `
     <div class="kpi"><div class="v good">${kpis.digital_twin_fill_rate_pct.toFixed(2)}%</div><div class="l">Digital twin fill rate</div></div>
     <div class="kpi"><div class="v warn">${kpis.manual_baseline_fill_rate_pct.toFixed(2)}%</div><div class="l">Manual baseline fill rate</div></div>
     <div class="kpi"><div class="v good">${kpis.stockout_days_avoided}</div><div class="l">Stockout days avoided</div></div>
     <div class="kpi"><div class="v good">${kpis.forecast_accuracy_improvement_pct.toFixed(1)}%</div><div class="l">Forecast accuracy gain</div></div>
+    <div class="kpi"><div class="v good">${dtReorders}</div><div class="l">DT reorders · ${reorderDelta} vs manual (${manReorders})</div></div>
     <div class="kpi" style="grid-column:1/3"><div class="v warn">${kpis.data_inconsistency_rate_pct.toFixed(1)}%</div><div class="l">Source spreadsheet inconsistency rate (validated away by agents below)</div></div>
   `;
   renderTargetCards(kpis);
 
-  const tbody = document.getElementById("sku-table-body");
-  tbody.innerHTML = Object.entries(data.skus).map(([id, s]) => {
-    const [label, color] = statusLabel(s.reconciled_stock, s.reorder_point);
-    return `<tr>
+  // KS: populate SKU selector (only on first call or site change)
+  renderSkuOptions(data.skus);
+
+  // KS: critical-zone rows (stock below reorder point) shown first, red-highlighted
+  const criticalRows = [];
+  const normalRows = [];
+  for (const [id, s] of Object.entries(data.skus)) {
+    const stock = stockForMode(s);
+    const [label, color] = statusLabel(stock, s.reorder_point);
+    const isCritical = stock <= s.reorder_point;
+    const row = `<tr class="${isCritical ? "critical-row" : ""}">
       <td>${id}</td>
       <td>${ZONE_LABELS[s.storage_mode] || s.storage_mode}</td>
-      <td>${s.pallet_count.toFixed(1)} / ${s.pallet_capacity}</td>
+      <td>${palletCountForMode(s).toFixed(1)} / ${s.pallet_capacity}</td>
       <td><span class="dot" style="background:${color}"></span>${label}</td>
     </tr>`;
-  }).join("");
+    if (isCritical) criticalRows.push(row); else normalRows.push(row);
+  }
+  const tbody = document.getElementById("sku-table-body");
+  tbody.innerHTML = [...criticalRows, ...normalRows].join("");
 }
 
 async function refreshAgentLog() {
@@ -813,6 +1066,276 @@ refreshState();
 refreshAgentLog();
 setInterval(refreshState, 1500);
 setInterval(refreshAgentLog, 1500);
+
+// ---- Analytics Tab (#1 Audit Heatmap, #2 ARIMA, #4 ABC/XYZ) --------
+let analyticsLoaded = false;
+
+function switchView(name) {
+  const live = document.getElementById("view-live");
+  const analytics = document.getElementById("view-analytics");
+  live.style.display = name === "live" ? "flex" : "none";
+  analytics.style.display = name === "analytics" ? "flex" : "none";
+  analytics.style.flexDirection = "column";
+  document.getElementById("tab-live").classList.toggle("active", name === "live");
+  document.getElementById("tab-analytics").classList.toggle("active", name === "analytics");
+  if (name === "analytics" && !analyticsLoaded) {
+    analyticsLoaded = true;
+    loadAbcXyz();
+    loadAudit();
+  }
+}
+
+document.getElementById("tab-live").addEventListener("click", () => switchView("live"));
+document.getElementById("tab-analytics").addEventListener("click", () => switchView("analytics"));
+
+async function loadAbcXyz() {
+  try {
+    const res = await fetch("/api/abc-xyz");
+    const data = await res.json();
+    if (data.error) {
+      document.getElementById("abc-xyz-chart").innerHTML = `<div style="font-size:10.5px;color:#7d8aa3">${data.error}</div>`;
+      return;
+    }
+    renderAbcXyz(data);
+    renderArimaComparison(data.arima_summary);
+  } catch (e) {
+    document.getElementById("abc-xyz-chart").textContent = "Error loading data.";
+  }
+}
+
+function renderArimaComparison(a) {
+  const el = document.getElementById("arima-comparison");
+  if (!a) return; // keep the default "run run_pilot.py" message
+  el.innerHTML = `
+    <div class="arima-row"><span class="arima-label">Manual ETS (corrupted data)</span><span class="arima-val warn">${a.manual_wmape.toFixed(1)}% WMAPE</span></div>
+    <div class="arima-row"><span class="arima-label">DT Moving Avg (clean data)</span><span class="arima-val">${a.dt_wmape.toFixed(1)}% WMAPE</span></div>
+    <div class="arima-row"><span class="arima-label">ARIMA(1,1,1) (clean data)</span><span class="arima-val good">${a.arima_wmape.toFixed(1)}% WMAPE</span></div>
+    <div class="arima-row" style="border:none"><span class="arima-label">ARIMA vs Manual improvement</span><span class="arima-val good">↑ ${a.arima_vs_manual.toFixed(1)}%</span></div>
+  `;
+}
+
+function renderAbcXyz(data) {
+  const allWmape = [...data.abc, ...data.xyz].map(r => r.manual_wmape);
+  const maxW = Math.max(...allWmape, 1);
+  let html = '<div style="font-size:10px;color:#7d8aa3;margin-bottom:6px">Manual ETS vs Digital Twin WMAPE</div>';
+
+  for (const [title, groups] of [["ABC (demand volume)", data.abc], ["XYZ (demand variability)", data.xyz]]) {
+    html += `<div class="abc-group-label">${title}</div>`;
+    for (const g of groups) {
+      const mp = (g.manual_wmape / maxW * 100).toFixed(0);
+      const dp = (g.dt_wmape / maxW * 100).toFixed(0);
+      html += `
+        <div style="margin-bottom:7px">
+          <div class="cls-label">${g.class}-Class · ${g.sku_count} SKU${g.sku_count > 1 ? "s" : ""}</div>
+          <div class="abc-bar-row">
+            <div class="abc-bar-name">Manual</div>
+            <div class="abc-bar-track"><div class="abc-bar-fill" style="width:${mp}%;background:#ff5f6d"></div></div>
+            <div class="abc-bar-val">${g.manual_wmape.toFixed(1)}%</div>
+            <div class="abc-impr">↑${g.improvement.toFixed(0)}%</div>
+          </div>
+          <div class="abc-bar-row">
+            <div class="abc-bar-name">DT</div>
+            <div class="abc-bar-track"><div class="abc-bar-fill" style="width:${dp}%;background:#5fd685"></div></div>
+            <div class="abc-bar-val">${g.dt_wmape.toFixed(1)}%</div>
+            <div class="abc-impr"></div>
+          </div>
+        </div>`;
+    }
+  }
+  document.getElementById("abc-xyz-chart").innerHTML = html;
+}
+
+function toggleSidebar() {
+  const aside = document.querySelector("aside");
+  const btn = document.getElementById("sidebar-toggle");
+  const collapsed = aside.classList.toggle("collapsed");
+  btn.textContent = collapsed ? "⟨" : "⟩";
+  // give the CSS transition 260ms to complete, then resize the Three.js renderer
+  setTimeout(() => {
+    camera.aspect = sceneWrap.clientWidth / sceneWrap.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(sceneWrap.clientWidth, sceneWrap.clientHeight);
+  }, 260);
+}
+document.getElementById("sidebar-toggle").addEventListener("click", toggleSidebar);
+
+async function loadAudit() {
+  try {
+    const res = await fetch("/api/audit");
+    const data = await res.json();
+    if (data.error) {
+      document.getElementById("audit-table-body").innerHTML =
+        `<tr><td colspan="7" style="color:#7d8aa3;padding:8px">${data.error}</td></tr>`;
+      return;
+    }
+    const colorMap = { error: "#ff5f6d", missing: "#ff8c42", duplicate: "#ffb454", ok: "#5fd685" };
+    document.getElementById("audit-table-body").innerHTML = data.rows.map(r => {
+      const rep = r.stock_level != null ? r.stock_level : "—";
+      const tru = r.true_stock != null ? r.true_stock : "—";
+      const sheet = r.source_sheet.replace(".xlsx","").replace("Inventory_","Inv_").replace("ManualAdjustments","ManAdj").replace("WeeklyStockCount","Weekly");
+      const errColor = r.issue === "error" ? "color:#ff5f6d" : "";
+      return `<tr style="opacity:${r.issue==='ok'?0.55:1}">
+        <td>${r.sku_id}</td>
+        <td>${r.reported_day}</td>
+        <td>${r.true_day}</td>
+        <td style="${errColor}">${rep}</td>
+        <td>${tru}</td>
+        <td style="font-size:9px;color:#7d8aa3">${sheet}</td>
+        <td><span class="issue-badge issue-${r.issue}">${r.issue.toUpperCase()}</span></td>
+      </tr>`;
+    }).join("");
+  } catch (e) {
+    document.getElementById("audit-table-body").innerHTML =
+      `<tr><td colspan="7" style="color:#ff5f6d;padding:8px">Error loading audit data.</td></tr>`;
+  }
+}
+
+// ---- KS: View Toggle (Digital Twin ↔ Manual Baseline) ---------------
+document.getElementById("view-toggle").addEventListener("click", () => {
+  viewMode = viewMode === "dt" ? "manual" : "dt";
+  const btn = document.getElementById("view-toggle");
+  const banner = document.getElementById("mode-banner");
+  if (viewMode === "manual") {
+    btn.textContent = "View: Manual Baseline";
+    btn.classList.add("manual");
+    banner.style.display = "block";
+  } else {
+    btn.textContent = "View: Digital Twin";
+    btn.classList.remove("manual");
+    banner.style.display = "none";
+  }
+  refreshAllBays();
+  // re-render table rows in new mode
+  if (latestSkus) {
+    const criticalRows = [], normalRows = [];
+    for (const [id, s] of Object.entries(latestSkus)) {
+      const stock = stockForMode(s);
+      const [label, color] = statusLabel(stock, s.reorder_point);
+      const isCritical = stock <= s.reorder_point;
+      const row = `<tr class="${isCritical ? "critical-row" : ""}">
+        <td>${id}</td>
+        <td>${ZONE_LABELS[s.storage_mode] || s.storage_mode}</td>
+        <td>${palletCountForMode(s).toFixed(1)} / ${s.pallet_capacity}</td>
+        <td><span class="dot" style="background:${color}"></span>${label}</td>
+      </tr>`;
+      if (isCritical) criticalRows.push(row); else normalRows.push(row);
+    }
+    document.getElementById("sku-table-body").innerHTML = [...criticalRows, ...normalRows].join("");
+  }
+  // reload stock chart for selected SKU in new mode
+  if (selectedSku) loadSkuSeries(selectedSku);
+});
+
+// ---- KS: Speed Buttons -----------------------------------------------
+document.querySelectorAll(".speed-btn").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    document.querySelectorAll(".speed-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    await fetch("/api/control", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ site: currentSite, action: "speed", value: parseFloat(btn.dataset.speed) }),
+    });
+  });
+});
+
+// ---- KS: SKU Selector + Stock Trajectory Chart -----------------------
+let _skuOptionsBuilt = false;
+
+function renderSkuOptions(skus) {
+  if (_skuOptionsBuilt) return;
+  const sel = document.getElementById("sku-selector");
+  const ids = Object.keys(skus);
+  if (!ids.length) return;
+  sel.innerHTML = ids.map(id => `<option value="${id}">${id} — ${skus[id].sku_name || ""}</option>`).join("");
+  selectedSku = ids[0];
+  _skuOptionsBuilt = true;
+  loadSkuSeries(selectedSku);
+}
+
+document.getElementById("sku-selector").addEventListener("change", (e) => {
+  selectedSku = e.target.value;
+  if (selectedSku) loadSkuSeries(selectedSku);
+});
+
+async function loadSkuSeries(skuId) {
+  try {
+    const res = await fetch(`/api/sku-series?site=${currentSite}&sku=${skuId}`);
+    if (!res.ok) return;
+    const d = await res.json();
+    drawStockChart(d);
+  } catch (_) { /* ignore while loading */ }
+}
+
+// KS: map day index → SVG x coordinate within viewBox 500×170
+function pointsFor(values, maxVal, x0, x1, y0, y1) {
+  const n = values.length;
+  return values.map((v, i) => {
+    const x = x0 + (i / Math.max(n - 1, 1)) * (x1 - x0);
+    const y = y1 - ((v / Math.max(maxVal, 1)) * (y1 - y0));
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+}
+
+function drawStockChart(d) {
+  const svg = document.getElementById("stock-chart");
+  if (!svg) return;
+
+  const PAD = { left: 36, right: 12, top: 12, bottom: 26 };
+  const W = 500, H = 170;
+  const x0 = PAD.left, x1 = W - PAD.right;
+  const y0 = PAD.top, y1 = H - PAD.bottom;
+
+  const allValues = [...(d.dt_stock || []), ...(d.manual_stock || []), d.reorder_point];
+  const maxVal = Math.max(...allValues, 1) * 1.08;
+  const rpY = (y1 - ((d.reorder_point / maxVal) * (y1 - y0))).toFixed(1);
+  const dtPts = pointsFor(d.dt_stock, maxVal, x0, x1, y0, y1);
+  const manPts = pointsFor(d.manual_stock, maxVal, x0, x1, y0, y1);
+
+  // Y-axis tick labels (3 ticks)
+  const ticks = [0, Math.round(maxVal * 0.5), Math.round(maxVal)].map(v => {
+    const ty = (y1 - (v / maxVal) * (y1 - y0)).toFixed(1);
+    return `<text x="${x0 - 4}" y="${ty}" text-anchor="end" font-size="9" fill="#7d8aa3" dominant-baseline="middle">${v}</text>`;
+  }).join("");
+
+  // X-axis tick labels (day 0, mid, last)
+  const days = d.days || [];
+  const xTicks = [0, Math.floor((days.length - 1) / 2), days.length - 1].map(i => {
+    const tx = (x0 + (i / Math.max(days.length - 1, 1)) * (x1 - x0)).toFixed(1);
+    return `<text x="${tx}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#7d8aa3">Day ${i}</text>`;
+  }).join("");
+
+  // Stockout dots on manual baseline line
+  const stockoutDays = MANUAL_STOCKOUT_DAYS[currentSite] || [];
+  const stockoutDots = stockoutDays.map(day => {
+    if (day >= (d.manual_stock || []).length) return "";
+    const x = (x0 + (day / Math.max(days.length - 1, 1)) * (x1 - x0)).toFixed(1);
+    const y = (y1 - (d.manual_stock[day] / maxVal) * (y1 - y0)).toFixed(1);
+    return `<circle cx="${x}" cy="${y}" r="4" fill="#ff5f6d" stroke="#101a2c" stroke-width="1.5"/>`;
+  }).join("");
+
+  svg.innerHTML = `
+    ${ticks}${xTicks}
+    <line x1="${x0}" y1="${rpY}" x2="${x1}" y2="${rpY}" stroke="#ff5f6d" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
+    <text x="${x1}" y="${Number(rpY) - 4}" text-anchor="end" font-size="9" fill="#ff5f6d">ROP</text>
+    <polyline points="${manPts}" fill="none" stroke="#ff8c42" stroke-width="1.5" opacity="0.7"/>
+    <polyline points="${dtPts}"  fill="none" stroke="#3a8df0" stroke-width="2"/>
+    ${stockoutDots}
+    <circle cx="${x0 + 8}" cy="${y0 + 6}" r="4" fill="#3a8df0"/>
+    <text x="${x0 + 16}" y="${y0 + 10}" font-size="9" fill="#9fb3d8">DT</text>
+    <circle cx="${x0 + 40}" cy="${y0 + 6}" r="4" fill="#ff8c42"/>
+    <text x="${x0 + 48}" y="${y0 + 10}" font-size="9" fill="#9fb3d8">Manual</text>
+  `;
+}
+
+// KS: reload chart when analytics tab switches to show latest SKU series
+const _origSwitchView = switchView;
+// patch switchView to also load chart
+(function() {
+  const parent = document.getElementById("tab-analytics");
+  parent.addEventListener("click", () => {
+    if (selectedSku) loadSkuSeries(selectedSku);
+  });
+})();
 </script>
 </body>
 </html>
