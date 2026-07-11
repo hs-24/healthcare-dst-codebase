@@ -122,6 +122,9 @@ class LiveTwin:
                 "data_inconsistency_rate_pct": self.results["data_quality_metrics"]["inconsistency_rate_pct"],
                 "digital_twin_total_reorders": self.results["kpi_summary_digital_twin"]["total_reorders_placed"],
                 "manual_baseline_total_reorders": self.results["kpi_summary_manual_baseline"]["total_reorders_placed"],
+                # KS: reorder count comparison for KPI card
+                "digital_twin_total_reorders": self.results["kpi_summary_digital_twin"]["total_reorders_placed"],
+                "manual_baseline_total_reorders": self.results["kpi_summary_manual_baseline"]["total_reorders_placed"],
             },
         }
 
@@ -213,6 +216,136 @@ def api_control():
     body = request.get_json(force=True) or {}
     twin.control(body.get("action"), body.get("value"))
     return jsonify({"ok": True, "playing": twin.playing, "speed": twin.speed})
+
+
+@app.get("/api/sku-series")
+def api_sku_series():
+    """KS: 30-day DT vs Manual stock trajectory for the stock chart panel."""
+    t = _get_twin(request)
+    sku_id = request.args.get("sku") or t.sku_ids[0]
+    series = t.per_sku.get(sku_id)
+    if series is None:
+        return jsonify({"error": f"Unknown SKU: {sku_id}"}), 404
+    return jsonify({
+        "sku_id": sku_id,
+        "sku_name": series["sku_name"],
+        "days": series["days"],
+        "dt_stock": series["digital_twin_stock"],
+        "manual_stock": series["manual_baseline_perceived_stock"],
+        "reorder_point": series["reorder_point"],
+        "demand": series["demand"],
+    })
+
+
+@app.get("/api/audit")
+def api_audit():
+    """Annotated fragmented spreadsheet data for the Audit Heatmap (#1)."""
+    import pandas as pd
+    frag_path = ROOT / "data" / "fragmented_spreadsheet_sim.csv"
+    clean_path = ROOT / "data" / "clean_ground_truth.csv"
+    if not frag_path.exists():
+        return jsonify({"rows": [], "error": "Run: py run_pilot.py"})
+
+    frag_df = pd.read_csv(frag_path)
+    clean_df = pd.read_csv(clean_path)
+
+    clean_lookup = {
+        (int(r["day"]), r["sku_id"]): r["stock_level"]
+        for _, r in clean_df.iterrows()
+    }
+    dup_counts = frag_df.groupby([frag_df["day"].astype(int), frag_df["sku_id"]]).size().to_dict()
+
+    rows = []
+    for _, r in frag_df.iterrows():
+        reported = None if (hasattr(r["stock_level"], "__float__") and
+                            __import__("math").isnan(float(r["stock_level"]))) \
+                   else float(r["stock_level"])
+        try:
+            reported = float(r["stock_level"])
+            import math
+            if math.isnan(reported):
+                reported = None
+        except (TypeError, ValueError):
+            reported = None
+
+        true_stock = clean_lookup.get((int(r["true_day"]), r["sku_id"]))
+        is_dup = dup_counts.get((int(r["day"]), r["sku_id"]), 1) > 1
+
+        if reported is None:
+            issue = "missing"
+        elif true_stock is not None and abs(reported - true_stock) > 0.5:
+            issue = "error"
+        elif is_dup:
+            issue = "duplicate"
+        else:
+            issue = "ok"
+
+        rows.append({
+            "sku_id": r["sku_id"],
+            "reported_day": int(r["day"]),
+            "true_day": int(r["true_day"]),
+            "stock_level": round(reported) if reported is not None else None,
+            "true_stock": round(true_stock) if true_stock is not None else None,
+            "source_sheet": str(r.get("source_sheet", "")),
+            "issue": issue,
+        })
+
+    order = {"error": 0, "missing": 1, "duplicate": 2, "ok": 3}
+    rows.sort(key=lambda x: (order.get(x["issue"], 9), x["sku_id"], x["true_day"]))
+    return jsonify({"rows": rows[:250]})
+
+
+@app.get("/api/abc-xyz")
+def api_abc_xyz():
+    """Forecast accuracy grouped by ABC/XYZ class + optional ARIMA summary (#2 & #4)."""
+    import pandas as pd
+    import yaml
+    accuracy_path = ROOT / "outputs" / "forecast_accuracy_comparison.csv"
+    if not accuracy_path.exists():
+        return jsonify({"error": "Run: py run_pilot.py", "abc": [], "xyz": []})
+
+    acc_df = pd.read_csv(accuracy_path)
+    with open(ROOT / "config" / "warehouse_config.yaml", "r", encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+
+    sku_map = {s["sku_id"]: s for s in cfg["skus"]}
+    acc_df["abc_class"] = acc_df["sku_id"].map(lambda x: sku_map.get(x, {}).get("abc_class", "?"))
+    acc_df["xyz_class"] = acc_df["sku_id"].map(lambda x: sku_map.get(x, {}).get("xyz_class", "?"))
+
+    def group_stats(df, col):
+        out = []
+        for cls, grp in df.groupby(col):
+            mw = grp["manual_baseline_WMAPE_pct"].mean()
+            dw = grp["digital_twin_WMAPE_pct"].mean()
+            out.append({
+                "class": cls, "sku_count": len(grp),
+                "manual_wmape": round(mw, 1), "dt_wmape": round(dw, 1),
+                "improvement": round(((mw - dw) / max(mw, 1)) * 100, 1),
+            })
+        return out
+
+    arima_summary = None
+    if "arima_abs_error_total" in acc_df.columns:
+        me = acc_df["manual_baseline_abs_error_total"].sum()
+        md = acc_df["manual_baseline_demand_total"].sum()
+        de = acc_df["digital_twin_abs_error_total"].sum()
+        dd = acc_df["digital_twin_demand_total"].sum()
+        ae = acc_df["arima_abs_error_total"].sum()
+        ad = acc_df["arima_demand_total"].sum()
+        mw = me / md * 100 if md else 0
+        dw = de / dd * 100 if dd else 0
+        aw = ae / ad * 100 if ad else 0
+        arima_summary = {
+            "manual_wmape": round(mw, 2), "dt_wmape": round(dw, 2),
+            "arima_wmape": round(aw, 2),
+            "arima_vs_manual": round((mw - aw) / max(mw, 1) * 100, 2),
+        }
+
+    return jsonify({
+        "abc": group_stats(acc_df, "abc_class"),
+        "xyz": group_stats(acc_df, "xyz_class"),
+        "arima_summary": arima_summary,
+    })
 
 
 if __name__ == "__main__":

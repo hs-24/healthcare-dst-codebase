@@ -14,7 +14,9 @@
   "forecast_accuracy_summary": {
     "avg_manual_baseline_WMAPE_pct": 49.81,
     "avg_digital_twin_WMAPE_pct": 29.66,
-    "forecast_accuracy_improvement_pct": 40.46
+    "avg_arima_WMAPE_pct": 30.48,
+    "forecast_accuracy_improvement_pct": 40.46,
+    "arima_vs_manual_improvement_pct": 38.8
   },
   "operational_comparison": {
     "digital_twin_fill_rate_pct": 99.88,
