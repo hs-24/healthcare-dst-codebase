@@ -1,481 +1,901 @@
 day,site_id,sku_id,sku_name,abc_class,xyz_class,stock_level,on_order,demand,fulfilled,stockout,reorder_point
-0,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,476.7811316809823,0.0,23.22,23.22,False,150
-0,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,580.2399046374429,0.0,19.76,19.76,False,180
-0,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,281.49729282516125,0.0,18.5,18.5,False,100
-0,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,424.4160469852615,0.0,25.58,25.58,False,140
-0,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,194.90207037730767,0.0,5.1,5.1,False,60
-0,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,156.40653852058696,0.0,3.59,3.59,False,50
-0,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,57.91875111303197,0.0,2.08,2.08,False,20
-0,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,117.58121296171791,0.0,2.42,2.42,False,40
-0,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,173.05040347251287,0.0,6.95,6.95,False,50
-0,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,136.63260981893396,0.0,3.37,3.37,False,45
-0,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,122.8894448603292,0.0,7.11,7.11,False,40
-0,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,236.66662419371315,0.0,13.33,13.33,False,80
-0,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,86.52927413999902,0.0,3.47,3.47,False,30
-0,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,36.80913818954795,0.0,3.19,3.19,False,12
-0,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,102.89097384169428,0.0,7.11,7.11,False,35
-0,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,35.0,0.0,0.0,0.0,False,10
-1,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,453.3061285446523,0.0,23.48,23.48,False,150
-1,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,559.993200242417,0.0,20.25,20.25,False,180
-1,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,262.2265910173176,0.0,19.27,19.27,False,100
-1,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,405.7655283621653,0.0,18.65,18.65,False,140
-1,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,186.2717951043982,0.0,8.63,8.63,False,60
-1,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,150.94932715379878,0.0,5.46,5.46,False,50
-1,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,53.42916016794911,0.0,4.49,4.49,False,20
-1,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,114.35386037206192,0.0,3.23,3.23,False,40
-1,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,167.33538693900218,0.0,5.72,5.72,False,50
-1,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,132.01294369515452,0.0,4.62,4.62,False,45
-1,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,116.61190281500117,0.0,6.28,6.28,False,40
-1,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,224.57029200062092,0.0,12.1,12.1,False,80
-1,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,81.63707043245546,0.0,4.89,4.89,False,30
-1,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,34.66290668503613,0.0,2.15,2.15,False,12
-1,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,91.09436055925698,0.0,11.8,11.8,False,35
-1,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,34.468981022938465,0.0,0.53,0.53,False,10
-2,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,433.35509946093845,0.0,19.95,19.95,False,150
-2,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,538.8758366119042,0.0,21.12,21.12,False,180
-2,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,244.53071448186463,0.0,17.7,17.7,False,100
-2,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,378.86272231311904,0.0,26.9,26.9,False,140
-2,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,177.49969001970794,0.0,8.77,8.77,False,60
-2,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,145.96979658468635,0.0,4.98,4.98,False,50
-2,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,53.42916016794911,0.0,0.0,0.0,False,20
-2,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,107.10089643293841,0.0,7.25,7.25,False,40
-2,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,158.10562442539185,0.0,9.23,9.23,False,50
-2,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,125.15505802439154,0.0,6.86,6.86,False,45
-2,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,113.20912611249403,0.0,3.4,3.4,False,40
-2,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,212.87380803142077,0.0,11.7,11.7,False,80
-2,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,77.95865861497848,0.0,3.68,3.68,False,30
-2,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,32.834873789942606,0.0,1.83,1.83,False,12
-2,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,82.85435998100205,0.0,8.24,8.24,False,35
-2,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,33.05594725465391,0.0,1.41,1.41,False,10
-3,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,408.63944520865084,0.0,24.72,24.72,False,150
-3,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,512.4703621949709,0.0,26.41,26.41,False,180
-3,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,228.79599808972472,0.0,15.73,15.73,False,100
-3,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,355.4437047322493,0.0,23.42,23.42,False,140
-3,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,171.41400165941928,0.0,6.09,6.09,False,60
-3,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,139.42881023375824,0.0,6.54,6.54,False,50
-3,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,52.663980007393256,0.0,0.77,0.77,False,20
-3,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,106.29528567415512,0.0,0.81,0.81,False,40
-3,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,151.93105117907191,0.0,6.17,6.17,False,50
-3,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,115.91770474630555,0.0,9.24,9.24,False,45
-3,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,110.28712079015781,0.0,2.92,2.92,False,40
-3,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,198.96897296764632,0.0,13.9,13.9,False,80
-3,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,77.95865861497848,0.0,0.0,0.0,False,30
-3,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,31.837201334921268,0.0,1.0,1.0,False,12
-3,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,76.59865139870803,0.0,6.26,6.26,False,35
-3,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,31.135235990750918,0.0,1.92,1.92,False,10
-4,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,383.79453888947944,0.0,24.84,24.84,False,150
-4,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,481.71027878377134,0.0,30.76,30.76,False,180
-4,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,216.88834852321534,0.0,11.91,11.91,False,100
-4,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,339.68016728090123,0.0,15.76,15.76,False,140
-4,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,160.698049896905,0.0,10.72,10.72,False,60
-4,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,132.5027232084031,0.0,6.93,6.93,False,50
-4,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,52.663980007393256,0.0,0.0,0.0,False,20
-4,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,106.29528567415512,0.0,0.0,0.0,False,40
-4,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,147.68940803707676,0.0,4.24,4.24,False,50
-4,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,109.17480288617114,0.0,6.74,6.74,False,45
-4,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,104.94529902358846,0.0,5.34,5.34,False,40
-4,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,185.897516905443,0.0,13.07,13.07,False,80
-4,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,76.51039446495827,0.0,1.45,1.45,False,30
-4,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,30.099391798306197,0.0,1.74,1.74,False,12
-4,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,69.04699829559948,0.0,7.55,7.55,False,35
-4,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,30.46832114635925,0.0,0.67,0.67,False,10
-5,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,359.9674379392498,0.0,23.83,23.83,False,150
-5,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,459.68183443017125,0.0,22.03,22.03,False,180
-5,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,205.06667160260577,0.0,11.82,11.82,False,100
-5,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,323.3523325388895,0.0,16.33,16.33,False,140
-5,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,154.08972918808308,0.0,6.61,6.61,False,60
-5,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,123.54180576604635,0.0,8.96,8.96,False,50
-5,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,51.89666515583925,0.0,0.77,0.77,False,20
-5,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,102.23281508051669,0.0,4.06,4.06,False,40
-5,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,139.24716806035903,0.0,8.44,8.44,False,50
-5,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,102.55847494609628,0.0,6.62,6.62,False,45
-5,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,98.34837476205378,0.0,6.6,6.6,False,40
-5,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,175.19297335897127,0.0,10.7,10.7,False,80
-5,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,75.0459175443393,0.0,1.46,1.46,False,30
-5,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,28.718969114665796,0.0,1.38,1.38,False,12
-5,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,67.97153471068196,0.0,1.08,1.08,False,35
-5,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,30.46832114635925,0.0,0.0,0.0,False,10
-6,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,343.2582363886674,0.0,16.71,16.71,False,150
-6,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,439.6653153957801,0.0,20.02,20.02,False,180
-6,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,188.66802624226514,0.0,16.4,16.4,False,100
-6,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,310.69068592640997,0.0,12.66,12.66,False,140
-6,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,145.84605429616187,0.0,8.24,8.24,False,60
-6,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,112.14412087268815,0.0,11.4,11.4,False,50
-6,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,50.880445892174386,0.0,1.02,1.02,False,20
-6,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,94.54523723818126,0.0,7.69,7.69,False,40
-6,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,135.04802110038867,0.0,4.2,4.2,False,50
-6,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,97.57206884076535,0.0,4.99,4.99,False,45
-6,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,95.62842769383917,0.0,2.72,2.72,False,40
-6,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,165.21007258667296,0.0,9.98,9.98,False,80
-6,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,68.40065418076398,0.0,6.65,6.65,False,30
-6,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,28.718969114665796,0.0,0.0,0.0,False,12
-6,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,60.95514850875357,0.0,7.02,7.02,False,35
-6,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,29.035491303094062,0.0,1.43,1.43,False,10
-7,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,323.63483621145457,0.0,19.62,19.62,False,150
-7,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,422.3416625221108,0.0,17.32,17.32,False,180
-7,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,174.23524919598194,0.0,14.43,14.43,False,100
-7,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,295.3971348898566,0.0,15.29,15.29,False,140
-7,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,136.38070187345247,0.0,9.47,9.47,False,60
-7,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,104.57856443611782,0.0,7.57,7.57,False,50
-7,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,45.55653233126837,0.0,5.32,5.32,False,20
-7,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,91.74201537554637,0.0,2.8,2.8,False,40
-7,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,131.11851357825427,0.0,3.93,3.93,False,50
-7,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,91.62387975337457,0.0,5.95,5.95,False,45
-7,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,90.10043565230694,0.0,5.53,5.53,False,40
-7,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,150.13250986095164,0.0,15.08,15.08,False,80
-7,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,61.77669807251421,0.0,6.62,6.62,False,30
-7,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,26.683662525941532,0.0,2.04,2.04,False,12
-7,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,51.05790041333879,0.0,9.9,9.9,False,35
-7,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,29.035491303094062,0.0,0.0,0.0,False,10
-8,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,304.19384234245354,0.0,19.44,19.44,False,150
-8,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,401.90111817054395,0.0,20.44,20.44,False,180
-8,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,162.57410801491653,0.0,11.66,11.66,False,100
-8,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,286.03393792275074,0.0,9.36,9.36,False,140
-8,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,126.11039997982365,0.0,10.27,10.27,False,60
-8,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,97.74523252741413,0.0,6.83,6.83,False,50
-8,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,45.55653233126837,0.0,0.0,0.0,False,20
-8,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,91.74201537554637,0.0,0.0,0.0,False,40
-8,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,123.17797203590368,0.0,7.94,7.94,False,50
-8,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,84.02856333363862,0.0,7.6,7.6,False,45
-8,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,80.30828151224665,0.0,9.79,9.79,False,40
-8,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,130.39092246292967,0.0,19.74,19.74,False,80
-8,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,56.87761939608262,0.0,4.9,4.9,False,30
-8,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,26.66796970598933,0.0,0.02,0.02,False,12
-8,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,51.05790041333879,0.0,0.0,0.0,False,35
-8,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,27.560695255812693,0.0,1.47,1.47,False,10
-9,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,285.4456067236948,0.0,18.75,18.75,False,150
-9,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,378.3932617316221,0.0,23.51,23.51,False,180
-9,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,152.24668880927538,0.0,10.33,10.33,False,100
-9,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,268.01947412766543,0.0,18.01,18.01,False,140
-9,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,114.97843951824836,0.0,11.13,11.13,False,60
-9,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,89.7740868250781,0.0,7.97,7.97,False,50
-9,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,44.10552897275348,0.0,1.45,1.45,False,20
-9,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,91.74201537554637,0.0,0.0,0.0,False,40
-9,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,121.20202087001675,0.0,1.98,1.98,False,50
-9,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,79.74433310632195,0.0,4.28,4.28,False,45
-9,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,75.43735963421062,0.0,4.87,4.87,False,40
-9,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,114.08713272219002,0.0,16.3,16.3,False,80
-9,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,53.14349385804379,0.0,3.73,3.73,False,30
-9,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,23.693860439454742,0.0,2.97,2.97,False,12
-9,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,46.65592808924842,0.0,4.4,4.4,False,35
-9,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,27.560695255812693,0.0,0.0,0.0,False,10
-10,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,267.3060737726243,0.0,18.14,18.14,False,150
-10,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,356.7446181188366,0.0,21.65,21.65,False,180
-10,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,125.4758704146644,0.0,26.77,26.77,False,100
-10,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,254.76918088223613,0.0,13.25,13.25,False,140
-10,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,104.30146111077568,0.0,10.68,10.68,False,60
-10,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,84.98286835933918,0.0,4.79,4.79,False,50
-10,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,40.25606834443015,0.0,3.85,3.85,False,20
-10,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,85.81726054501706,0.0,5.92,5.92,False,40
-10,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,114.67193456299103,0.0,6.53,6.53,False,50
-10,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,74.34623942166053,0.0,5.4,5.4,False,45
-10,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,72.00885010324116,0.0,3.43,3.43,False,40
-10,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,101.74891611774378,0.0,12.34,12.34,False,80
-10,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,51.80892612744099,0.0,1.33,1.33,False,30
-10,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,23.693860439454742,0.0,0.0,0.0,False,12
-10,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,44.43415329734336,0.0,2.22,2.22,False,35
-10,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,26.219072171001727,0.0,1.34,1.34,False,10
-11,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,238.98970874698256,0.0,28.32,28.32,False,150
-11,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,329.784668437396,0.0,26.96,26.96,False,180
-11,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,112.1877003713237,0.0,13.29,13.29,False,100
-11,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,233.76839790501833,0.0,21.0,21.0,False,140
-11,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,92.68945762736203,0.0,11.61,11.61,False,60
-11,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,76.8247208552476,0.0,8.16,8.16,False,50
-11,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,39.36010825226437,0.0,0.9,0.9,False,20
-11,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,76.28581699471762,0.0,9.53,9.53,False,40
-11,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,106.38566524760618,0.0,8.29,8.29,False,50
-11,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,65.00684944167055,0.0,9.34,9.34,False,45
-11,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,66.56908745390858,0.0,5.44,5.44,False,40
-11,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,94.42232321290527,0.0,7.33,7.33,False,80
-11,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,51.80892612744099,0.0,0.0,0.0,False,30
-11,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,19.717468541107866,0.0,3.98,3.98,False,12
-11,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,33.807889279150125,90.0,10.63,10.63,False,35
-11,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,25.37039906959737,0.0,0.85,0.85,False,10
-12,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,218.5224580315265,0.0,20.47,20.47,False,150
-12,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,295.0160026839428,0.0,34.77,34.77,False,180
-12,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,104.82997446358463,0.0,7.36,7.36,False,100
-12,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,221.03148703770913,0.0,12.74,12.74,False,140
-12,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,82.40280403798394,0.0,10.29,10.29,False,60
-12,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,70.50853622382637,0.0,6.32,6.32,False,50
-12,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,37.57137635904852,0.0,1.79,1.79,False,20
-12,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,73.10303148734019,0.0,3.18,3.18,False,40
-12,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,98.37294160120939,0.0,8.01,8.01,False,50
-12,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,55.988144788386265,0.0,9.02,9.02,False,45
-12,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,61.35168367734439,0.0,5.22,5.22,False,40
-12,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,81.49050683307469,0.0,12.93,12.93,False,80
-12,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,51.80892612744099,0.0,0.0,0.0,False,30
-12,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,18.290546144003045,0.0,1.43,1.43,False,12
-12,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,30.368934035970163,90.0,3.44,3.44,False,35
-12,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,25.37039906959737,0.0,0.0,0.0,False,10
-13,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,200.0350674992415,0.0,18.49,18.49,False,150
-13,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,271.02074332814766,0.0,24.0,24.0,False,180
-13,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,85.33455920944856,250.0,19.5,19.5,False,100
-13,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,211.3162360618861,0.0,9.72,9.72,False,140
-13,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,73.34154105279511,0.0,9.06,9.06,False,60
-13,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,64.4610445238271,0.0,6.05,6.05,False,50
-13,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,36.49225716664483,0.0,1.08,1.08,False,20
-13,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,64.08924236081717,0.0,9.01,9.01,False,40
-13,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,89.75859529019762,0.0,8.61,8.61,False,50
-13,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,47.144649519779406,0.0,8.84,8.84,False,45
-13,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,56.72249730754415,0.0,4.63,4.63,False,40
-13,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,72.5783346680868,180.0,8.91,8.91,False,80
-13,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,49.52674727665104,0.0,2.28,2.28,False,30
-13,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,16.426800957096212,0.0,1.86,1.86,False,12
-13,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,24.074528632299774,90.0,6.29,6.29,False,35
-13,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,25.37039906959737,0.0,0.0,0.0,False,10
-14,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,177.67310837273,0.0,22.36,22.36,False,150
-14,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,243.65137334731423,0.0,27.37,27.37,False,180
-14,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,56.229714984245035,250.0,29.1,29.1,False,100
-14,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,179.1783237829144,0.0,32.14,32.14,False,140
-14,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,66.04802775391275,0.0,7.29,7.29,False,60
-14,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,57.82319460847462,0.0,6.64,6.64,False,50
-14,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,36.49225716664483,0.0,0.0,0.0,False,20
-14,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,63.0427774306346,0.0,1.05,1.05,False,40
-14,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,81.8117802794266,0.0,7.95,7.95,False,50
-14,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,38.63001546755882,100.0,8.51,8.51,False,45
-14,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,53.47229851812881,0.0,3.25,3.25,False,40
-14,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,63.540773988290184,180.0,9.04,9.04,False,80
-14,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,49.52674727665104,0.0,0.0,0.0,False,30
-14,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,15.170799837913574,0.0,1.26,1.26,False,12
-14,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,21.249288985506553,90.0,2.83,2.83,False,35
-14,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,25.01161426790987,0.0,0.36,0.36,False,10
-15,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,159.18055148540037,0.0,18.49,18.49,False,150
-15,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,218.21694867282957,0.0,25.43,25.43,False,180
-15,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,52.776085332384824,250.0,3.45,3.45,False,100
-15,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,170.44764050065132,0.0,8.73,8.73,False,140
-15,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,52.78953352985615,150.0,13.26,13.26,False,60
-15,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,54.18546235229672,0.0,3.64,3.64,False,50
-15,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,36.49225716664483,0.0,0.0,0.0,False,20
-15,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,49.85820978902803,0.0,13.18,13.18,False,40
-15,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,66.09657877170538,0.0,15.72,15.72,False,50
-15,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,36.05893203962218,100.0,2.57,2.57,False,45
-15,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,49.35609601442008,0.0,4.12,4.12,False,40
-15,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,51.516107335468654,180.0,12.02,12.02,False,80
-15,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,39.23908693458811,0.0,10.29,10.29,False,30
-15,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,15.15108545555593,0.0,0.02,0.02,False,12
-15,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,106.13606695414445,0.0,5.11,5.11,False,35
-15,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,22.823341661423427,0.0,2.19,2.19,False,10
-16,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,135.4414871875339,400.0,23.74,23.74,False,150
-16,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,194.47388510021017,0.0,23.74,23.74,False,180
-16,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,39.57902311948107,250.0,13.2,13.2,False,100
-16,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,161.07191115924118,0.0,9.38,9.38,False,140
-16,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,44.265881017805484,150.0,8.52,8.52,False,60
-16,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,47.48462482232358,120.0,6.7,6.7,False,50
-16,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,34.18148340946707,0.0,2.31,2.31,False,20
-16,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,48.63484588312311,0.0,1.22,1.22,False,40
-16,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,57.681963204069966,0.0,8.41,8.41,False,50
-16,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,28.027142495072606,100.0,8.03,8.03,False,45
-16,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,43.983065628015765,0.0,5.37,5.37,False,40
-16,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,39.46083811027104,180.0,12.06,12.06,False,80
-16,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,35.82115000951885,0.0,3.42,3.42,False,30
-16,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,13.650958865918808,0.0,1.5,1.5,False,12
-16,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,102.35642944806443,0.0,3.78,3.78,False,35
-16,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,21.280249695080798,0.0,1.54,1.54,False,10
-17,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,113.83063358118787,400.0,21.61,21.61,False,150
-17,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,155.9148752466266,450.0,38.56,38.56,False,180
-17,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,266.1388937046296,0.0,23.44,23.44,False,100
-17,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,139.37098529134568,350.0,21.7,21.7,False,140
-17,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,36.79199543719502,150.0,7.47,7.47,False,60
-17,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,43.32185923827384,120.0,4.16,4.16,False,50
-17,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,29.760968912671565,0.0,4.42,4.42,False,20
-17,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,43.32109975738742,0.0,5.31,5.31,False,40
-17,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,49.241532993895134,120.0,8.44,8.44,False,50
-17,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,26.888607462508087,100.0,1.14,1.14,False,45
-17,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,36.75721327227613,90.0,7.23,7.23,False,40
-17,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,207.09757709562794,0.0,12.36,12.36,False,80
-17,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,35.82115000951885,0.0,0.0,0.0,False,30
-17,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,12.858246077093732,0.0,0.79,0.79,False,12
-17,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,95.81802127586617,0.0,6.54,6.54,False,35
-17,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,20.10679617738206,0.0,1.17,1.17,False,10
-18,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,92.99931832440208,400.0,20.83,20.83,False,150
-18,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,130.53580485502235,450.0,25.38,25.38,False,180
-18,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,253.6507579738709,0.0,12.49,12.49,False,100
-18,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,119.30304770662839,350.0,20.07,20.07,False,140
-18,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,24.849011491208707,150.0,11.94,11.94,False,60
-18,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,43.32185923827384,120.0,0.0,0.0,False,50
-18,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,28.482039494592872,0.0,1.28,1.28,False,20
-18,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,38.43853765052519,100.0,4.88,4.88,False,40
-18,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,41.353551024833834,120.0,7.89,7.89,False,50
-18,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,22.318393915811313,100.0,4.57,4.57,False,45
-18,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,35.97334555022473,90.0,0.78,0.78,False,40
-18,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,195.1135906444856,0.0,11.98,11.98,False,80
-18,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,25.539014131445693,80.0,10.28,10.28,False,30
-18,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,12.858246077093732,0.0,0.0,0.0,False,12
-18,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,87.59930283751125,0.0,8.22,8.22,False,35
-18,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,19.46673148975411,0.0,0.64,0.64,False,10
-19,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,471.2446157077175,0.0,21.75,21.75,False,150
-19,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,110.85319591924605,450.0,19.68,19.68,False,180
-19,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,241.65749500800615,0.0,11.99,11.99,False,100
-19,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,91.20273554373568,350.0,28.1,28.1,False,140
-19,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,14.683701007233292,150.0,10.17,10.17,False,60
-19,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,30.624924422044003,120.0,12.7,12.7,False,50
-19,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,24.091733338841944,0.0,4.39,4.39,False,20
-19,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,32.24310425587731,100.0,6.2,6.2,False,40
-19,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,29.12174744633046,120.0,12.23,12.23,False,50
-19,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,115.72091101896557,0.0,6.6,6.6,False,45
-19,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,28.986173925911785,90.0,6.99,6.99,False,40
-19,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,185.00330350508975,0.0,10.11,10.11,False,80
-19,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,22.06617628642295,80.0,3.47,3.47,False,30
-19,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,12.404381812044146,0.0,0.45,0.45,False,12
-19,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,79.02846782064566,0.0,8.57,8.57,False,35
-19,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,19.46673148975411,0.0,0.0,0.0,False,10
-20,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,446.1152143380469,0.0,25.13,25.13,False,150
-20,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,85.997102264277,450.0,24.86,24.86,False,180
-20,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,220.63001244720223,0.0,21.03,21.03,False,100
-20,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,66.94665262261687,350.0,24.26,24.26,False,140
-20,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,152.04240869193967,0.0,12.64,12.64,False,60
-20,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,20.93260034862807,120.0,9.69,9.69,False,50
-20,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,24.091733338841944,0.0,0.0,0.0,False,20
-20,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,28.577870120368317,100.0,3.67,3.67,False,40
-20,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,145.6377690241149,0.0,3.48,3.48,False,50
-20,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,111.51661062488125,0.0,4.2,4.2,False,45
-20,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,20.359225686047655,90.0,8.63,8.63,False,40
-20,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,172.09070207239665,0.0,12.91,12.91,False,80
-20,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,21.731791043595813,80.0,0.33,0.33,False,30
-20,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,12.404381812044146,0.0,0.0,0.0,False,12
-20,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,73.13667796059212,0.0,5.89,5.89,False,35
-20,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,19.46673148975411,0.0,0.0,0.0,False,10
-21,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,426.79977544763324,0.0,19.32,19.32,False,150
-21,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,508.1250454349696,0.0,27.87,27.87,False,180
-21,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,199.69814023056205,0.0,20.93,20.93,False,100
-21,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,43.68532231704579,350.0,23.26,23.26,False,140
-21,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,147.62498770913587,0.0,4.42,4.42,False,60
-21,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,12.519500161537291,120.0,8.41,8.41,False,50
-21,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,22.133259477730274,0.0,1.96,1.96,False,20
-21,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,22.50841869350485,100.0,6.07,6.07,False,40
-21,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,133.7891399791613,0.0,11.85,11.85,False,50
-21,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,111.17470631689311,0.0,0.34,0.34,False,45
-21,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,106.7778739065063,0.0,3.58,3.58,False,40
-21,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,159.31798310401658,0.0,12.77,12.77,False,80
-21,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,21.731791043595813,80.0,0.0,0.0,False,30
-21,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,8.690458239963883,30.0,3.71,3.71,False,12
-21,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,66.30527944503028,0.0,6.83,6.83,False,35
-21,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,17.181513909573344,0.0,2.29,2.29,False,10
-22,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,407.0835500937204,0.0,19.72,19.72,False,150
-22,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,477.24246329517234,0.0,30.88,30.88,False,180
-22,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,179.2873108946278,0.0,20.41,20.41,False,100
-22,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,373.05517617608564,0.0,20.63,20.63,False,140
-22,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,138.15618592373846,0.0,9.47,9.47,False,60
-22,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,124.20847044369211,0.0,8.31,8.31,False,50
-22,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,22.133259477730274,0.0,0.0,0.0,False,20
-22,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,19.246062094706616,100.0,3.26,3.26,False,40
-22,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,127.24670757651836,0.0,6.54,6.54,False,50
-22,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,104.71622165600937,0.0,6.46,6.46,False,45
-22,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,99.37829571392159,0.0,7.4,7.4,False,40
-22,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,151.4935913499518,0.0,7.82,7.82,False,80
-22,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,19.04432806790608,80.0,2.69,2.69,False,30
-22,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,4.968274918475423,30.0,3.72,3.72,False,12
-22,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,62.58732648570546,0.0,3.72,3.72,False,35
-22,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,17.181513909573344,0.0,0.0,0.0,False,10
-23,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,384.2743253263956,0.0,22.81,22.81,False,150
-23,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,446.17615215226044,0.0,31.07,31.07,False,180
-23,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,165.21875456126386,0.0,14.07,14.07,False,100
-23,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,344.7524520430267,0.0,28.3,28.3,False,140
-23,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,127.4425979586054,0.0,10.71,10.71,False,60
-23,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,114.18301024302193,0.0,10.03,10.03,False,50
-23,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,19.11420317481727,50.0,3.02,3.02,False,20
-23,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,3.6077965929761913,100.0,15.64,15.64,False,40
-23,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,120.86219264311649,0.0,6.38,6.38,False,50
-23,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,104.22502738617565,0.0,0.49,0.49,False,45
-23,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,90.52808524628045,0.0,8.85,8.85,False,40
-23,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,141.86668964282228,0.0,9.63,9.63,False,80
-23,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,15.402018246099644,80.0,3.64,3.64,False,30
-23,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,1.5039488911846326,30.0,3.46,3.46,False,12
-23,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,61.27365320067045,0.0,1.31,1.31,False,35
-23,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,17.181513909573344,0.0,0.0,0.0,False,10
-24,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,368.67943707487103,0.0,15.59,15.59,False,150
-24,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,424.94096989241297,0.0,21.24,21.24,False,180
-24,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,148.5809349251619,0.0,16.64,16.64,False,100
-24,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,322.08313714333735,0.0,22.67,22.67,False,140
-24,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,117.8900495999483,0.0,9.55,9.55,False,60
-24,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,110.92130789469903,0.0,3.26,3.26,False,50
-24,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,19.11420317481727,50.0,0.0,0.0,False,20
-24,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,99.33602866602428,0.0,4.27,4.27,False,40
-24,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,115.27752074403149,0.0,5.58,5.58,False,50
-24,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,97.57656295688412,0.0,6.65,6.65,False,45
-24,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,83.8433965433494,0.0,6.68,6.68,False,40
-24,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,130.45196534664623,0.0,11.41,11.41,False,80
-24,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,9.085472596058644,80.0,6.32,6.32,False,30
-24,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,0.0,30.0,1.84,1.5,True,12
-24,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,53.98947202498635,0.0,7.28,7.28,False,35
-24,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,17.068056477591178,0.0,0.11,0.11,False,10
-25,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,347.39788273019684,0.0,21.28,21.28,False,150
-25,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,397.7603133124712,0.0,27.18,27.18,False,180
-25,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,129.6577640726574,0.0,18.92,18.92,False,100
-25,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,305.83932534890937,0.0,16.24,16.24,False,140
-25,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,107.84771508848408,0.0,10.04,10.04,False,60
-25,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,104.21882427044517,0.0,6.7,6.7,False,50
-25,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,17.572795942939155,50.0,1.54,1.54,False,20
-25,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,91.18843345590392,0.0,8.15,8.15,False,40
-25,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,114.25670185719396,0.0,1.02,1.02,False,50
-25,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,95.31774377707102,0.0,2.26,2.26,False,45
-25,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,82.40064149721216,0.0,1.44,1.44,False,40
-25,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,126.45281370619115,0.0,4.0,4.0,False,80
-25,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,88.66635680069487,0.0,0.42,0.42,False,30
-25,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,0.0,30.0,2.62,0.0,True,12
-25,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,48.98714741085756,0.0,5.0,5.0,False,35
-25,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,15.691150362872584,0.0,1.38,1.38,False,10
-26,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,321.0410127433537,0.0,26.36,26.36,False,150
-26,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,363.7941965188651,0.0,33.97,33.97,False,180
-26,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,116.07259168101422,0.0,13.59,13.59,False,100
-26,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,277.3642241219236,0.0,28.48,28.48,False,140
-26,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,98.66346177161586,0.0,9.18,9.18,False,60
-26,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,99.23101894192756,0.0,4.99,4.99,False,50
-26,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,17.080476717776374,50.0,0.49,0.49,False,20
-26,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,91.18843345590392,0.0,0.0,0.0,False,40
-26,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,109.92110341839492,0.0,4.34,4.34,False,50
-26,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,90.71278549725709,0.0,4.6,4.6,False,45
-26,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,75.47203745070352,0.0,6.93,6.93,False,40
-26,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,110.29050421269321,0.0,16.16,16.16,False,80
-26,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,88.66635680069487,0.0,0.0,0.0,False,30
-26,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,0.0,30.0,2.09,0.0,True,12
-26,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,46.100670440498654,0.0,2.89,2.89,False,35
-26,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,13.926574439024101,0.0,1.76,1.76,False,10
-27,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,299.5653593461046,0.0,21.48,21.48,False,150
-27,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,348.77963147395025,0.0,15.01,15.01,False,180
-27,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,96.5028097316033,250.0,19.57,19.57,False,100
-27,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,262.5992291115847,0.0,14.76,14.76,False,140
-27,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,90.73126224836297,0.0,7.93,7.93,False,60
-27,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,94.94027617579663,0.0,4.29,4.29,False,50
-27,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,16.719899926488996,50.0,0.36,0.36,False,20
-27,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,85.04898125242933,0.0,6.14,6.14,False,40
-27,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,103.48883644120414,0.0,6.43,6.43,False,50
-27,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,84.39113049155088,0.0,6.32,6.32,False,45
-27,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,69.6034250012743,0.0,5.87,5.87,False,40
-27,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,95.32851924610871,0.0,14.96,14.96,False,80
-27,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,86.87178001923883,0.0,1.79,1.79,False,30
-27,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,0.0,30.0,0.0,0.0,False,12
-27,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,37.3124476740971,0.0,8.79,8.79,False,35
-27,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,13.290657879960257,0.0,0.64,0.64,False,10
-28,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,273.10698956779504,0.0,26.46,26.46,False,150
-28,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,320.4793687948554,0.0,28.3,28.3,False,180
-28,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,83.28963491282337,250.0,13.21,13.21,False,100
-28,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,241.15779785326063,0.0,21.44,21.44,False,140
-28,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,77.82923712811036,0.0,12.9,12.9,False,60
-28,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,81.20933458863537,0.0,13.73,13.73,False,50
-28,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,14.767261429196882,50.0,1.95,1.95,False,20
-28,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,80.24802828584396,0.0,4.8,4.8,False,40
-28,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,93.26011596880498,0.0,10.23,10.23,False,50
-28,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,81.00528307346924,0.0,3.39,3.39,False,45
-28,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,63.80405610699049,0.0,5.8,5.8,False,40
-28,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,84.40610778997028,0.0,10.92,10.92,False,80
-28,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,82.38475635226285,0.0,4.49,4.49,False,30
-28,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,0.0,30.0,0.25,0.0,True,12
-28,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,35.963236655362216,0.0,1.35,1.35,False,35
-28,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,13.290657879960257,0.0,0.0,0.0,False,10
-29,SITE_A,MED-001,"Surgical Gloves, Nitrile (Box of 100)",A,X,255.5765260197535,0.0,17.53,17.53,False,150
-29,SITE_A,MED-007,N95 Respirator Masks (Box of 20),A,X,297.23142050449144,0.0,23.25,23.25,False,180
-29,SITE_A,MED-002,"IV Cannulas, 20G (Pack of 50)",A,Y,71.04878443271595,250.0,12.24,12.24,False,100
-29,SITE_A,MED-008,"IV Fluid Bags, Normal Saline 1L",A,Y,208.597179716254,0.0,32.56,32.56,False,140
-29,SITE_A,MED-003,Paracetamol 500mg (Box of 1000 tablets),A,X,66.61725038829577,0.0,11.21,11.21,False,60
-29,SITE_A,MED-009,Amoxicillin 500mg (Box of 500 capsules),A,Y,76.59560793766025,0.0,4.61,4.61,False,50
-29,SITE_A,MED-012,"Influenza Vaccine (Vial Pack of 10, cold-chain 2-8Â°C)",B,Z,12.202302833804776,50.0,2.56,2.56,False,20
-29,SITE_A,MED-005,"Insulin Syringes (Pack of 100, cold-chain)",B,Z,78.28341946759558,0.0,1.96,1.96,False,40
-29,SITE_A,MED-004,"Wound Dressing Kits, Sterile",B,Y,87.11320748292526,0.0,6.15,6.15,False,50
-29,SITE_A,MED-010,"Surgical Sutures, Absorbable (Box of 12)",B,Y,75.04196894993079,0.0,5.96,5.96,False,45
-29,SITE_A,MED-014,Urinary Catheters (Pack of 10),B,Y,57.31804542624954,0.0,6.49,6.49,False,40
-29,SITE_A,MED-015,"Blood Collection Tubes, EDTA (Box of 100)",A,X,74.42388324162232,180.0,9.98,9.98,False,80
-29,SITE_A,MED-011,Rapid Antigen Test Kits (Box of 25),B,Z,74.82296506805199,0.0,7.56,7.56,False,30
-29,SITE_A,MED-006,"Defibrillator Pads, Adult (Pair)",C,Z,30.0,0.0,0.0,0.0,False,12
-29,SITE_A,MED-013,"Oxygen Masks, Adult Non-Rebreather",B,Y,30.145487280747865,90.0,5.82,5.82,False,35
-29,SITE_A,MED-016,"Ventilator Circuit Kits, Single-Use",C,Z,8.553914662726092,25.0,4.74,4.74,False,10
+0,SITE_A,HSC-100,IV Drip,C,Y,2519.68837402111,0.0,198.31,198.31,False,527.0
+0,SITE_A,HSC-101,Gloves,A,Y,3478.2823245717263,0.0,248.72,248.72,False,613.0
+0,SITE_A,HSC-102,IV Drip,B,Y,1884.6329447985158,0.0,238.37,238.37,False,442.0
+0,SITE_A,HSC-103,Gloves,B,Y,2234.4894762197423,0.0,300.51,300.51,False,385.0
+0,SITE_A,HSC-104,X-ray Machine,A,Y,2259.8440368477304,0.0,188.16,188.16,False,589.0
+0,SITE_A,HSC-105,IV Drip,C,Y,2520.4945504836073,0.0,104.51,104.51,False,510.0
+0,SITE_A,HSC-106,Ventilator,B,Y,2118.6728904000192,0.0,236.83,236.83,False,491.0
+0,SITE_A,HSC-107,Surgical Mask,C,Y,2699.7831989907218,0.0,195.22,195.22,False,583.0
+0,SITE_A,HSC-108,Ventilator,B,Y,1716.7348826292375,0.0,242.27,242.27,False,462.0
+0,SITE_A,HSC-109,X-ray Machine,A,Y,2260.168870693132,0.0,284.83,284.83,False,483.5
+1,SITE_A,HSC-100,IV Drip,C,Y,2301.929546551752,0.0,217.76,217.76,False,527.0
+1,SITE_A,HSC-101,Gloves,A,Y,3129.4415447683,0.0,348.84,348.84,False,613.0
+1,SITE_A,HSC-102,IV Drip,B,Y,1672.136984430702,0.0,212.5,212.5,False,442.0
+1,SITE_A,HSC-103,Gloves,B,Y,1925.343297985401,0.0,309.15,309.15,False,385.0
+1,SITE_A,HSC-104,X-ray Machine,A,Y,1945.4400491821737,0.0,314.4,314.4,False,589.0
+1,SITE_A,HSC-105,IV Drip,C,Y,2405.1073662966487,0.0,115.39,115.39,False,510.0
+1,SITE_A,HSC-106,Ventilator,B,Y,1871.8070452273014,0.0,246.87,246.87,False,491.0
+1,SITE_A,HSC-107,Surgical Mask,C,Y,2528.51116469761,0.0,171.27,171.27,False,583.0
+1,SITE_A,HSC-108,Ventilator,B,Y,1435.3114664500574,0.0,281.42,281.42,False,462.0
+1,SITE_A,HSC-109,X-ray Machine,A,Y,1926.6928831215691,0.0,333.48,333.48,False,483.5
+2,SITE_A,HSC-100,IV Drip,C,Y,2120.1852889341235,0.0,181.74,181.74,False,527.0
+2,SITE_A,HSC-101,Gloves,A,Y,2860.947144074069,0.0,268.49,268.49,False,613.0
+2,SITE_A,HSC-102,IV Drip,B,Y,1415.9249218288235,0.0,256.21,256.21,False,442.0
+2,SITE_A,HSC-103,Gloves,B,Y,1675.4918318259038,0.0,249.85,249.85,False,385.0
+2,SITE_A,HSC-104,X-ray Machine,A,Y,1677.798761499088,0.0,267.64,267.64,False,589.0
+2,SITE_A,HSC-105,IV Drip,C,Y,2277.2592876321446,0.0,127.85,127.85,False,510.0
+2,SITE_A,HSC-106,Ventilator,B,Y,1618.1257214652933,0.0,253.68,253.68,False,491.0
+2,SITE_A,HSC-107,Surgical Mask,C,Y,2307.8947188594047,0.0,220.62,220.62,False,583.0
+2,SITE_A,HSC-108,Ventilator,B,Y,1174.2585420188489,0.0,261.05,261.05,False,462.0
+2,SITE_A,HSC-109,X-ray Machine,A,Y,1564.0980549693818,0.0,362.59,362.59,False,483.5
+3,SITE_A,HSC-100,IV Drip,C,Y,1859.7119341206671,0.0,260.47,260.47,False,527.0
+3,SITE_A,HSC-101,Gloves,A,Y,2577.3324831765335,0.0,283.61,283.61,False,613.0
+3,SITE_A,HSC-102,IV Drip,B,Y,1225.2876969877275,0.0,190.64,190.64,False,442.0
+3,SITE_A,HSC-103,Gloves,B,Y,1456.1369582346506,0.0,219.35,219.35,False,385.0
+3,SITE_A,HSC-104,X-ray Machine,A,Y,1355.644635640647,0.0,322.15,322.15,False,589.0
+3,SITE_A,HSC-105,IV Drip,C,Y,2113.020438399992,0.0,164.24,164.24,False,510.0
+3,SITE_A,HSC-106,Ventilator,B,Y,1391.373912025772,0.0,226.75,226.75,False,491.0
+3,SITE_A,HSC-107,Surgical Mask,C,Y,2132.1989491910285,0.0,175.7,175.7,False,583.0
+3,SITE_A,HSC-108,Ventilator,B,Y,967.3213503931837,0.0,206.94,206.94,False,462.0
+3,SITE_A,HSC-109,X-ray Machine,A,Y,1188.1916498108396,0.0,375.91,375.91,False,483.5
+4,SITE_A,HSC-100,IV Drip,C,Y,1646.5602129671427,0.0,213.15,213.15,False,527.0
+4,SITE_A,HSC-101,Gloves,A,Y,2241.4155460782836,0.0,335.92,335.92,False,613.0
+4,SITE_A,HSC-102,IV Drip,B,Y,1040.44396392324,0.0,184.84,184.84,False,442.0
+4,SITE_A,HSC-103,Gloves,B,Y,1188.3971754295842,0.0,267.74,267.74,False,385.0
+4,SITE_A,HSC-104,X-ray Machine,A,Y,1059.553636403501,0.0,296.09,296.09,False,589.0
+4,SITE_A,HSC-105,IV Drip,C,Y,1971.1472595783603,0.0,141.87,141.87,False,510.0
+4,SITE_A,HSC-106,Ventilator,B,Y,1123.561474848671,0.0,267.81,267.81,False,491.0
+4,SITE_A,HSC-107,Surgical Mask,C,Y,1916.8677790436839,0.0,215.33,215.33,False,583.0
+4,SITE_A,HSC-108,Ventilator,B,Y,694.625671144419,0.0,272.7,272.7,False,462.0
+4,SITE_A,HSC-109,X-ray Machine,A,Y,847.5983855718976,0.0,340.59,340.59,False,483.5
+5,SITE_A,HSC-100,IV Drip,C,Y,1448.7764125154736,0.0,197.78,197.78,False,527.0
+5,SITE_A,HSC-101,Gloves,A,Y,1900.6441905990969,0.0,340.77,340.77,False,613.0
+5,SITE_A,HSC-102,IV Drip,B,Y,885.5244539137842,0.0,154.92,154.92,False,442.0
+5,SITE_A,HSC-103,Gloves,B,Y,946.185165898273,0.0,242.21,242.21,False,385.0
+5,SITE_A,HSC-104,X-ray Machine,A,Y,794.107088957585,0.0,265.45,265.45,False,589.0
+5,SITE_A,HSC-105,IV Drip,C,Y,1850.3444883096993,0.0,120.8,120.8,False,510.0
+5,SITE_A,HSC-106,Ventilator,B,Y,903.5266524572869,0.0,220.03,220.03,False,491.0
+5,SITE_A,HSC-107,Surgical Mask,C,Y,1654.1662657870902,0.0,262.7,262.7,False,583.0
+5,SITE_A,HSC-108,Ventilator,B,Y,489.49712414484145,0.0,205.13,205.13,False,462.0
+5,SITE_A,HSC-109,X-ray Machine,A,Y,452.44976563429157,2776.12,395.15,395.15,False,483.5
+6,SITE_A,HSC-100,IV Drip,C,Y,1317.7247255869524,0.0,131.05,131.05,False,527.0
+6,SITE_A,HSC-101,Gloves,A,Y,1613.0896580507133,0.0,287.55,287.55,False,613.0
+6,SITE_A,HSC-102,IV Drip,B,Y,669.372388052815,0.0,216.15,216.15,False,442.0
+6,SITE_A,HSC-103,Gloves,B,Y,662.0665208495927,0.0,284.12,284.12,False,385.0
+6,SITE_A,HSC-104,X-ray Machine,A,Y,466.981061492398,1957.5,327.13,327.13,False,589.0
+6,SITE_A,HSC-105,IV Drip,C,Y,1694.351946740837,0.0,155.99,155.99,False,510.0
+6,SITE_A,HSC-106,Ventilator,B,Y,686.5580262178793,0.0,216.97,216.97,False,491.0
+6,SITE_A,HSC-107,Surgical Mask,C,Y,1464.393493581772,0.0,189.77,189.77,False,583.0
+6,SITE_A,HSC-108,Ventilator,B,Y,208.96925909865354,2817.0,280.53,280.53,False,462.0
+6,SITE_A,HSC-109,X-ray Machine,A,Y,127.53706859237099,2776.12,324.91,324.91,False,483.5
+7,SITE_A,HSC-100,IV Drip,C,Y,1172.8939507687078,0.0,144.83,144.83,False,527.0
+7,SITE_A,HSC-101,Gloves,A,Y,1369.511117798025,0.0,243.58,243.58,False,613.0
+7,SITE_A,HSC-102,IV Drip,B,Y,494.12768446367596,0.0,175.24,175.24,False,442.0
+7,SITE_A,HSC-103,Gloves,B,Y,382.0678648296656,2535.0,280.0,280.0,False,385.0
+7,SITE_A,HSC-104,X-ray Machine,A,Y,169.54643806951447,1957.5,297.43,297.43,False,589.0
+7,SITE_A,HSC-105,IV Drip,C,Y,1540.886721591392,0.0,153.47,153.47,False,510.0
+7,SITE_A,HSC-106,Ventilator,B,Y,472.86164399072265,3302.5,213.7,213.7,False,491.0
+7,SITE_A,HSC-107,Surgical Mask,C,Y,1251.4863046922535,0.0,212.91,212.91,False,583.0
+7,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,270.36,208.97,True,462.0
+7,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,317.76,127.54,True,483.5
+8,SITE_A,HSC-100,IV Drip,C,Y,969.4366767297649,0.0,203.46,203.46,False,527.0
+8,SITE_A,HSC-101,Gloves,A,Y,1099.969998631976,0.0,269.54,269.54,False,613.0
+8,SITE_A,HSC-102,IV Drip,B,Y,297.85111986383566,1575.0,196.28,196.28,False,442.0
+8,SITE_A,HSC-103,Gloves,B,Y,142.7270598060283,2535.0,239.34,239.34,False,385.0
+8,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,227.58,169.55,True,589.0
+8,SITE_A,HSC-105,IV Drip,C,Y,1392.4218077384903,0.0,148.46,148.46,False,510.0
+8,SITE_A,HSC-106,Ventilator,B,Y,260.92163950697017,3302.5,211.94,211.94,False,491.0
+8,SITE_A,HSC-107,Surgical Mask,C,Y,1044.0207738284598,0.0,207.47,207.47,False,583.0
+8,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,264.03,0.0,True,462.0
+8,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,363.55,0.0,True,483.5
+9,SITE_A,HSC-100,IV Drip,C,Y,758.9200446421258,0.0,210.52,210.52,False,527.0
+9,SITE_A,HSC-101,Gloves,A,Y,799.3945791187551,0.0,300.58,300.58,False,613.0
+9,SITE_A,HSC-102,IV Drip,B,Y,103.85179605910469,1575.0,194.0,194.0,False,442.0
+9,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,253.31,142.73,True,385.0
+9,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,201.92,0.0,True,589.0
+9,SITE_A,HSC-105,IV Drip,C,Y,1291.4773611859255,0.0,100.94,100.94,False,510.0
+9,SITE_A,HSC-106,Ventilator,B,Y,84.53853235377812,3302.5,176.38,176.38,False,491.0
+9,SITE_A,HSC-107,Surgical Mask,C,Y,874.178190624891,0.0,169.84,169.84,False,583.0
+9,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,260.49,0.0,True,462.0
+9,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,281.66,0.0,True,483.5
+10,SITE_A,HSC-100,IV Drip,C,Y,583.7170654708189,0.0,175.2,175.2,False,527.0
+10,SITE_A,HSC-101,Gloves,A,Y,421.8330844766987,2983.5,377.56,377.56,False,613.0
+10,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,196.53,103.85,True,442.0
+10,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,291.12,0.0,True,385.0
+10,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,241.27,0.0,True,589.0
+10,SITE_A,HSC-105,IV Drip,C,Y,1160.0249619827332,0.0,131.45,131.45,False,510.0
+10,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,191.91,84.54,True,491.0
+10,SITE_A,HSC-107,Surgical Mask,C,Y,679.810563032946,0.0,194.37,194.37,False,583.0
+10,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,279.76,0.0,True,462.0
+10,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,231.88,0.0,True,483.5
+11,SITE_A,HSC-100,IV Drip,C,Y,381.01616937322706,1833.0,202.7,202.7,False,527.0
+11,SITE_A,HSC-101,Gloves,A,Y,102.73860750023681,2983.5,319.09,319.09,False,613.0
+11,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,187.54,0.0,True,442.0
+11,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,190.11,0.0,True,385.0
+11,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,293.77,0.0,True,589.0
+11,SITE_A,HSC-105,IV Drip,C,Y,1036.534597844431,0.0,123.49,123.49,False,510.0
+11,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,241.2,0.0,True,491.0
+11,SITE_A,HSC-107,Surgical Mask,C,Y,471.9963520907425,2484.0,207.81,207.81,False,583.0
+11,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,313.06,0.0,True,462.0
+11,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,322.0,0.0,True,483.5
+12,SITE_A,HSC-100,IV Drip,C,Y,227.65132452355095,1833.0,153.36,153.36,False,527.0
+12,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,315.87,102.74,True,613.0
+12,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,218.32,0.0,True,442.0
+12,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,319.88,0.0,True,385.0
+12,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,333.59,0.0,True,589.0
+12,SITE_A,HSC-105,IV Drip,C,Y,891.2662759211274,0.0,145.27,145.27,False,510.0
+12,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,292.48,0.0,True,491.0
+12,SITE_A,HSC-107,Surgical Mask,C,Y,309.2896634948119,2484.0,162.71,162.71,False,583.0
+12,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,215.02,0.0,True,462.0
+12,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,280.38,0.0,True,483.5
+13,SITE_A,HSC-100,IV Drip,C,Y,52.84248826234216,1833.0,174.81,174.81,False,527.0
+13,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,230.17,0.0,True,613.0
+13,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,234.01,0.0,True,442.0
+13,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,246.72,0.0,True,385.0
+13,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,213.22,0.0,True,589.0
+13,SITE_A,HSC-105,IV Drip,C,Y,779.7190539463967,0.0,111.55,111.55,False,510.0
+13,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,244.56,0.0,True,491.0
+13,SITE_A,HSC-107,Surgical Mask,C,Y,71.06106757506728,2484.0,238.23,238.23,False,583.0
+13,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,330.34,0.0,True,462.0
+13,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,512.99,0.0,True,483.5
+14,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,202.02,52.84,True,527.0
+14,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,251.5,0.0,True,613.0
+14,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,129.41,0.0,True,442.0
+14,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,269.38,0.0,True,385.0
+14,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,247.56,0.0,True,589.0
+14,SITE_A,HSC-105,IV Drip,C,Y,653.4243818290115,0.0,126.29,126.29,False,510.0
+14,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,205.99,0.0,True,491.0
+14,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,201.75,71.06,True,583.0
+14,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,289.63,0.0,True,462.0
+14,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,346.01,0.0,True,483.5
+15,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,182.63,0.0,True,527.0
+15,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,248.96,0.0,True,613.0
+15,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,146.7,0.0,True,442.0
+15,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,234.5,0.0,True,385.0
+15,SITE_A,HSC-104,X-ray Machine,A,Y,1670.3074491527163,0.0,287.19,287.19,False,589.0
+15,SITE_A,HSC-105,IV Drip,C,Y,473.4863438523538,1023.75,179.94,179.94,False,510.0
+15,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,236.93,0.0,True,491.0
+15,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,243.62,0.0,True,583.0
+15,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,221.16,0.0,True,462.0
+15,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,264.73,0.0,True,483.5
+16,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,155.34,0.0,True,527.0
+16,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,266.05,0.0,True,613.0
+16,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,290.46,0.0,True,442.0
+16,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,219.0,0.0,True,385.0
+16,SITE_A,HSC-104,X-ray Machine,A,Y,1336.5383127176792,0.0,333.77,333.77,False,589.0
+16,SITE_A,HSC-105,IV Drip,C,Y,359.17126461795203,1023.75,114.32,114.32,False,510.0
+16,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,270.32,0.0,True,491.0
+16,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,221.34,0.0,True,583.0
+16,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,236.15,0.0,True,462.0
+16,SITE_A,HSC-109,X-ray Machine,A,Y,2442.088986208023,0.0,334.03,334.03,False,483.5
+17,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,165.84,0.0,True,527.0
+17,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,330.57,0.0,True,613.0
+17,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,192.8,0.0,True,442.0
+17,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,200.3,0.0,True,385.0
+17,SITE_A,HSC-104,X-ray Machine,A,Y,1113.2466540971634,0.0,223.29,223.29,False,589.0
+17,SITE_A,HSC-105,IV Drip,C,Y,218.43077947951957,1023.75,140.74,140.74,False,510.0
+17,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,297.3,0.0,True,491.0
+17,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,212.96,0.0,True,583.0
+17,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,237.81,0.0,True,462.0
+17,SITE_A,HSC-109,X-ray Machine,A,Y,2088.276496932297,0.0,353.81,353.81,False,483.5
+18,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,232.2,0.0,True,527.0
+18,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,318.08,0.0,True,613.0
+18,SITE_A,HSC-102,IV Drip,B,Y,1380.5330493255153,0.0,194.47,194.47,False,442.0
+18,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,308.18,0.0,True,385.0
+18,SITE_A,HSC-104,X-ray Machine,A,Y,800.8655680094671,0.0,312.38,312.38,False,589.0
+18,SITE_A,HSC-105,IV Drip,C,Y,44.19725475617804,1023.75,174.23,174.23,False,510.0
+18,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,239.14,0.0,True,491.0
+18,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,161.38,0.0,True,583.0
+18,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,183.16,0.0,True,462.0
+18,SITE_A,HSC-109,X-ray Machine,A,Y,1651.7797920770504,0.0,436.5,436.5,False,483.5
+19,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,246.33,0.0,True,527.0
+19,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,296.11,0.0,True,613.0
+19,SITE_A,HSC-102,IV Drip,B,Y,1185.0175300644557,0.0,195.52,195.52,False,442.0
+19,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,324.61,0.0,True,385.0
+19,SITE_A,HSC-104,X-ray Machine,A,Y,568.6533526121372,1957.5,232.21,232.21,False,589.0
+19,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,114.52,44.2,True,510.0
+19,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,258.31,0.0,True,491.0
+19,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,192.3,0.0,True,583.0
+19,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,242.78,0.0,True,462.0
+19,SITE_A,HSC-109,X-ray Machine,A,Y,1325.17952844068,0.0,326.6,326.6,False,483.5
+20,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,199.42,0.0,True,527.0
+20,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,383.52,0.0,True,613.0
+20,SITE_A,HSC-102,IV Drip,B,Y,971.5934205835697,0.0,213.42,213.42,False,442.0
+20,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,286.79,0.0,True,385.0
+20,SITE_A,HSC-104,X-ray Machine,A,Y,385.67233628595653,1957.5,182.98,182.98,False,589.0
+20,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,135.3,0.0,True,510.0
+20,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,196.36,0.0,True,491.0
+20,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,161.59,0.0,True,583.0
+20,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,204.59,0.0,True,462.0
+20,SITE_A,HSC-109,X-ray Machine,A,Y,1008.9173852439283,0.0,316.26,316.26,False,483.5
+21,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,218.99,0.0,True,527.0
+21,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,232.94,0.0,True,613.0
+21,SITE_A,HSC-102,IV Drip,B,Y,760.4355501635007,0.0,211.16,211.16,False,442.0
+21,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,234.6,0.0,True,385.0
+21,SITE_A,HSC-104,X-ray Machine,A,Y,112.77687181165089,1957.5,272.9,272.9,False,589.0
+21,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,161.14,0.0,True,510.0
+21,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,253.92,0.0,True,491.0
+21,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,256.83,0.0,True,583.0
+21,SITE_A,HSC-108,Ventilator,B,Y,0.0,2817.0,236.24,0.0,True,462.0
+21,SITE_A,HSC-109,X-ray Machine,A,Y,714.5706292328227,0.0,294.35,294.35,False,483.5
+22,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,180.42,0.0,True,527.0
+22,SITE_A,HSC-101,Gloves,A,Y,0.0,2983.5,319.36,0.0,True,613.0
+22,SITE_A,HSC-102,IV Drip,B,Y,543.7610772139504,0.0,216.67,216.67,False,442.0
+22,SITE_A,HSC-103,Gloves,B,Y,0.0,2535.0,206.84,0.0,True,385.0
+22,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,294.72,112.78,True,589.0
+22,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,142.11,0.0,True,510.0
+22,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,336.4,0.0,True,491.0
+22,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,276.93,0.0,True,583.0
+22,SITE_A,HSC-108,Ventilator,B,Y,2611.320864153443,0.0,205.68,205.68,False,462.0
+22,SITE_A,HSC-109,X-ray Machine,A,Y,395.47743944185635,2776.12,319.09,319.09,False,483.5
+23,SITE_A,HSC-100,IV Drip,C,Y,0.0,1833.0,138.48,0.0,True,527.0
+23,SITE_A,HSC-101,Gloves,A,Y,2710.0361423291088,0.0,273.46,273.46,False,613.0
+23,SITE_A,HSC-102,IV Drip,B,Y,321.8312080782356,1575.0,221.93,221.93,False,442.0
+23,SITE_A,HSC-103,Gloves,B,Y,2222.21721149771,0.0,312.78,312.78,False,385.0
+23,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,251.94,0.0,True,589.0
+23,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,120.43,0.0,True,510.0
+23,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,142.02,0.0,True,491.0
+23,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,200.94,0.0,True,583.0
+23,SITE_A,HSC-108,Ventilator,B,Y,2414.79087052818,0.0,196.53,196.53,False,462.0
+23,SITE_A,HSC-109,X-ray Machine,A,Y,91.04558555741943,2776.12,304.43,304.43,False,483.5
+24,SITE_A,HSC-100,IV Drip,C,Y,1674.6729687331913,0.0,158.33,158.33,False,527.0
+24,SITE_A,HSC-101,Gloves,A,Y,2409.2281238173396,0.0,300.81,300.81,False,613.0
+24,SITE_A,HSC-102,IV Drip,B,Y,178.27334127151624,1575.0,143.56,143.56,False,442.0
+24,SITE_A,HSC-103,Gloves,B,Y,2033.0827245494975,0.0,189.13,189.13,False,385.0
+24,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,401.15,0.0,True,589.0
+24,SITE_A,HSC-105,IV Drip,C,Y,0.0,1023.75,104.87,0.0,True,510.0
+24,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,185.8,0.0,True,491.0
+24,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,275.44,0.0,True,583.0
+24,SITE_A,HSC-108,Ventilator,B,Y,2044.7232325456048,0.0,370.07,370.07,False,462.0
+24,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,265.54,91.05,True,483.5
+25,SITE_A,HSC-100,IV Drip,C,Y,1499.1345134308983,0.0,175.54,175.54,False,527.0
+25,SITE_A,HSC-101,Gloves,A,Y,2084.415244071536,0.0,324.81,324.81,False,613.0
+25,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,275.34,178.27,True,442.0
+25,SITE_A,HSC-103,Gloves,B,Y,1821.7347329975878,0.0,211.35,211.35,False,385.0
+25,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,277.2,0.0,True,589.0
+25,SITE_A,HSC-105,IV Drip,C,Y,868.150815756163,0.0,155.6,155.6,False,510.0
+25,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,249.62,0.0,True,491.0
+25,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,192.98,0.0,True,583.0
+25,SITE_A,HSC-108,Ventilator,B,Y,1807.5766490135366,0.0,237.15,237.15,False,462.0
+25,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,253.22,0.0,True,483.5
+26,SITE_A,HSC-100,IV Drip,C,Y,1319.194312927001,0.0,179.94,179.94,False,527.0
+26,SITE_A,HSC-101,Gloves,A,Y,1793.0878670212294,0.0,291.33,291.33,False,613.0
+26,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,218.78,0.0,True,442.0
+26,SITE_A,HSC-103,Gloves,B,Y,1590.4241701401554,0.0,231.31,231.31,False,385.0
+26,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,314.61,0.0,True,589.0
+26,SITE_A,HSC-105,IV Drip,C,Y,706.7683881123298,0.0,161.38,161.38,False,510.0
+26,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,237.98,0.0,True,491.0
+26,SITE_A,HSC-107,Surgical Mask,C,Y,0.0,2484.0,220.11,0.0,True,583.0
+26,SITE_A,HSC-108,Ventilator,B,Y,1562.2516341104806,0.0,245.33,245.33,False,462.0
+26,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,336.51,0.0,True,483.5
+27,SITE_A,HSC-100,IV Drip,C,Y,1155.611836782091,0.0,163.58,163.58,False,527.0
+27,SITE_A,HSC-101,Gloves,A,Y,1469.6553630882636,0.0,323.43,323.43,False,613.0
+27,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,206.32,0.0,True,442.0
+27,SITE_A,HSC-103,Gloves,B,Y,1236.5942041690262,0.0,353.83,353.83,False,385.0
+27,SITE_A,HSC-104,X-ray Machine,A,Y,0.0,1957.5,372.13,0.0,True,589.0
+27,SITE_A,HSC-105,IV Drip,C,Y,560.7881383160166,0.0,145.98,145.98,False,510.0
+27,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,199.7,0.0,True,491.0
+27,SITE_A,HSC-107,Surgical Mask,C,Y,2318.4484514461024,0.0,165.55,165.55,False,583.0
+27,SITE_A,HSC-108,Ventilator,B,Y,1267.1510413423737,0.0,295.1,295.1,False,462.0
+27,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,352.41,0.0,True,483.5
+28,SITE_A,HSC-100,IV Drip,C,Y,951.3637840113188,0.0,204.25,204.25,False,527.0
+28,SITE_A,HSC-101,Gloves,A,Y,1259.747159250802,0.0,209.91,209.91,False,613.0
+28,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,245.06,0.0,True,442.0
+28,SITE_A,HSC-103,Gloves,B,Y,958.5727193232298,0.0,278.02,278.02,False,385.0
+28,SITE_A,HSC-104,X-ray Machine,A,Y,1725.4644817264357,0.0,232.04,232.04,False,589.0
+28,SITE_A,HSC-105,IV Drip,C,Y,435.8735028350618,1023.75,124.91,124.91,False,510.0
+28,SITE_A,HSC-106,Ventilator,B,Y,0.0,3302.5,242.49,0.0,True,491.0
+28,SITE_A,HSC-107,Surgical Mask,C,Y,2109.4935385393487,0.0,208.95,208.95,False,583.0
+28,SITE_A,HSC-108,Ventilator,B,Y,1036.9306090094212,0.0,230.22,230.22,False,462.0
+28,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,330.23,0.0,True,483.5
+29,SITE_A,HSC-100,IV Drip,C,Y,771.8906984898398,0.0,179.47,179.47,False,527.0
+29,SITE_A,HSC-101,Gloves,A,Y,945.3440160841981,0.0,314.4,314.4,False,613.0
+29,SITE_A,HSC-102,IV Drip,B,Y,0.0,1575.0,265.62,0.0,True,442.0
+29,SITE_A,HSC-103,Gloves,B,Y,820.3063388007116,0.0,138.27,138.27,False,385.0
+29,SITE_A,HSC-104,X-ray Machine,A,Y,1447.8280655338413,0.0,277.64,277.64,False,589.0
+29,SITE_A,HSC-105,IV Drip,C,Y,295.0365926419408,1023.75,140.84,140.84,False,510.0
+29,SITE_A,HSC-106,Ventilator,B,Y,3058.6659304497384,0.0,243.83,243.83,False,491.0
+29,SITE_A,HSC-107,Surgical Mask,C,Y,1916.35107583938,0.0,193.14,193.14,False,583.0
+29,SITE_A,HSC-108,Ventilator,B,Y,870.7696197750345,0.0,166.16,166.16,False,462.0
+29,SITE_A,HSC-109,X-ray Machine,A,Y,0.0,2776.12,356.37,0.0,True,483.5
+0,SITE_B,HSC-100,IV Drip,C,Y,1827.0951387893845,0.0,78.74,78.74,False,244.8
+0,SITE_B,HSC-101,Surgical Mask,B,Y,1949.8137141077584,0.0,220.99,220.99,False,404.64
+0,SITE_B,HSC-102,Ventilator,A,Y,1353.0357320298756,0.0,216.56,216.56,False,402.48
+0,SITE_B,HSC-103,IV Drip,B,Y,1435.9478988461537,0.0,207.81,207.81,False,375.84
+0,SITE_B,HSC-104,IV Drip,B,Y,1305.7151405515642,0.0,147.24,147.24,False,277.2
+0,SITE_B,HSC-105,X-ray Machine,C,Y,1738.343141076315,0.0,125.02,125.02,False,385.2
+0,SITE_B,HSC-106,Gloves,B,Y,1238.050468742054,0.0,186.83,186.83,False,427.68
+0,SITE_B,HSC-107,Gloves,C,Y,2006.9751762770334,0.0,149.42,149.42,False,413.28
+0,SITE_B,HSC-108,Ventilator,A,Y,1852.0166688579952,0.0,174.78,174.78,False,226.8
+0,SITE_B,HSC-109,IV Drip,A,Y,2048.9439309180084,0.0,218.34,218.34,False,421.2
+1,SITE_B,HSC-100,IV Drip,C,Y,1763.325668077845,0.0,63.77,63.77,False,244.8
+1,SITE_B,HSC-101,Surgical Mask,B,Y,1778.7545912605474,0.0,171.06,171.06,False,404.64
+1,SITE_B,HSC-102,Ventilator,A,Y,1168.6762682090864,0.0,184.36,184.36,False,402.48
+1,SITE_B,HSC-103,IV Drip,B,Y,1279.80980547333,0.0,156.14,156.14,False,375.84
+1,SITE_B,HSC-104,IV Drip,B,Y,1188.6809741213342,0.0,117.03,117.03,False,277.2
+1,SITE_B,HSC-105,X-ray Machine,C,Y,1589.9857962304486,0.0,148.36,148.36,False,385.2
+1,SITE_B,HSC-106,Gloves,B,Y,1032.343522744978,0.0,205.71,205.71,False,427.68
+1,SITE_B,HSC-107,Gloves,C,Y,1906.4708371429128,0.0,100.5,100.5,False,413.28
+1,SITE_B,HSC-108,Ventilator,A,Y,1625.216045447749,0.0,226.8,226.8,False,226.8
+1,SITE_B,HSC-109,IV Drip,A,Y,1855.4385182485335,0.0,193.51,193.51,False,421.2
+2,SITE_B,HSC-100,IV Drip,C,Y,1690.1188985310291,0.0,73.21,73.21,False,244.8
+2,SITE_B,HSC-101,Surgical Mask,B,Y,1540.3057262409834,0.0,238.45,238.45,False,404.64
+2,SITE_B,HSC-102,Ventilator,A,Y,877.4583408363704,0.0,291.22,291.22,False,402.48
+2,SITE_B,HSC-103,IV Drip,B,Y,1059.9637828188388,0.0,219.85,219.85,False,375.84
+2,SITE_B,HSC-104,IV Drip,B,Y,969.4901402226001,0.0,219.19,219.19,False,277.2
+2,SITE_B,HSC-105,X-ray Machine,C,Y,1455.7260913418222,0.0,134.26,134.26,False,385.2
+2,SITE_B,HSC-106,Gloves,B,Y,809.055697828058,0.0,223.29,223.29,False,427.68
+2,SITE_B,HSC-107,Gloves,C,Y,1776.6592102726122,0.0,129.81,129.81,False,413.28
+2,SITE_B,HSC-108,Ventilator,A,Y,1389.0669575760753,0.0,236.15,236.15,False,226.8
+2,SITE_B,HSC-109,IV Drip,A,Y,1628.9363474357847,0.0,226.5,226.5,False,421.2
+3,SITE_B,HSC-100,IV Drip,C,Y,1583.385269027891,0.0,106.73,106.73,False,244.8
+3,SITE_B,HSC-101,Surgical Mask,B,Y,1353.3202049817749,0.0,186.99,186.99,False,404.64
+3,SITE_B,HSC-102,Ventilator,A,Y,630.9083743948828,0.0,246.55,246.55,False,402.48
+3,SITE_B,HSC-103,IV Drip,B,Y,836.7358148311566,0.0,223.23,223.23,False,375.84
+3,SITE_B,HSC-104,IV Drip,B,Y,737.2426766990525,0.0,232.25,232.25,False,277.2
+3,SITE_B,HSC-105,X-ray Machine,C,Y,1326.4639327182078,0.0,129.26,129.26,False,385.2
+3,SITE_B,HSC-106,Gloves,B,Y,673.6008785105096,0.0,135.45,135.45,False,427.68
+3,SITE_B,HSC-107,Gloves,C,Y,1661.6757765265236,0.0,114.98,114.98,False,413.28
+3,SITE_B,HSC-108,Ventilator,A,Y,1194.0587937122928,0.0,195.01,195.01,False,226.8
+3,SITE_B,HSC-109,IV Drip,A,Y,1280.857743734896,0.0,348.08,348.08,False,421.2
+4,SITE_B,HSC-100,IV Drip,C,Y,1469.8473037803365,0.0,113.54,113.54,False,244.8
+4,SITE_B,HSC-101,Surgical Mask,B,Y,1154.340196510567,0.0,198.98,198.98,False,404.64
+4,SITE_B,HSC-102,Ventilator,A,Y,402.00784087225384,2485.44,228.9,228.9,False,402.48
+4,SITE_B,HSC-103,IV Drip,B,Y,648.7513658671273,0.0,187.98,187.98,False,375.84
+4,SITE_B,HSC-104,IV Drip,B,Y,526.3683203583942,0.0,210.87,210.87,False,277.2
+4,SITE_B,HSC-105,X-ray Machine,C,Y,1255.919236640667,0.0,70.54,70.54,False,385.2
+4,SITE_B,HSC-106,Gloves,B,Y,440.7520630203585,0.0,232.85,232.85,False,427.68
+4,SITE_B,HSC-107,Gloves,C,Y,1553.3054780573716,0.0,108.37,108.37,False,413.28
+4,SITE_B,HSC-108,Ventilator,A,Y,990.4276661625609,0.0,203.63,203.63,False,226.8
+4,SITE_B,HSC-109,IV Drip,A,Y,1082.54943687804,0.0,198.31,198.31,False,421.2
+5,SITE_B,HSC-100,IV Drip,C,Y,1381.589566258716,0.0,88.26,88.26,False,244.8
+5,SITE_B,HSC-101,Surgical Mask,B,Y,966.5543548712756,0.0,187.79,187.79,False,404.64
+5,SITE_B,HSC-102,Ventilator,A,Y,181.11107154431855,2485.44,220.9,220.9,False,402.48
+5,SITE_B,HSC-103,IV Drip,B,Y,504.3760959557543,0.0,144.38,144.38,False,375.84
+5,SITE_B,HSC-104,IV Drip,B,Y,290.30872106223103,0.0,236.06,236.06,False,277.2
+5,SITE_B,HSC-105,X-ray Machine,C,Y,1160.5813370242554,0.0,95.34,95.34,False,385.2
+5,SITE_B,HSC-106,Gloves,B,Y,263.67835982470956,1436.4,177.07,177.07,False,427.68
+5,SITE_B,HSC-107,Gloves,C,Y,1429.7630934393167,0.0,123.54,123.54,False,413.28
+5,SITE_B,HSC-108,Ventilator,A,Y,803.5506493026021,0.0,186.88,186.88,False,226.8
+5,SITE_B,HSC-109,IV Drip,A,Y,865.7393608261243,0.0,216.81,216.81,False,421.2
+6,SITE_B,HSC-100,IV Drip,C,Y,1289.4781604401003,0.0,92.11,92.11,False,244.8
+6,SITE_B,HSC-101,Surgical Mask,B,Y,743.2874203885575,0.0,223.27,223.27,False,404.64
+6,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,204.37,181.11,True,402.48
+6,SITE_B,HSC-103,IV Drip,B,Y,269.3487767861067,2146.5,235.03,235.03,False,375.84
+6,SITE_B,HSC-104,IV Drip,B,Y,51.56333827855619,1239.84,238.75,238.75,False,277.2
+6,SITE_B,HSC-105,X-ray Machine,C,Y,1053.1023072329435,0.0,107.48,107.48,False,385.2
+6,SITE_B,HSC-106,Gloves,B,Y,45.77685180493748,1436.4,217.9,217.9,False,427.68
+6,SITE_B,HSC-107,Gloves,C,Y,1384.3196959920879,0.0,45.44,45.44,False,413.28
+6,SITE_B,HSC-108,Ventilator,A,Y,647.8721609551933,0.0,155.68,155.68,False,226.8
+6,SITE_B,HSC-109,IV Drip,A,Y,642.3406269974062,0.0,223.4,223.4,False,421.2
+7,SITE_B,HSC-100,IV Drip,C,Y,1204.627451207174,0.0,84.85,84.85,False,244.8
+7,SITE_B,HSC-101,Surgical Mask,B,Y,599.3088707679907,0.0,143.98,143.98,False,404.64
+7,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,270.2,0.0,True,402.48
+7,SITE_B,HSC-103,IV Drip,B,Y,119.28200035171301,2146.5,150.07,150.07,False,375.84
+7,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,247.12,51.56,True,277.2
+7,SITE_B,HSC-105,X-ray Machine,C,Y,913.1715445595238,0.0,139.93,139.93,False,385.2
+7,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,232.01,45.78,True,427.68
+7,SITE_B,HSC-107,Gloves,C,Y,1258.06420833309,0.0,126.26,126.26,False,413.28
+7,SITE_B,HSC-108,Ventilator,A,Y,496.7046690028781,0.0,151.17,151.17,False,226.8
+7,SITE_B,HSC-109,IV Drip,A,Y,396.21435508250204,1799.82,246.13,246.13,False,421.2
+8,SITE_B,HSC-100,IV Drip,C,Y,1113.0710046383226,0.0,91.56,91.56,False,244.8
+8,SITE_B,HSC-101,Surgical Mask,B,Y,429.89522680349,0.0,169.41,169.41,False,404.64
+8,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,240.2,0.0,True,402.48
+8,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,281.36,119.28,True,375.84
+8,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,302.04,0.0,True,277.2
+8,SITE_B,HSC-105,X-ray Machine,C,Y,796.6131831025905,0.0,116.56,116.56,False,385.2
+8,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,220.13,0.0,True,427.68
+8,SITE_B,HSC-107,Gloves,C,Y,1154.2512141600168,0.0,103.81,103.81,False,413.28
+8,SITE_B,HSC-108,Ventilator,A,Y,237.62051800076716,0.0,259.08,259.08,False,226.8
+8,SITE_B,HSC-109,IV Drip,A,Y,163.5850313846185,1799.82,232.63,232.63,False,421.2
+9,SITE_B,HSC-100,IV Drip,C,Y,1016.6155211782128,0.0,96.46,96.46,False,244.8
+9,SITE_B,HSC-101,Surgical Mask,B,Y,238.82136130227337,2116.8,191.07,191.07,False,404.64
+9,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,229.72,0.0,True,402.48
+9,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,174.88,0.0,True,375.84
+9,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,178.32,0.0,True,277.2
+9,SITE_B,HSC-105,X-ray Machine,C,Y,623.871163892191,0.0,172.74,172.74,False,385.2
+9,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,198.55,0.0,True,427.68
+9,SITE_B,HSC-107,Gloves,C,Y,1039.7580671748074,0.0,114.49,114.49,False,413.28
+9,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,239.83,237.62,True,226.8
+9,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,242.67,163.59,True,421.2
+10,SITE_B,HSC-100,IV Drip,C,Y,882.399042715157,0.0,134.22,134.22,False,244.8
+10,SITE_B,HSC-101,Surgical Mask,B,Y,54.39370363517472,2116.8,184.43,184.43,False,404.64
+10,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,249.74,0.0,True,402.48
+10,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,163.04,0.0,True,375.84
+10,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,181.44,0.0,True,277.2
+10,SITE_B,HSC-105,X-ray Machine,C,Y,473.3594734437843,0.0,150.51,150.51,False,385.2
+10,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,187.89,0.0,True,427.68
+10,SITE_B,HSC-107,Gloves,C,Y,921.4557614065385,0.0,118.3,118.3,False,413.28
+10,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,165.07,0.0,True,226.8
+10,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,273.65,0.0,True,421.2
+11,SITE_B,HSC-100,IV Drip,C,Y,829.0644666564143,0.0,53.33,53.33,False,244.8
+11,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,149.31,54.39,True,404.64
+11,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,175.24,0.0,True,402.48
+11,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,177.72,0.0,True,375.84
+11,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,183.74,0.0,True,277.2
+11,SITE_B,HSC-105,X-ray Machine,C,Y,359.8661309904614,1425.6,113.49,113.49,False,385.2
+11,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,165.06,0.0,True,427.68
+11,SITE_B,HSC-107,Gloves,C,Y,824.7744374033713,0.0,96.68,96.68,False,413.28
+11,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,236.0,0.0,True,226.8
+11,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,228.94,0.0,True,421.2
+12,SITE_B,HSC-100,IV Drip,C,Y,755.1125775540113,0.0,73.95,73.95,False,244.8
+12,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,156.5,0.0,True,404.64
+12,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,191.81,0.0,True,402.48
+12,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,194.59,0.0,True,375.84
+12,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,243.83,0.0,True,277.2
+12,SITE_B,HSC-105,X-ray Machine,C,Y,274.9664204335356,1425.6,84.9,84.9,False,385.2
+12,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,170.13,0.0,True,427.68
+12,SITE_B,HSC-107,Gloves,C,Y,726.3767063675091,0.0,98.4,98.4,False,413.28
+12,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,222.76,0.0,True,226.8
+12,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,221.14,0.0,True,421.2
+13,SITE_B,HSC-100,IV Drip,C,Y,649.8384270689786,0.0,105.27,105.27,False,244.8
+13,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,204.33,0.0,True,404.64
+13,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,249.45,0.0,True,402.48
+13,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,286.13,0.0,True,375.84
+13,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,219.39,0.0,True,277.2
+13,SITE_B,HSC-105,X-ray Machine,C,Y,101.68216482376775,1425.6,173.28,173.28,False,385.2
+13,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,244.8,0.0,True,427.68
+13,SITE_B,HSC-107,Gloves,C,Y,633.6520451434594,0.0,92.72,92.72,False,413.28
+13,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,186.04,0.0,True,226.8
+13,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,277.03,0.0,True,421.2
+14,SITE_B,HSC-100,IV Drip,C,Y,567.1233040236605,0.0,82.72,82.72,False,244.8
+14,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,184.06,0.0,True,404.64
+14,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,245.74,0.0,True,402.48
+14,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,200.55,0.0,True,375.84
+14,SITE_B,HSC-104,IV Drip,B,Y,1092.1225483560156,0.0,147.72,147.72,False,277.2
+14,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,139.73,101.68,True,385.2
+14,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,190.91,0.0,True,427.68
+14,SITE_B,HSC-107,Gloves,C,Y,516.5790765731588,0.0,117.07,117.07,False,413.28
+14,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,174.33,0.0,True,226.8
+14,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,195.7,0.0,True,421.2
+15,SITE_B,HSC-100,IV Drip,C,Y,453.3214180348717,0.0,113.8,113.8,False,244.8
+15,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,166.6,0.0,True,404.64
+15,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,253.73,0.0,True,402.48
+15,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,268.63,0.0,True,375.84
+15,SITE_B,HSC-104,IV Drip,B,Y,824.939835902388,0.0,267.18,267.18,False,277.2
+15,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,111.45,0.0,True,385.2
+15,SITE_B,HSC-106,Gloves,B,Y,1290.2273575823688,0.0,146.17,146.17,False,427.68
+15,SITE_B,HSC-107,Gloves,C,Y,369.07404715657293,1564.92,147.51,147.51,False,413.28
+15,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,158.09,0.0,True,226.8
+15,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,255.46,0.0,True,421.2
+16,SITE_B,HSC-100,IV Drip,C,Y,366.0886291664141,0.0,87.23,87.23,False,244.8
+16,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,224.6,0.0,True,404.64
+16,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,128.26,0.0,True,402.48
+16,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,196.01,0.0,True,375.84
+16,SITE_B,HSC-104,IV Drip,B,Y,618.840713417354,0.0,206.1,206.1,False,277.2
+16,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,104.92,0.0,True,385.2
+16,SITE_B,HSC-106,Gloves,B,Y,1037.9901102598458,0.0,252.24,252.24,False,427.68
+16,SITE_B,HSC-107,Gloves,C,Y,261.1874355459281,1564.92,107.89,107.89,False,413.28
+16,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,184.03,0.0,True,226.8
+16,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,250.11,0.0,True,421.2
+17,SITE_B,HSC-100,IV Drip,C,Y,252.00805189049632,0.0,114.08,114.08,False,244.8
+17,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,129.13,0.0,True,404.64
+17,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,272.23,0.0,True,402.48
+17,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,210.03,0.0,True,375.84
+17,SITE_B,HSC-104,IV Drip,B,Y,438.5691203414644,0.0,180.27,180.27,False,277.2
+17,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,127.38,0.0,True,385.2
+17,SITE_B,HSC-106,Gloves,B,Y,832.120764022013,0.0,205.87,205.87,False,427.68
+17,SITE_B,HSC-107,Gloves,C,Y,153.83488595966702,1564.92,107.35,107.35,False,413.28
+17,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,170.9,0.0,True,226.8
+17,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,184.5,0.0,True,421.2
+18,SITE_B,HSC-100,IV Drip,C,Y,162.59737035785747,1183.68,89.41,89.41,False,244.8
+18,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,166.9,0.0,True,404.64
+18,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,262.95,0.0,True,402.48
+18,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,179.14,0.0,True,375.84
+18,SITE_B,HSC-104,IV Drip,B,Y,218.8702351721272,1239.84,219.7,219.7,False,277.2
+18,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,120.52,0.0,True,385.2
+18,SITE_B,HSC-106,Gloves,B,Y,625.8833765981085,0.0,206.24,206.24,False,427.68
+18,SITE_B,HSC-107,Gloves,C,Y,4.0306936109598155,1564.92,149.8,149.8,False,413.28
+18,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,267.04,0.0,True,226.8
+18,SITE_B,HSC-109,IV Drip,A,Y,1576.67958174447,0.0,223.14,223.14,False,421.2
+19,SITE_B,HSC-100,IV Drip,C,Y,101.25586838197137,1183.68,61.34,61.34,False,244.8
+19,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,158.45,0.0,True,404.64
+19,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,253.0,0.0,True,402.48
+19,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,212.08,0.0,True,375.84
+19,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,293.32,218.87,True,277.2
+19,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,150.21,0.0,True,385.2
+19,SITE_B,HSC-106,Gloves,B,Y,401.4331143140453,1436.4,224.45,224.45,False,427.68
+19,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,109.87,4.03,True,413.28
+19,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,244.88,0.0,True,226.8
+19,SITE_B,HSC-109,IV Drip,A,Y,1336.9190565851725,0.0,239.76,239.76,False,421.2
+20,SITE_B,HSC-100,IV Drip,C,Y,13.294800943307905,1183.68,87.96,87.96,False,244.8
+20,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,140.68,0.0,True,404.64
+20,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,182.94,0.0,True,402.48
+20,SITE_B,HSC-103,IV Drip,B,Y,0.0,2146.5,225.55,0.0,True,375.84
+20,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,277.05,0.0,True,277.2
+20,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,146.48,0.0,True,385.2
+20,SITE_B,HSC-106,Gloves,B,Y,284.12528764248657,1436.4,117.31,117.31,False,427.68
+20,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,118.01,0.0,True,413.28
+20,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,151.05,0.0,True,226.8
+20,SITE_B,HSC-109,IV Drip,A,Y,1103.0354753451707,0.0,233.88,233.88,False,421.2
+21,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,108.16,13.29,True,244.8
+21,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,117.92,0.0,True,404.64
+21,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,234.06,0.0,True,402.48
+21,SITE_B,HSC-103,IV Drip,B,Y,1912.3958630729485,0.0,234.1,234.1,False,375.84
+21,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,162.65,0.0,True,277.2
+21,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,149.24,0.0,True,385.2
+21,SITE_B,HSC-106,Gloves,B,Y,132.27027738552385,1436.4,151.86,151.86,False,427.68
+21,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,136.18,0.0,True,413.28
+21,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,229.65,0.0,True,226.8
+21,SITE_B,HSC-109,IV Drip,A,Y,971.0764118958289,0.0,131.96,131.96,False,421.2
+22,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,104.66,0.0,True,244.8
+22,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,222.28,0.0,True,404.64
+22,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,256.13,0.0,True,402.48
+22,SITE_B,HSC-103,IV Drip,B,Y,1731.1879984993013,0.0,181.21,181.21,False,375.84
+22,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,249.77,0.0,True,277.2
+22,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,106.28,0.0,True,385.2
+22,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,152.46,132.27,True,427.68
+22,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,95.11,0.0,True,413.28
+22,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,173.27,0.0,True,226.8
+22,SITE_B,HSC-109,IV Drip,A,Y,679.1910348757424,0.0,291.89,291.89,False,421.2
+23,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,108.41,0.0,True,244.8
+23,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,188.94,0.0,True,404.64
+23,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,221.86,0.0,True,402.48
+23,SITE_B,HSC-103,IV Drip,B,Y,1500.529422178706,0.0,230.66,230.66,False,375.84
+23,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,202.52,0.0,True,277.2
+23,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,154.65,0.0,True,385.2
+23,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,173.5,0.0,True,427.68
+23,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,133.6,0.0,True,413.28
+23,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,201.07,0.0,True,226.8
+23,SITE_B,HSC-109,IV Drip,A,Y,493.420129555444,0.0,185.77,185.77,False,421.2
+24,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,95.41,0.0,True,244.8
+24,SITE_B,HSC-101,Surgical Mask,B,Y,0.0,2116.8,229.34,0.0,True,404.64
+24,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,182.43,0.0,True,402.48
+24,SITE_B,HSC-103,IV Drip,B,Y,1329.7236513102882,0.0,170.81,170.81,False,375.84
+24,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,191.96,0.0,True,277.2
+24,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,129.12,0.0,True,385.2
+24,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,185.86,0.0,True,427.68
+24,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,112.64,0.0,True,413.28
+24,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,270.57,0.0,True,226.8
+24,SITE_B,HSC-109,IV Drip,A,Y,257.7413892943905,1799.82,235.68,235.68,False,421.2
+25,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,116.62,0.0,True,244.8
+25,SITE_B,HSC-101,Surgical Mask,B,Y,1954.4902199222474,0.0,162.31,162.31,False,404.64
+25,SITE_B,HSC-102,Ventilator,A,Y,0.0,2485.44,213.94,0.0,True,402.48
+25,SITE_B,HSC-103,IV Drip,B,Y,1153.9573090454353,0.0,175.77,175.77,False,375.84
+25,SITE_B,HSC-104,IV Drip,B,Y,0.0,1239.84,156.11,0.0,True,277.2
+25,SITE_B,HSC-105,X-ray Machine,C,Y,0.0,1425.6,112.57,0.0,True,385.2
+25,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,173.75,0.0,True,427.68
+25,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,70.53,0.0,True,413.28
+25,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,177.17,0.0,True,226.8
+25,SITE_B,HSC-109,IV Drip,A,Y,15.555021631717835,1799.82,242.19,242.19,False,421.2
+26,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,84.95,0.0,True,244.8
+26,SITE_B,HSC-101,Surgical Mask,B,Y,1766.0304726184834,0.0,188.46,188.46,False,404.64
+26,SITE_B,HSC-102,Ventilator,A,Y,2312.9469365138966,0.0,172.49,172.49,False,402.48
+26,SITE_B,HSC-103,IV Drip,B,Y,939.7689894144347,0.0,214.19,214.19,False,375.84
+26,SITE_B,HSC-104,IV Drip,B,Y,1055.8943395702167,0.0,183.95,183.95,False,277.2
+26,SITE_B,HSC-105,X-ray Machine,C,Y,1312.3791985331409,0.0,113.22,113.22,False,385.2
+26,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,158.18,0.0,True,427.68
+26,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,73.13,0.0,True,413.28
+26,SITE_B,HSC-108,Ventilator,A,Y,0.0,2535.84,249.41,0.0,True,226.8
+26,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,228.26,15.56,True,421.2
+27,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,93.9,0.0,True,244.8
+27,SITE_B,HSC-101,Surgical Mask,B,Y,1624.9424342759166,0.0,141.09,141.09,False,404.64
+27,SITE_B,HSC-102,Ventilator,A,Y,2085.030335387697,0.0,227.92,227.92,False,402.48
+27,SITE_B,HSC-103,IV Drip,B,Y,770.5963191995089,0.0,169.17,169.17,False,375.84
+27,SITE_B,HSC-104,IV Drip,B,Y,835.667138018581,0.0,220.23,220.23,False,277.2
+27,SITE_B,HSC-105,X-ray Machine,C,Y,1177.9995275480942,0.0,134.38,134.38,False,385.2
+27,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,124.42,0.0,True,427.68
+27,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,114.2,0.0,True,413.28
+27,SITE_B,HSC-108,Ventilator,A,Y,2284.761936616689,0.0,251.08,251.08,False,226.8
+27,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,193.22,0.0,True,421.2
+28,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,92.24,0.0,True,244.8
+28,SITE_B,HSC-101,Surgical Mask,B,Y,1484.3751490905381,0.0,140.57,140.57,False,404.64
+28,SITE_B,HSC-102,Ventilator,A,Y,1824.6015189224695,0.0,260.43,260.43,False,402.48
+28,SITE_B,HSC-103,IV Drip,B,Y,612.4870927186535,0.0,158.11,158.11,False,375.84
+28,SITE_B,HSC-104,IV Drip,B,Y,656.5024492742176,0.0,179.16,179.16,False,277.2
+28,SITE_B,HSC-105,X-ray Machine,C,Y,1066.5887008659224,0.0,111.41,111.41,False,385.2
+28,SITE_B,HSC-106,Gloves,B,Y,0.0,1436.4,207.51,0.0,True,427.68
+28,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,97.06,0.0,True,413.28
+28,SITE_B,HSC-108,Ventilator,A,Y,2066.6516233510333,0.0,218.11,218.11,False,226.8
+28,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,169.32,0.0,True,421.2
+29,SITE_B,HSC-100,IV Drip,C,Y,0.0,1183.68,109.06,0.0,True,244.8
+29,SITE_B,HSC-101,Surgical Mask,B,Y,1297.6179017761922,0.0,186.76,186.76,False,404.64
+29,SITE_B,HSC-102,Ventilator,A,Y,1615.506409295837,0.0,209.1,209.1,False,402.48
+29,SITE_B,HSC-103,IV Drip,B,Y,384.56190218903396,0.0,227.93,227.93,False,375.84
+29,SITE_B,HSC-104,IV Drip,B,Y,430.93731263250925,0.0,225.57,225.57,False,277.2
+29,SITE_B,HSC-105,X-ray Machine,C,Y,926.8402704943369,0.0,139.75,139.75,False,385.2
+29,SITE_B,HSC-106,Gloves,B,Y,1229.2931481607905,0.0,207.11,207.11,False,427.68
+29,SITE_B,HSC-107,Gloves,C,Y,0.0,1564.92,131.72,0.0,True,413.28
+29,SITE_B,HSC-108,Ventilator,A,Y,1827.9061836896756,0.0,238.75,238.75,False,226.8
+29,SITE_B,HSC-109,IV Drip,A,Y,0.0,1799.82,226.77,0.0,True,421.2
+0,SITE_C,HSC-100,Ventilator,B,Y,1164.8432598978898,0.0,128.76,128.76,False,227.04
+0,SITE_C,HSC-101,X-ray Machine,A,Y,804.298340087612,0.0,162.42,162.42,False,246.72
+0,SITE_C,HSC-102,X-ray Machine,B,Y,985.5675139451463,0.0,93.95,93.95,False,283.2
+0,SITE_C,HSC-103,Gloves,B,Y,1071.6257126983369,0.0,154.29,154.29,False,258.24
+0,SITE_C,HSC-104,IV Drip,A,Y,917.5495099573646,0.0,194.37,194.37,False,304.8
+0,SITE_C,HSC-105,Surgical Mask,C,Y,1044.7967170806107,0.0,113.44,113.44,False,136.32
+0,SITE_C,HSC-106,Surgical Mask,C,Y,956.711051994841,0.0,140.57,140.57,False,91.2
+0,SITE_C,HSC-107,IV Drip,B,Y,859.9970795069374,0.0,134.08,134.08,False,136.32
+0,SITE_C,HSC-108,X-ray Machine,C,Y,543.5659249514882,0.0,136.83,136.83,False,307.92
+0,SITE_C,HSC-109,Gloves,A,Y,986.9265595766622,0.0,222.19,222.19,False,273.6
+1,SITE_C,HSC-100,Ventilator,B,Y,1024.6696728682225,0.0,140.17,140.17,False,227.04
+1,SITE_C,HSC-101,X-ray Machine,A,Y,658.287717654157,0.0,146.01,146.01,False,246.72
+1,SITE_C,HSC-102,X-ray Machine,B,Y,842.3538400246935,0.0,143.21,143.21,False,283.2
+1,SITE_C,HSC-103,Gloves,B,Y,925.9042351148805,0.0,145.72,145.72,False,258.24
+1,SITE_C,HSC-104,IV Drip,A,Y,790.7862966152078,0.0,126.76,126.76,False,304.8
+1,SITE_C,HSC-105,Surgical Mask,C,Y,945.4992495090958,0.0,99.3,99.3,False,136.32
+1,SITE_C,HSC-106,Surgical Mask,C,Y,846.5297388588214,0.0,110.18,110.18,False,91.2
+1,SITE_C,HSC-107,IV Drip,B,Y,688.7081705932343,0.0,171.29,171.29,False,136.32
+1,SITE_C,HSC-108,X-ray Machine,C,Y,423.424502043271,0.0,120.14,120.14,False,307.92
+1,SITE_C,HSC-109,Gloves,A,Y,809.8986593472946,0.0,177.03,177.03,False,273.6
+2,SITE_C,HSC-100,Ventilator,B,Y,854.4039030866672,0.0,170.27,170.27,False,227.04
+2,SITE_C,HSC-101,X-ray Machine,A,Y,523.9023378970497,0.0,134.39,134.39,False,246.72
+2,SITE_C,HSC-102,X-ray Machine,B,Y,709.3394758447652,0.0,133.01,133.01,False,283.2
+2,SITE_C,HSC-103,Gloves,B,Y,762.2108813295996,0.0,163.69,163.69,False,258.24
+2,SITE_C,HSC-104,IV Drip,A,Y,619.1063951361434,0.0,171.68,171.68,False,304.8
+2,SITE_C,HSC-105,Surgical Mask,C,Y,842.3607781568685,0.0,103.14,103.14,False,136.32
+2,SITE_C,HSC-106,Surgical Mask,C,Y,759.225708460739,0.0,87.3,87.3,False,91.2
+2,SITE_C,HSC-107,IV Drip,B,Y,562.5209930493852,0.0,126.19,126.19,False,136.32
+2,SITE_C,HSC-108,X-ray Machine,C,Y,313.4895866730513,0.0,109.93,109.93,False,307.92
+2,SITE_C,HSC-109,Gloves,A,Y,607.9674015922188,0.0,201.93,201.93,False,273.6
+3,SITE_C,HSC-100,Ventilator,B,Y,725.4164020736921,0.0,128.99,128.99,False,227.04
+3,SITE_C,HSC-101,X-ray Machine,A,Y,382.9580949702816,0.0,140.94,140.94,False,246.72
+3,SITE_C,HSC-102,X-ray Machine,B,Y,576.3947688005205,0.0,132.94,132.94,False,283.2
+3,SITE_C,HSC-103,Gloves,B,Y,631.3065125001908,0.0,130.9,130.9,False,258.24
+3,SITE_C,HSC-104,IV Drip,A,Y,435.6663312558021,0.0,183.44,183.44,False,304.8
+3,SITE_C,HSC-105,Surgical Mask,C,Y,721.4380928934098,0.0,120.92,120.92,False,136.32
+3,SITE_C,HSC-106,Surgical Mask,C,Y,627.3698056032492,0.0,131.86,131.86,False,91.2
+3,SITE_C,HSC-107,IV Drip,B,Y,349.8522289942909,0.0,212.67,212.67,False,136.32
+3,SITE_C,HSC-108,X-ray Machine,C,Y,185.4188105685328,1681.2,128.07,128.07,False,307.92
+3,SITE_C,HSC-109,Gloves,A,Y,474.01447903650035,0.0,133.95,133.95,False,273.6
+4,SITE_C,HSC-100,Ventilator,B,Y,580.0192840343433,0.0,145.4,145.4,False,227.04
+4,SITE_C,HSC-101,X-ray Machine,A,Y,273.2189084717626,0.0,109.74,109.74,False,246.72
+4,SITE_C,HSC-102,X-ray Machine,B,Y,462.9998292677203,0.0,113.39,113.39,False,283.2
+4,SITE_C,HSC-103,Gloves,B,Y,448.00846094032147,0.0,183.3,183.3,False,258.24
+4,SITE_C,HSC-104,IV Drip,A,Y,225.0727077639237,1235.04,210.59,210.59,False,304.8
+4,SITE_C,HSC-105,Surgical Mask,C,Y,611.5439963557086,0.0,109.89,109.89,False,136.32
+4,SITE_C,HSC-106,Surgical Mask,C,Y,509.33520143880065,0.0,118.03,118.03,False,91.2
+4,SITE_C,HSC-107,IV Drip,B,Y,238.9689300008054,0.0,110.88,110.88,False,136.32
+4,SITE_C,HSC-108,X-ray Machine,C,Y,85.2313863282679,1681.2,100.19,100.19,False,307.92
+4,SITE_C,HSC-109,Gloves,A,Y,328.26029192860676,0.0,145.75,145.75,False,273.6
+5,SITE_C,HSC-100,Ventilator,B,Y,429.47808593764944,0.0,150.54,150.54,False,227.04
+5,SITE_C,HSC-101,X-ray Machine,A,Y,121.71738341891498,1651.68,151.5,151.5,False,246.72
+5,SITE_C,HSC-102,X-ray Machine,B,Y,318.322014969383,0.0,144.68,144.68,False,283.2
+5,SITE_C,HSC-103,Gloves,B,Y,304.86697172317633,0.0,143.14,143.14,False,258.24
+5,SITE_C,HSC-104,IV Drip,A,Y,94.65875068371545,1235.04,130.41,130.41,False,304.8
+5,SITE_C,HSC-105,Surgical Mask,C,Y,519.5867225682782,0.0,91.96,91.96,False,136.32
+5,SITE_C,HSC-106,Surgical Mask,C,Y,420.72488187498277,0.0,88.61,88.61,False,91.2
+5,SITE_C,HSC-107,IV Drip,B,Y,86.28046747468238,1743.84,152.69,152.69,False,136.32
+5,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,130.06,85.23,True,307.92
+5,SITE_C,HSC-109,Gloves,A,Y,216.63564045278864,1252.8,111.62,111.62,False,273.6
+6,SITE_C,HSC-100,Ventilator,B,Y,296.1611626753721,0.0,133.32,133.32,False,227.04
+6,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,153.23,121.72,True,246.72
+6,SITE_C,HSC-102,X-ray Machine,B,Y,198.23077587055823,1635.36,120.09,120.09,False,283.2
+6,SITE_C,HSC-103,Gloves,B,Y,156.72010316239317,1506.24,148.15,148.15,False,258.24
+6,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,159.19,94.66,True,304.8
+6,SITE_C,HSC-105,Surgical Mask,C,Y,408.9680637682014,0.0,110.62,110.62,False,136.32
+6,SITE_C,HSC-106,Surgical Mask,C,Y,306.418993247788,0.0,114.31,114.31,False,91.2
+6,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,163.01,86.28,True,136.32
+6,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,95.71,0.0,True,307.92
+6,SITE_C,HSC-109,Gloves,A,Y,52.775829325413895,1252.8,163.86,163.86,False,273.6
+7,SITE_C,HSC-100,Ventilator,B,Y,219.29812526420784,839.52,76.86,76.86,False,227.04
+7,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,127.47,0.0,True,246.72
+7,SITE_C,HSC-102,X-ray Machine,B,Y,69.5113897308828,1635.36,128.72,128.72,False,283.2
+7,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,169.53,156.72,True,258.24
+7,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,167.56,0.0,True,304.8
+7,SITE_C,HSC-105,Surgical Mask,C,Y,281.1905195227173,0.0,127.78,127.78,False,136.32
+7,SITE_C,HSC-106,Surgical Mask,C,Y,194.4049311422777,0.0,112.01,112.01,False,91.2
+7,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,157.98,0.0,True,136.32
+7,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,117.47,0.0,True,307.92
+7,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,235.09,52.78,True,273.6
+8,SITE_C,HSC-100,Ventilator,B,Y,68.69065586201265,839.52,150.61,150.61,False,227.04
+8,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,165.02,0.0,True,246.72
+8,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,151.2,69.51,True,283.2
+8,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,185.26,0.0,True,258.24
+8,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,162.21,0.0,True,304.8
+8,SITE_C,HSC-105,Surgical Mask,C,Y,194.65138455603886,0.0,86.54,86.54,False,136.32
+8,SITE_C,HSC-106,Surgical Mask,C,Y,62.1464125584707,517.32,132.26,132.26,False,91.2
+8,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,175.58,0.0,True,136.32
+8,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,93.03,0.0,True,307.92
+8,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,196.96,0.0,True,273.6
+9,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,149.55,68.69,True,227.04
+9,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,131.62,0.0,True,246.72
+9,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,172.81,0.0,True,283.2
+9,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,115.52,0.0,True,258.24
+9,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,226.1,0.0,True,304.8
+9,SITE_C,HSC-105,Surgical Mask,C,Y,65.37476260734027,1118.88,129.28,129.28,False,136.32
+9,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,103.73,62.15,True,91.2
+9,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,124.3,0.0,True,136.32
+9,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,141.07,0.0,True,307.92
+9,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,111.43,0.0,True,273.6
+10,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,159.36,0.0,True,227.04
+10,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,105.09,0.0,True,246.72
+10,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,139.51,0.0,True,283.2
+10,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,134.98,0.0,True,258.24
+10,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,211.32,0.0,True,304.8
+10,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,122.19,65.37,True,136.32
+10,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,110.09,0.0,True,91.2
+10,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,135.8,0.0,True,136.32
+10,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,89.65,0.0,True,307.92
+10,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,155.35,0.0,True,273.6
+11,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,184.0,0.0,True,227.04
+11,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,137.04,0.0,True,246.72
+11,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,157.55,0.0,True,283.2
+11,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,151.42,0.0,True,258.24
+11,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,164.72,0.0,True,304.8
+11,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,128.18,0.0,True,136.32
+11,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,128.99,0.0,True,91.2
+11,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,145.67,0.0,True,136.32
+11,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,93.34,0.0,True,307.92
+11,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,122.5,0.0,True,273.6
+12,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,162.02,0.0,True,227.04
+12,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,140.84,0.0,True,246.72
+12,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,156.17,0.0,True,283.2
+12,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,126.43,0.0,True,258.24
+12,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,164.09,0.0,True,304.8
+12,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,118.97,0.0,True,136.32
+12,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,107.95,0.0,True,91.2
+12,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,124.33,0.0,True,136.32
+12,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,130.04,0.0,True,307.92
+12,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,121.6,0.0,True,273.6
+13,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,126.12,0.0,True,227.04
+13,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,152.88,0.0,True,246.72
+13,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,165.5,0.0,True,283.2
+13,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,118.18,0.0,True,258.24
+13,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,179.04,0.0,True,304.8
+13,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,66.61,0.0,True,136.32
+13,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,69.79,0.0,True,91.2
+13,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,110.94,0.0,True,136.32
+13,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,114.39,0.0,True,307.92
+13,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,169.95,0.0,True,273.6
+14,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,143.95,0.0,True,227.04
+14,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,121.97,0.0,True,246.72
+14,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,93.49,0.0,True,283.2
+14,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,128.13,0.0,True,258.24
+14,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,149.0,0.0,True,304.8
+14,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,110.6,0.0,True,136.32
+14,SITE_C,HSC-106,Surgical Mask,C,Y,416.5282341626002,0.0,100.79,100.79,False,91.2
+14,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,161.81,0.0,True,136.32
+14,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,133.2,0.0,True,307.92
+14,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,198.25,0.0,True,273.6
+15,SITE_C,HSC-100,Ventilator,B,Y,711.5983020789602,0.0,127.92,127.92,False,227.04
+15,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,139.68,0.0,True,246.72
+15,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,116.02,0.0,True,283.2
+15,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,157.09,0.0,True,258.24
+15,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,169.99,0.0,True,304.8
+15,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,111.79,0.0,True,136.32
+15,SITE_C,HSC-106,Surgical Mask,C,Y,286.1500634254291,0.0,130.38,130.38,False,91.2
+15,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,106.05,0.0,True,136.32
+15,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,112.48,0.0,True,307.92
+15,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,160.4,0.0,True,273.6
+16,SITE_C,HSC-100,Ventilator,B,Y,598.497916429426,0.0,113.1,113.1,False,227.04
+16,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,102.6,0.0,True,246.72
+16,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,158.97,0.0,True,283.2
+16,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,129.78,0.0,True,258.24
+16,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,160.26,0.0,True,304.8
+16,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,99.21,0.0,True,136.32
+16,SITE_C,HSC-106,Surgical Mask,C,Y,171.13594420757553,0.0,115.01,115.01,False,91.2
+16,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,115.58,0.0,True,136.32
+16,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,107.78,0.0,True,307.92
+16,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,189.51,0.0,True,273.6
+17,SITE_C,HSC-100,Ventilator,B,Y,429.84668024226534,0.0,168.65,168.65,False,227.04
+17,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,111.32,0.0,True,246.72
+17,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,138.51,0.0,True,283.2
+17,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,155.1,0.0,True,258.24
+17,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,157.53,0.0,True,304.8
+17,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,109.44,0.0,True,136.32
+17,SITE_C,HSC-106,Surgical Mask,C,Y,66.23959364316082,517.32,104.9,104.9,False,91.2
+17,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,144.45,0.0,True,136.32
+17,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,133.71,0.0,True,307.92
+17,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,139.17,0.0,True,273.6
+18,SITE_C,HSC-100,Ventilator,B,Y,279.6289607101902,0.0,150.22,150.22,False,227.04
+18,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,137.97,0.0,True,246.72
+18,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,135.48,0.0,True,283.2
+18,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,68.29,0.0,True,258.24
+18,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,205.69,0.0,True,304.8
+18,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,99.05,0.0,True,136.32
+18,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,113.02,66.24,True,91.2
+18,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,170.53,0.0,True,136.32
+18,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,136.39,0.0,True,307.92
+18,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,141.68,0.0,True,273.6
+19,SITE_C,HSC-100,Ventilator,B,Y,111.52809250416286,839.52,168.1,168.1,False,227.04
+19,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,134.46,0.0,True,246.72
+19,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,166.62,0.0,True,283.2
+19,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,113.43,0.0,True,258.24
+19,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,180.7,0.0,True,304.8
+19,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,135.57,0.0,True,136.32
+19,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,111.86,0.0,True,91.2
+19,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,143.26,0.0,True,136.32
+19,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,94.54,0.0,True,307.92
+19,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,117.08,0.0,True,273.6
+20,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,168.2,111.53,True,227.04
+20,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,141.52,0.0,True,246.72
+20,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,120.01,0.0,True,283.2
+20,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,138.19,0.0,True,258.24
+20,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,149.46,0.0,True,304.8
+20,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,128.1,0.0,True,136.32
+20,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,95.23,0.0,True,91.2
+20,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,179.7,0.0,True,136.32
+20,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,106.19,0.0,True,307.92
+20,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,212.68,0.0,True,273.6
+21,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,126.95,0.0,True,227.04
+21,SITE_C,HSC-101,X-ray Machine,A,Y,0.0,1651.68,165.9,0.0,True,246.72
+21,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,167.8,0.0,True,283.2
+21,SITE_C,HSC-103,Gloves,B,Y,0.0,1506.24,109.22,0.0,True,258.24
+21,SITE_C,HSC-104,IV Drip,A,Y,1080.636868741851,0.0,154.4,154.4,False,304.8
+21,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,111.54,0.0,True,136.32
+21,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,98.24,0.0,True,91.2
+21,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,160.74,0.0,True,136.32
+21,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,90.51,0.0,True,307.92
+21,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,175.59,0.0,True,273.6
+22,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,133.83,0.0,True,227.04
+22,SITE_C,HSC-101,X-ray Machine,A,Y,1527.8830167881704,0.0,123.8,123.8,False,246.72
+22,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,146.04,0.0,True,283.2
+22,SITE_C,HSC-103,Gloves,B,Y,1343.3811165358209,0.0,162.86,162.86,False,258.24
+22,SITE_C,HSC-104,IV Drip,A,Y,893.5007833535826,0.0,187.14,187.14,False,304.8
+22,SITE_C,HSC-105,Surgical Mask,C,Y,0.0,1118.88,93.21,0.0,True,136.32
+22,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,99.3,0.0,True,91.2
+22,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,146.13,0.0,True,136.32
+22,SITE_C,HSC-108,X-ray Machine,C,Y,0.0,1681.2,62.17,0.0,True,307.92
+22,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,160.47,0.0,True,273.6
+23,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,124.94,0.0,True,227.04
+23,SITE_C,HSC-101,X-ray Machine,A,Y,1339.0231130780035,0.0,188.86,188.86,False,246.72
+23,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,130.8,0.0,True,283.2
+23,SITE_C,HSC-103,Gloves,B,Y,1198.1779423003156,0.0,145.2,145.2,False,258.24
+23,SITE_C,HSC-104,IV Drip,A,Y,684.2070120165807,0.0,209.29,209.29,False,304.8
+23,SITE_C,HSC-105,Surgical Mask,C,Y,1002.736255794567,0.0,116.14,116.14,False,136.32
+23,SITE_C,HSC-106,Surgical Mask,C,Y,391.1149648095921,0.0,126.21,126.21,False,91.2
+23,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,142.51,0.0,True,136.32
+23,SITE_C,HSC-108,X-ray Machine,C,Y,1600.7086771518098,0.0,80.49,80.49,False,307.92
+23,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,160.59,0.0,True,273.6
+24,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,129.74,0.0,True,227.04
+24,SITE_C,HSC-101,X-ray Machine,A,Y,1167.3127823257614,0.0,171.71,171.71,False,246.72
+24,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,109.45,0.0,True,283.2
+24,SITE_C,HSC-103,Gloves,B,Y,1066.8528101650954,0.0,131.33,131.33,False,258.24
+24,SITE_C,HSC-104,IV Drip,A,Y,492.28886519297816,0.0,191.92,191.92,False,304.8
+24,SITE_C,HSC-105,Surgical Mask,C,Y,932.4719032419456,0.0,70.26,70.26,False,136.32
+24,SITE_C,HSC-106,Surgical Mask,C,Y,303.5655404235773,0.0,87.55,87.55,False,91.2
+24,SITE_C,HSC-107,IV Drip,B,Y,0.0,1743.84,127.04,0.0,True,136.32
+24,SITE_C,HSC-108,X-ray Machine,C,Y,1482.1185516080259,0.0,118.59,118.59,False,307.92
+24,SITE_C,HSC-109,Gloves,A,Y,0.0,1252.8,138.78,0.0,True,273.6
+25,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,144.04,0.0,True,227.04
+25,SITE_C,HSC-101,X-ray Machine,A,Y,1035.5553709846408,0.0,131.76,131.76,False,246.72
+25,SITE_C,HSC-102,X-ray Machine,B,Y,0.0,1635.36,160.63,0.0,True,283.2
+25,SITE_C,HSC-103,Gloves,B,Y,918.1394648550122,0.0,148.71,148.71,False,258.24
+25,SITE_C,HSC-104,IV Drip,A,Y,300.1274687092663,1235.04,192.16,192.16,False,304.8
+25,SITE_C,HSC-105,Surgical Mask,C,Y,805.2145463312667,0.0,127.26,127.26,False,136.32
+25,SITE_C,HSC-106,Surgical Mask,C,Y,151.9454217557444,0.0,151.62,151.62,False,91.2
+25,SITE_C,HSC-107,IV Drip,B,Y,1537.9459087116581,0.0,205.89,205.89,False,136.32
+25,SITE_C,HSC-108,X-ray Machine,C,Y,1377.3756503020752,0.0,104.74,104.74,False,307.92
+25,SITE_C,HSC-109,Gloves,A,Y,1089.6201959880761,0.0,163.18,163.18,False,273.6
+26,SITE_C,HSC-100,Ventilator,B,Y,0.0,839.52,149.72,0.0,True,227.04
+26,SITE_C,HSC-101,X-ray Machine,A,Y,923.5263078465316,0.0,112.03,112.03,False,246.72
+26,SITE_C,HSC-102,X-ray Machine,B,Y,1504.9622823152015,0.0,130.4,130.4,False,283.2
+26,SITE_C,HSC-103,Gloves,B,Y,760.3239871671755,0.0,157.82,157.82,False,258.24
+26,SITE_C,HSC-104,IV Drip,A,Y,186.6449759603039,1235.04,113.48,113.48,False,304.8
+26,SITE_C,HSC-105,Surgical Mask,C,Y,674.7624442986786,0.0,130.45,130.45,False,136.32
+26,SITE_C,HSC-106,Surgical Mask,C,Y,54.50162438320767,517.32,97.44,97.44,False,91.2
+26,SITE_C,HSC-107,IV Drip,B,Y,1401.7292131102895,0.0,136.22,136.22,False,136.32
+26,SITE_C,HSC-108,X-ray Machine,C,Y,1252.2571675946197,0.0,125.12,125.12,False,307.92
+26,SITE_C,HSC-109,Gloves,A,Y,924.5277399882165,0.0,165.09,165.09,False,273.6
+27,SITE_C,HSC-100,Ventilator,B,Y,764.5498473234721,0.0,74.97,74.97,False,227.04
+27,SITE_C,HSC-101,X-ray Machine,A,Y,828.9204766257909,0.0,94.61,94.61,False,246.72
+27,SITE_C,HSC-102,X-ray Machine,B,Y,1381.2512182138103,0.0,123.71,123.71,False,283.2
+27,SITE_C,HSC-103,Gloves,B,Y,599.7171571934114,0.0,160.61,160.61,False,258.24
+27,SITE_C,HSC-104,IV Drip,A,Y,41.16027609545674,1235.04,145.48,145.48,False,304.8
+27,SITE_C,HSC-105,Surgical Mask,C,Y,598.4506135859888,0.0,76.31,76.31,False,136.32
+27,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,123.51,54.5,True,91.2
+27,SITE_C,HSC-107,IV Drip,B,Y,1310.469165954084,0.0,91.26,91.26,False,136.32
+27,SITE_C,HSC-108,X-ray Machine,C,Y,1124.5699150414068,0.0,127.69,127.69,False,307.92
+27,SITE_C,HSC-109,Gloves,A,Y,786.367310894258,0.0,138.16,138.16,False,273.6
+28,SITE_C,HSC-100,Ventilator,B,Y,641.8398688791525,0.0,122.71,122.71,False,227.04
+28,SITE_C,HSC-101,X-ray Machine,A,Y,676.885921431855,0.0,152.03,152.03,False,246.72
+28,SITE_C,HSC-102,X-ray Machine,B,Y,1247.1193399460806,0.0,134.13,134.13,False,283.2
+28,SITE_C,HSC-103,Gloves,B,Y,478.13635196358496,0.0,121.58,121.58,False,258.24
+28,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,128.02,41.16,True,304.8
+28,SITE_C,HSC-105,Surgical Mask,C,Y,478.1046490677055,0.0,120.35,120.35,False,136.32
+28,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,96.02,0.0,True,91.2
+28,SITE_C,HSC-107,IV Drip,B,Y,1148.6000267614693,0.0,161.87,161.87,False,136.32
+28,SITE_C,HSC-108,X-ray Machine,C,Y,1003.3718193237089,0.0,121.2,121.2,False,307.92
+28,SITE_C,HSC-109,Gloves,A,Y,657.3447157119822,0.0,129.02,129.02,False,273.6
+29,SITE_C,HSC-100,Ventilator,B,Y,492.1431152524257,0.0,149.7,149.7,False,227.04
+29,SITE_C,HSC-101,X-ray Machine,A,Y,585.4339277962349,0.0,91.45,91.45,False,246.72
+29,SITE_C,HSC-102,X-ray Machine,B,Y,1101.740793992198,0.0,145.38,145.38,False,283.2
+29,SITE_C,HSC-103,Gloves,B,Y,317.14522691595494,0.0,160.99,160.99,False,258.24
+29,SITE_C,HSC-104,IV Drip,A,Y,0.0,1235.04,178.5,0.0,True,304.8
+29,SITE_C,HSC-105,Surgical Mask,C,Y,365.91741310180817,0.0,112.19,112.19,False,136.32
+29,SITE_C,HSC-106,Surgical Mask,C,Y,0.0,517.32,103.27,0.0,True,91.2
+29,SITE_C,HSC-107,IV Drip,B,Y,978.0967189270986,0.0,170.5,170.5,False,136.32
+29,SITE_C,HSC-108,X-ray Machine,C,Y,872.8006321159033,0.0,130.57,130.57,False,307.92
+29,SITE_C,HSC-109,Gloves,A,Y,469.77823465254215,0.0,187.57,187.57,False,273.6

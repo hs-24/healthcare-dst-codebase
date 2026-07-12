@@ -1,475 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Healthcare Warehouse — Digital Supply Chain Twin (Live)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Supply Network Twin</title>
 <style>
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b1320; color: #e6edf3; overflow: hidden; }
-  #app { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 64px 1fr; height: 100vh; }
-  header { grid-column: 1 / 3; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: #101a2c; border-bottom: 1px solid #1f2c45; }
-  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
-  header .sub { font-size: 12px; color: #7d8aa3; }
-  #scene-wrap { position: relative; }
-  #scene-wrap canvas { display: block; }
-  #controls { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; align-items: center; background: rgba(16,26,44,0.85); padding: 8px 12px; border-radius: 8px; border: 1px solid #1f2c45; }
-  #controls button { background: #1f3358; color: #e6edf3; border: 1px solid #2c4a82; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; }
-  #controls button:hover { background: #2c4a82; }
-  #day-label { font-size: 12px; color: #9fb3d8; min-width: 90px; }
-  #legend { position: absolute; top: 16px; left: 16px; background: rgba(16,26,44,0.85); padding: 10px 14px; border-radius: 8px; border: 1px solid #1f2c45; font-size: 12px; }
-  #legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
-  #legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
-  aside { background: #0e1726; border-left: 1px solid #1f2c45; display: flex; flex-direction: column; overflow: hidden; }
-  .panel { padding: 14px 16px; border-bottom: 1px solid #1f2c45; }
-  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #7d8aa3; margin: 0 0 10px; }
-  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .kpi { background: #131f33; border-radius: 8px; padding: 8px 10px; }
-  .kpi .v { font-size: 18px; font-weight: 700; }
-  .kpi .l { font-size: 10.5px; color: #7d8aa3; margin-top: 2px; }
-  .kpi .v.good { color: #5fd685; }
-  .kpi .v.warn { color: #ffb454; }
-  #agent-feed { flex: 1; overflow-y: auto; padding: 10px 14px; }
-  .ev { border-radius: 6px; padding: 7px 9px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.4; border-left: 3px solid #3a4d72; background: #131f33; }
-  .ev.info { border-left-color: #3a8df0; }
-  .ev.warning { border-left-color: #ffb454; }
-  .ev.critical { border-left-color: #ff5f6d; }
-  .ev .meta { color: #7d8aa3; font-size: 10px; margin-bottom: 2px; }
-  .ev .agent-tag { color: #9fb3d8; font-weight: 600; }
-  #sku-table { width: 100%; font-size: 11.5px; border-collapse: collapse; }
-  #sku-table th { text-align: left; color: #7d8aa3; font-weight: 500; padding: 4px 2px; border-bottom: 1px solid #1f2c45; }
-  #sku-table td { padding: 5px 2px; border-bottom: 1px solid #182338; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+:root { --sidebar: 410px; --bg:#0a1018; --panel:#111a24; --panel2:#17222e; --line:#2a3948; --text:#edf3f7; --muted:#8ea0ae; --green:#57d68d; --amber:#f4bd59; --red:#ef6b73; --cyan:#50b8d8; }
+* { box-sizing:border-box; }
+body { margin:0; height:100vh; overflow:hidden; font:13px "Segoe UI",Arial,sans-serif; color:var(--text); background:var(--bg); }
+button,select { font:inherit; }
+#app { height:100vh; display:grid; grid-template-rows:64px minmax(0,1fr); }
+header { display:flex; align-items:center; gap:18px; padding:0 18px; background:#101821; border-bottom:1px solid var(--line); }
+.brand { min-width:280px; }
+.brand h1 { margin:0; font-size:16px; letter-spacing:0; }
+.brand p { margin:4px 0 0; color:var(--muted); font-size:11px; }
+.site-picker { display:flex; align-items:center; gap:8px; margin-left:auto; }
+.site-picker label { color:var(--muted); font-size:11px; text-transform:uppercase; }
+select { min-width:220px; color:var(--text); background:var(--panel2); border:1px solid var(--line); padding:8px 10px; border-radius:5px; }
+.source-badge { color:#b9cad4; border-left:1px solid var(--line); padding-left:16px; font-size:11px; }
+#workspace { min-height:0; display:grid; grid-template-columns:minmax(0,1fr) 5px var(--sidebar); }
+#main-view { position:relative; min-width:0; overflow:hidden; }
+#scene { width:100%; height:100%; display:block; }
+#overview { position:absolute; inset:0; overflow:auto; padding:22px; background:var(--bg); }
+#overview[hidden], #scene[hidden], .view[hidden] { display:none; }
+.section-title { margin:0 0 4px; font-size:18px; }
+.section-sub { color:var(--muted); margin:0 0 18px; }
+.network-kpis { display:grid; grid-template-columns:repeat(5,minmax(130px,1fr)); gap:10px; margin-bottom:20px; }
+.metric { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:12px; min-height:74px; }
+.metric strong { display:block; font-size:21px; margin-bottom:5px; }
+.metric span { color:var(--muted); font-size:11px; }
+.good { color:var(--green); } .warn { color:var(--amber); } .critical { color:var(--red); }
+.site-grid { display:grid; grid-template-columns:repeat(3,minmax(240px,1fr)); gap:12px; margin-bottom:20px; }
+.site-card { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:14px; cursor:pointer; }
+.site-card:hover { border-color:var(--cyan); }
+.site-card h3 { margin:0 0 12px; font-size:14px; }
+.site-card dl { display:grid; grid-template-columns:1fr auto; gap:8px; margin:0; }
+.site-card dt { color:var(--muted); } .site-card dd { margin:0; font-weight:600; }
+.band { background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px; margin:0 -22px 18px; }
+.band-inner { padding:0 22px; }
+.data-table { width:100%; border-collapse:collapse; font-size:12px; }
+.data-table th { color:var(--muted); text-align:left; font-weight:500; padding:8px; border-bottom:1px solid var(--line); }
+.data-table td { padding:8px; border-bottom:1px solid #202c37; vertical-align:top; }
+.empty { color:var(--muted); padding:18px 0; }
+#scene-overlay { position:absolute; top:16px; left:16px; max-width:330px; background:rgba(17,26,36,.93); border:1px solid var(--line); border-radius:6px; padding:12px; }
+#scene-overlay h2 { margin:0 0 4px; font-size:14px; }
+#scene-overlay p { margin:0 0 10px; color:var(--muted); font-size:11px; }
+.legend { display:flex; flex-wrap:wrap; gap:9px; color:var(--muted); font-size:10px; }
+.legend i,.status-dot { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:4px; }
+#play-controls { position:absolute; left:16px; bottom:16px; display:flex; align-items:center; gap:8px; background:rgba(17,26,36,.93); border:1px solid var(--line); border-radius:6px; padding:8px; }
+.command { color:var(--text); background:#203246; border:1px solid #385069; border-radius:5px; padding:6px 10px; cursor:pointer; }
+.command:hover { background:#29415a; }
+#day-label { color:var(--muted); min-width:78px; text-align:center; }
+#resizer { cursor:col-resize; background:#1a2733; border-left:1px solid var(--line); border-right:1px solid var(--line); }
+#resizer:hover { background:var(--cyan); }
+aside { min-width:0; overflow:hidden; display:grid; grid-template-rows:43px minmax(0,1fr); background:#0f1720; }
+.tabs { display:flex; align-items:stretch; border-bottom:1px solid var(--line); overflow-x:auto; }
+.tab { flex:1; min-width:64px; color:var(--muted); background:none; border:0; border-bottom:2px solid transparent; cursor:pointer; padding:0 8px; }
+.tab.active { color:var(--text); border-bottom-color:var(--cyan); }
+.views { min-height:0; overflow:hidden; }
+.view { height:100%; overflow:auto; padding:14px; }
+.view h2 { margin:0 0 12px; color:var(--muted); font-size:11px; text-transform:uppercase; }
+.kpi-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.kpi-grid .metric { min-height:68px; padding:10px; }
+.kpi-grid .metric strong { font-size:17px; }
+.pill { display:inline-block; padding:2px 6px; border-radius:4px; background:#243342; color:#c8d5dc; font-size:10px; }
+.event,.alert { padding:9px; margin-bottom:7px; background:var(--panel2); border-left:3px solid var(--cyan); border-radius:4px; }
+.alert.warning,.event.warning { border-left-color:var(--amber); }
+.alert.critical,.event.critical { border-left-color:var(--red); }
+.event .meta,.alert .meta { color:var(--muted); font-size:10px; margin-bottom:3px; }
+.detail { color:var(--muted); font-size:10px; line-height:1.5; }
+#evidence-chart { width:100%; height:190px; background:#0c141d; border:1px solid var(--line); border-radius:5px; }
+.chart-legend { display:flex; flex-wrap:wrap; gap:12px; margin:8px 0 10px; color:var(--muted); font-size:10px; }
+.chart-legend i { display:inline-block; width:18px; height:3px; margin-right:5px; vertical-align:middle; border-radius:2px; }
+.chart-legend i.threshold { height:0; border-top:2px dashed var(--red); background:none !important; }
+.evidence-help { margin:0 0 12px; padding:9px 10px; color:#b9cad4; background:#17222e; border-left:3px solid var(--cyan); border-radius:4px; font-size:11px; line-height:1.45; }
+.mobile-toggle { display:none; }
+@media (max-width:900px) {
+  .source-badge { display:none; } .brand { min-width:0; } .brand p { display:none; }
+  #workspace { grid-template-columns:minmax(0,1fr); }
+  #resizer { display:none; }
+  aside { position:absolute; z-index:8; right:0; top:64px; bottom:0; width:min(92vw,430px); box-shadow:-8px 0 24px #0008; }
+  aside.closed { display:none; } .mobile-toggle { display:block; }
+  .network-kpis,.site-grid { grid-template-columns:1fr 1fr; }
+}
 </style>
 </head>
 <body>
 <div id="app">
   <header>
-    <div>
-      <h1>Healthcare Warehouse — Digital Supply Chain Twin</h1>
-      <div class="sub">DSC2205 Group 3 · Central Distribution Hub (Pilot Site A) · Live agentic replay</div>
-    </div>
-    <div class="sub" id="header-day">Day — / —</div>
+    <div class="brand"><h1>Healthcare Supply Network Twin</h1><p>Hospital inventory pilot | validated, forecast and coordinated across sites</p></div>
+    <div class="site-picker"><label for="site-select">Site</label><select id="site-select"><option value="ALL">All Sites</option></select></div>
+    <div class="source-badge">Public Kaggle dataset + documented simulation enrichment</div>
+    <button class="command mobile-toggle" id="mobile-toggle" aria-label="Toggle operational panel">Panel</button>
   </header>
-
-  <div id="scene-wrap">
-    <div id="legend">
-      <div class="row"><span class="swatch" style="background:#5fd685"></span> Healthy stock (pallets lit)</div>
-      <div class="row"><span class="swatch" style="background:#ffb454"></span> Approaching reorder point</div>
-      <div class="row"><span class="swatch" style="background:#ff5f6d"></span> At/below reorder point</div>
-      <div class="row" style="margin-top:6px; padding-top:6px; border-top:1px solid #223252;"><span class="swatch" style="background:#3a8df0"></span> VNA pallet racking (reach/turret truck)</div>
-      <div class="row"><span class="swatch" style="background:#7fd1ff"></span> Cold-chain vault (VNV, 2–8°C)</div>
-      <div class="row"><span class="swatch" style="background:#c98cff"></span> Secure cage (critical equipment)</div>
-    </div>
-    <div id="controls">
-      <button id="btn-play">⏸ Pause</button>
-      <button id="btn-reset">⟲ Reset</button>
-      <span id="day-label">Day 0 / 29</span>
-    </div>
+  <div id="workspace">
+    <main id="main-view">
+      <div id="overview"><h2 class="section-title">Network overview</h2><p class="section-sub">Consolidated operational evidence across the three-site pilot.</p><div id="network-kpis" class="network-kpis"></div><div id="site-grid" class="site-grid"></div><div class="band"><div class="band-inner"><h3>Cross-site transfer recommendations</h3><div id="transfer-table"></div></div></div></div>
+      <canvas id="scene" hidden></canvas>
+      <div id="scene-overlay" hidden><h2 id="scene-title"></h2><p id="scene-subtitle"></p><div class="legend"><span><i style="background:var(--green)"></i>Healthy</span><span><i style="background:var(--amber)"></i>Watch</span><span><i style="background:var(--red)"></i>Below minimum</span></div></div>
+      <div id="play-controls" hidden><button class="command" id="btn-play">Pause</button><button class="command" id="btn-reset">Reset</button><span id="day-label">Day 0 / 29</span></div>
+    </main>
+    <div id="resizer" title="Resize operational panel"></div>
+    <aside id="sidebar">
+      <nav class="tabs"><button class="tab active" data-tab="summary">Overview</button><button class="tab" data-tab="inventory">Inventory</button><button class="tab" data-tab="alerts">Alerts</button><button class="tab" data-tab="agents">Agents</button><button class="tab" data-tab="evidence">Evidence</button></nav>
+      <div class="views">
+        <section class="view" id="view-summary"><h2>Operational KPIs</h2><div id="summary-kpis" class="kpi-grid"></div></section>
+        <section class="view" id="view-inventory" hidden><h2>Inventory positions</h2><div style="overflow:auto"><table class="data-table"><thead><tr><th>SKU</th><th>Stock</th><th>Zone</th><th>Status</th></tr></thead><tbody id="inventory-body"></tbody></table></div></section>
+        <section class="view" id="view-alerts" hidden><h2>Action queue</h2><div id="alert-list"></div></section>
+        <section class="view" id="view-agents" hidden><h2>Agent workflow</h2><div id="agent-list"></div></section>
+        <section class="view" id="view-evidence" hidden><h2>Manual vs digital twin</h2><p class="evidence-help">Compares stock visibility over the 30-day pilot. A gap between the two lines shows where the spreadsheet view differs from the accurate digital-twin record. Falling below the red line indicates reorder risk.</p><select id="sku-select" style="width:100%;margin-bottom:10px"></select><canvas id="evidence-chart" role="img" aria-label="Digital twin and manual perceived stock over 30 simulation days"></canvas><div class="chart-legend"><span><i style="background:var(--green)"></i>Digital twin stock</span><span><i style="background:var(--amber)"></i>Manual perceived stock</span><span><i class="threshold"></i>Reorder point</span></div><div id="provenance" class="detail"></div></section>
+      </div>
+    </aside>
   </div>
-
-  <aside>
-    <div class="panel">
-      <h2>Operational KPIs (30-day pilot)</h2>
-      <div class="kpi-grid" id="kpi-grid"></div>
-    </div>
-    <div class="panel">
-      <h2>Bay status (pallets)</h2>
-      <table id="sku-table">
-        <thead><tr><th>SKU</th><th>Zone</th><th>Pallets</th><th>Status</th></tr></thead>
-        <tbody id="sku-table-body"></tbody>
-      </table>
-    </div>
-    <div class="panel" style="border-bottom:none; flex:1; display:flex; flex-direction:column; min-height:0;">
-      <h2>Agentic AI workflow — live event feed</h2>
-      <div id="agent-feed"></div>
-    </div>
-  </aside>
 </div>
-
-<script type="importmap">
-{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
-</script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
 <script type="module">
 import * as THREE from "three";
 
-const sceneWrap = document.getElementById("scene-wrap");
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0b1320);
-scene.fog = new THREE.Fog(0x0b1320, 20, 60);
+const $ = id => document.getElementById(id);
+let selectedSite = "ALL", currentState = null, playing = true;
+let scene, camera, renderer, warehouseGroup;
 
-const camera = new THREE.PerspectiveCamera(45, sceneWrap.clientWidth / sceneWrap.clientHeight, 0.1, 200);
-camera.position.set(34, 28, 40);
-camera.lookAt(0, 2, 0);
+async function getJSON(url) { const response = await fetch(url); if (!response.ok) throw new Error(`${response.status} ${url}`); return response.json(); }
+const fmt = (value, digits=1) => Number(value ?? 0).toFixed(digits);
+function metric(value,label,tone="") { return `<div class="metric"><strong class="${tone}">${value}</strong><span>${label}</span></div>`; }
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(sceneWrap.clientWidth, sceneWrap.clientHeight);
-sceneWrap.appendChild(renderer.domElement);
-
-window.addEventListener("resize", () => {
-  camera.aspect = sceneWrap.clientWidth / sceneWrap.clientHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(sceneWrap.clientWidth, sceneWrap.clientHeight);
-});
-
-// lighting
-scene.add(new THREE.AmbientLight(0x8899bb, 0.6));
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.1);
-dirLight.position.set(10, 20, 10);
-scene.add(dirLight);
-
-// floor — sized for a large-scale DC footprint (VNA zone + cold vault + cage)
-const FLOOR_SIZE = 90;
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(FLOOR_SIZE, FLOOR_SIZE),
-  new THREE.MeshStandardMaterial({ color: 0x10192c, roughness: 1 })
-);
-floor.rotation.x = -Math.PI / 2;
-scene.add(floor);
-
-const grid = new THREE.GridHelper(FLOOR_SIZE, FLOOR_SIZE, 0x223252, 0x162032);
-grid.position.y = 0.01;
-scene.add(grid);
-
-// orbit-less manual rotate via drag (lightweight, no extra import)
-let isDragging = false, prevX = 0, prevY = 0;
-let camAngle = Math.atan2(camera.position.x, camera.position.z);
-let camHeight = camera.position.y;
-let camDist = Math.hypot(camera.position.x, camera.position.z);
-renderer.domElement.addEventListener("pointerdown", (e) => { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
-window.addEventListener("pointerup", () => isDragging = false);
-window.addEventListener("pointermove", (e) => {
-  if (!isDragging) return;
-  const dx = e.clientX - prevX, dy = e.clientY - prevY;
-  prevX = e.clientX; prevY = e.clientY;
-  camAngle -= dx * 0.005;
-  camHeight = Math.max(4, Math.min(45, camHeight + dy * 0.08));
-  camera.position.x = Math.sin(camAngle) * camDist;
-  camera.position.z = Math.cos(camAngle) * camDist;
-  camera.position.y = camHeight;
-  camera.lookAt(0, 2, 0);
-});
-renderer.domElement.addEventListener("wheel", (e) => {
-  camDist = Math.max(10, Math.min(85, camDist + e.deltaY * 0.03));
-  camera.position.x = Math.sin(camAngle) * camDist;
-  camera.position.z = Math.cos(camAngle) * camDist;
-});
-
-// ---------------------------------------------------------------------
-// Warehouse model: bays (one per SKU) grouped into three physical zones
-// that mirror a real large-scale healthcare distribution centre:
-//   VNA zone   - Very Narrow Aisle high-bay pallet racking, multiple
-//                aisles served by reach/turret trucks, bulk consumables
-//                and pharmaceuticals
-//   COLD_VAULT - a Very Narrow Vault: enclosed, blue-lit 2-8°C cage for
-//                cold-chain pharmaceuticals (vaccines, insulin)
-//   SECURE_CAGE - enclosed, wire-fenced bay for low-volume, clinically
-//                critical equipment consumables
-// Stock is rendered as discrete pallets (a fixed-capacity instanced
-// grid per bay) rather than a single bar, so the twin shows physical
-// pallet occupancy, not just an abstract stock level.
-// ---------------------------------------------------------------------
-
-const PALLET_LEVELS = 6;        // rack height in VNA/bulk bays
-const PALLET_PER_LEVEL = 2;     // pallets stored deep per level
-const PALLET_SLOTS = PALLET_LEVELS * PALLET_PER_LEVEL; // fixed visual capacity per bay
-const LEVEL_HEIGHT = 1.35;
-const PALLET_SIZE = { w: 1.0, h: 1.05, d: 1.0 };
-const BAY_WIDTH = 2.6;
-const BAY_DEPTH = 2.6;
-
-const racks = {}; // sku_id -> { instancedMesh, litCount, statusColor, glow }
-const zoneGroups = []; // for camera/labelling reference only
-
-function colorForStatus(stock, reorderPoint) {
-  if (stock <= reorderPoint) return 0xff5f6d;
-  if (stock <= reorderPoint * 1.6) return 0xffb454;
-  return 0x5fd685;
+function initScene() {
+  const canvas = $("scene"); scene = new THREE.Scene(); scene.background = new THREE.Color(0x0a1018); scene.fog = new THREE.Fog(0x0a1018,35,85);
+  camera = new THREE.PerspectiveCamera(44,1,.1,150); camera.position.set(30,25,34); camera.lookAt(0,3,0);
+  renderer = new THREE.WebGLRenderer({canvas,antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  scene.add(new THREE.HemisphereLight(0xb9d8ef,0x18212b,1.4)); const sun=new THREE.DirectionalLight(0xffffff,1.8); sun.position.set(12,24,8); scene.add(sun);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(72,54),new THREE.MeshStandardMaterial({color:0x111b25,roughness:1})); floor.rotation.x=-Math.PI/2; scene.add(floor);
+  const grid=new THREE.GridHelper(72,36,0x2a4255,0x1b2a37); grid.position.y=.01; scene.add(grid); warehouseGroup=new THREE.Group(); scene.add(warehouseGroup);
+  let drag=false,lastX=0,angle=.72,dist=45;
+  canvas.addEventListener("pointerdown",e=>{drag=true;lastX=e.clientX}); window.addEventListener("pointerup",()=>drag=false);
+  window.addEventListener("pointermove",e=>{if(!drag)return; angle-=(e.clientX-lastX)*.006;lastX=e.clientX;camera.position.x=Math.sin(angle)*dist;camera.position.z=Math.cos(angle)*dist;camera.lookAt(0,3,0)});
+  canvas.addEventListener("wheel",e=>{dist=Math.max(22,Math.min(70,dist+e.deltaY*.025));camera.position.x=Math.sin(angle)*dist;camera.position.z=Math.cos(angle)*dist;camera.lookAt(0,3,0)});
+  function animate(){requestAnimationFrame(animate); resizeScene(); renderer.render(scene,camera)} animate();
 }
+function resizeScene(){const canvas=$("scene");if(canvas.hidden)return;const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==w||canvas.height!==h){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}}
+function stockColor(s){return s.reconciled_stock<=s.reorder_point?0xef6b73:s.reconciled_stock<=s.reorder_point*1.35?0xf4bd59:0x57d68d}
+function rebuildWarehouse(skus){while(warehouseGroup.children.length)warehouseGroup.remove(warehouseGroup.children[0]);const entries=Object.entries(skus);entries.forEach(([id,s],i)=>{const col=i%5,row=Math.floor(i/5),x=(col-2)*5.2,z=(row-.5)*10;const frame=new THREE.Mesh(new THREE.BoxGeometry(4.1,7.5,3),new THREE.MeshStandardMaterial({color:0x283b4b,wireframe:true}));frame.position.set(x,3.75,z);warehouseGroup.add(frame);const ratio=Math.max(.03,Math.min(1,s.reconciled_stock/s.max_capacity));const stock=new THREE.Mesh(new THREE.BoxGeometry(3.4,Math.max(.25,6.8*ratio),2.4),new THREE.MeshStandardMaterial({color:stockColor(s),emissive:stockColor(s),emissiveIntensity:.14}));stock.position.set(x,Math.max(.125,6.8*ratio/2),z);warehouseGroup.add(stock)})}
+function updateWarehouse(skus){rebuildWarehouse(skus)}
 
-function makeLabelSprite(text, sizeScale = 1) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 320; canvas.height = 80;
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "rgba(0,0,0,0)";
-  ctx.fillRect(0, 0, 320, 80);
-  ctx.font = "bold 30px Segoe UI";
-  ctx.fillStyle = "#e6edf3";
-  ctx.textAlign = "center";
-  ctx.fillText(text, 160, 48);
-  const tex = new THREE.CanvasTexture(canvas);
-  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
-  const sprite = new THREE.Sprite(mat);
-  sprite.scale.set(3.6 * sizeScale, 0.9 * sizeScale, 1);
-  return sprite;
-}
+function renderNetwork(data){const n=data.network_summary;$("network-kpis").innerHTML=metric(`${fmt(n.digital_twin_fill_rate_pct,2)}%`,`Digital twin fill rate`,`good`)+metric(`${fmt(n.manual_baseline_fill_rate_pct,2)}%`,`Manual fill rate`,`warn`)+metric(n.stockout_days_avoided,`Stockout days avoided`,`good`)+metric(`${fmt(n.forecast_accuracy_improvement_pct)}%`,`Forecast accuracy gain`,`good`)+metric(`${fmt(n.data_inconsistency_rate_pct)}%`,`Source inconsistency`,`warn`);$("site-grid").innerHTML=data.sites.map(state=>{const s=state.site_summary;return `<article class="site-card" data-site="${state.site_id}"><h3>${state.site_name}</h3><dl><dt>Fill rate</dt><dd>${fmt(s.digital_twin_fill_rate_pct,2)}%</dd><dt>Capacity used</dt><dd>${fmt(s.capacity_utilization_pct)}%</dd><dt>Critical SKUs</dt><dd class="${s.critical_skus?'critical':'good'}">${s.critical_skus}</dd><dt>WMAPE gain</dt><dd>${fmt(s.forecast_accuracy_improvement_pct)}%</dd></dl></article>`}).join("");document.querySelectorAll(".site-card").forEach(card=>card.onclick=()=>{$("site-select").value=card.dataset.site;changeSite(card.dataset.site)});const transfers=data.transfers;$("transfer-table").innerHTML=transfers.length?`<table class="data-table"><thead><tr><th>SKU</th><th>From</th><th>To</th><th>Quantity</th><th>Reason</th></tr></thead><tbody>${transfers.map(t=>`<tr><td>${t.sku_id}<br><span class="detail">${t.sku_name}</span></td><td>${t.source_name}</td><td>${t.destination_name}</td><td>${fmt(t.quantity)} ${t.uom}</td><td>${t.reason}</td></tr>`).join("")}</tbody></table>`:`<p class="empty">No safe cross-site transfer is currently recommended.</p>`}
+function renderSummary(s){if(selectedSite==="ALL"){const n=s.network_summary;$("summary-kpis").innerHTML=metric(`${fmt(n.digital_twin_fill_rate_pct,2)}%`,`Network fill rate`,`good`)+metric(`${fmt(n.manual_baseline_fill_rate_pct,2)}%`,`Manual baseline`,`warn`)+metric(n.stockout_days_avoided,`Stockout days avoided`,`good`)+metric(`${fmt(n.forecast_accuracy_improvement_pct)}%`,`Forecast gain`,`good`);return}const k=s.site_summary;$("summary-kpis").innerHTML=metric(`${fmt(k.digital_twin_fill_rate_pct,2)}%`,`Digital twin fill rate`,`good`)+metric(`${fmt(k.manual_baseline_fill_rate_pct,2)}%`,`Manual fill rate`,`warn`)+metric(`${fmt(k.capacity_utilization_pct)}%`,`Capacity used`)+metric(k.stockout_days_avoided,`Stockout days avoided`,`good`)+metric(`${fmt(k.avg_digital_twin_WMAPE_pct)}%`,`Digital twin WMAPE`)+metric(`${fmt(k.data_inconsistency_rate_pct)}%`,`Source inconsistency`,`warn`)}
+function renderInventory(skus){$("inventory-body").innerHTML=Object.entries(skus).map(([id,s])=>{const low=s.reconciled_stock<=s.reorder_point,watch=!low&&s.reconciled_stock<=s.reorder_point*1.35,color=low?"var(--red)":watch?"var(--amber)":"var(--green)",label=low?"Below minimum":watch?"Watch":"Healthy";return `<tr><td><strong>${id}</strong><br><span class="detail">${s.sku_name}<br>${s.batch_number}${s.expiry_date?` | Exp ${s.expiry_date}`:""}</span></td><td>${fmt(s.reconciled_stock)} ${s.uom}<br><span class="detail">Min ${fmt(s.reorder_point)}</span></td><td><span class="pill">${s.storage_mode}</span></td><td><span class="status-dot" style="background:${color}"></span>${label}</td></tr>`}).join("")}
+async function renderAlerts(){const list=await getJSON(`/api/alerts?site=${selectedSite}`);$("alert-list").innerHTML=list.length?list.map(a=>`<div class="alert ${a.severity}"><div class="meta">${a.site_name?`${a.site_name} | `:""}${a.type} | ${a.sku_id}</div>${a.message}</div>`).join(""):`<p class="empty">No active exceptions.</p>`}
+async function renderAgents(){const list=await getJSON(`/api/agent-log?site=${selectedSite}`);$("agent-list").innerHTML=list.length?list.slice().reverse().map(e=>`<div class="event ${e.severity}"><div class="meta">${e.site_id} | ${e.agent} | ${e.sku_id}</div>${e.message}</div>`).join(""):`<p class="empty">Agent events will appear as the replay advances.</p>`}
+function setupEvidence(skus){const select=$("sku-select"),previous=select.value,entries=Object.entries(skus),signature=entries.map(([id,s])=>`${id}:${s.sku_name}`).join("|"),current=[...select.options].map(option=>`${option.value}:${option.textContent.replace(`${option.value} - `,"")}`).join("|");if(signature!==current){select.innerHTML=entries.map(([id,s])=>`<option value="${id}">${id} - ${s.sku_name}</option>`).join("");if(Object.hasOwn(skus,previous))select.value=previous}select.onchange=()=>loadEvidence(select.value);if(!$("view-evidence").hidden&&select.value)loadEvidence(select.value)}
+async function loadEvidence(skuId){if(!skuId||selectedSite==="ALL")return;try{const series=await getJSON(`/api/sku-series?site=${encodeURIComponent(selectedSite)}&sku=${encodeURIComponent(skuId)}`);drawEvidence(series)}catch(error){console.error(error);$("provenance").textContent="Unable to load evidence series."}}
+function drawEvidence(series){const canvas=$("evidence-chart"),rect=canvas.getBoundingClientRect(),dpr=devicePixelRatio||1;if(!series.digital_twin_stock||!series.manual_baseline_perceived_stock){$("provenance").textContent="Evidence series is unavailable for this SKU.";return}canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);const w=rect.width,h=rect.height,left=42,right=16,top=18,bottom=30,all=[...series.digital_twin_stock,...series.manual_baseline_perceived_stock].filter(Number.isFinite),max=Math.max(...all,series.reorder_point||0,1),min=Math.min(...all,0);ctx.clearRect(0,0,w,h);ctx.font="10px Segoe UI";ctx.fillStyle="#8ea0ae";ctx.textAlign="right";ctx.textBaseline="middle";ctx.strokeStyle="#273746";ctx.lineWidth=1;for(let i=0;i<4;i++){const value=max-(max-min)*i/3,y=top+(h-top-bottom)*i/3;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke();ctx.fillText(Math.round(value),left-6,y)}ctx.textAlign="center";ctx.textBaseline="top";ctx.fillText("Day 0",left,h-bottom+8);ctx.fillText(`Day ${series.days.length-1}`,w-right,h-bottom+8);ctx.save();ctx.translate(11,(top+h-bottom)/2);ctx.rotate(-Math.PI/2);ctx.fillText(`Stock (${series.uom})`,0,0);ctx.restore();function yFor(value){return h-bottom-(value-min)/(max-min||1)*(h-top-bottom)}function line(values,color){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();let started=false;values.forEach((v,i)=>{if(!Number.isFinite(v)){started=false;return}const x=left+(w-left-right)*i/(values.length-1),y=yFor(v);if(started)ctx.lineTo(x,y);else{ctx.moveTo(x,y);started=true}});ctx.stroke()}line(series.digital_twin_stock,"#57d68d");line(series.manual_baseline_perceived_stock,"#f4bd59");if(Number.isFinite(series.reorder_point)){ctx.setLineDash([5,4]);ctx.strokeStyle="#ef6b73";ctx.beginPath();ctx.moveTo(left,yFor(series.reorder_point));ctx.lineTo(w-right,yFor(series.reorder_point));ctx.stroke();ctx.setLineDash([])}$("provenance").innerHTML=`<strong>${series.sku_name}</strong><br>Batch: ${series.batch_number}<br>Zone: ${series.storage_mode} | UOM: ${series.uom}<br>Source: ${series.source_dataset}<br>Derived fields: ${series.derived_fields}`}
+async function refresh(){try{const data=await getJSON(`/api/state?site=${selectedSite}`);currentState=data;renderSummary(data);if(selectedSite==="ALL"){renderNetwork(data)}else{updateWarehouse(data.skus);$("day-label").textContent=`Day ${data.day} / ${data.n_days-1}`;playing=data.playing;$("btn-play").textContent=playing?"Pause":"Play";renderInventory(data.skus);setupEvidence(data.skus)}if(document.querySelector('[data-tab="alerts"]').classList.contains("active"))renderAlerts();if(document.querySelector('[data-tab="agents"]').classList.contains("active"))renderAgents()}catch(error){console.error(error)}}
+async function changeSite(site){selectedSite=site;const all=site==="ALL";$("overview").hidden=!all;$("scene").hidden=all;$("scene-overlay").hidden=all;$("play-controls").hidden=all;if(!all){$("scene-title").textContent=$("site-select").selectedOptions[0].textContent;$("scene-subtitle").textContent="Drag to rotate | Scroll to zoom | Stock shown against item capacity"}await refresh();await renderAlerts();await renderAgents()}
 
-function makeZoneSign(text, x, z, color) {
-  const sprite = makeLabelSprite(text, 1.4);
-  sprite.position.set(x, 8.2, z);
-  scene.add(sprite);
-  const haloMat = new THREE.SpriteMaterial({ color, transparent: true, opacity: 0.0 });
-  return sprite;
-}
+document.querySelectorAll(".tab").forEach(tab=>tab.onclick=async()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===tab));document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!==`view-${tab.dataset.tab}`);if(tab.dataset.tab==="alerts")await renderAlerts();if(tab.dataset.tab==="agents")await renderAgents();if(tab.dataset.tab==="evidence"&&selectedSite!=="ALL"&&currentState)setupEvidence(currentState.skus)});
+$("site-select").onchange=e=>changeSite(e.target.value);$("btn-play").onclick=async()=>{await fetch("/api/control",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site:selectedSite,action:playing?"pause":"play"})});refresh()};$("btn-reset").onclick=async()=>{await fetch("/api/control",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site:selectedSite,action:"reset"})});refresh()};
+const resizer=$("resizer");let resizing=false;resizer.onpointerdown=()=>resizing=true;window.onpointerup=()=>{resizing=false;localStorage.setItem("sidebarWidth",getComputedStyle(document.documentElement).getPropertyValue("--sidebar"))};window.addEventListener("pointermove",e=>{if(!resizing)return;const width=Math.max(320,Math.min(620,innerWidth-e.clientX));document.documentElement.style.setProperty("--sidebar",`${width}px`)});const saved=localStorage.getItem("sidebarWidth");if(saved)document.documentElement.style.setProperty("--sidebar",saved);$("mobile-toggle").onclick=()=>$("sidebar").classList.toggle("closed");
 
-const pallSlotOffsets = (() => {
-  // local offsets within a bay for each of PALLET_SLOTS pallet positions
-  const offs = [];
-  for (let lvl = 0; lvl < PALLET_LEVELS; lvl++) {
-    for (let p = 0; p < PALLET_PER_LEVEL; p++) {
-      const dz = (p - (PALLET_PER_LEVEL - 1) / 2) * (PALLET_SIZE.d + 0.05);
-      offs.push({ y: 0.4 + lvl * LEVEL_HEIGHT, z: dz });
-    }
-  }
-  return offs;
-})();
-
-function buildRackFrame(x, z, color) {
-  const postMat = new THREE.MeshStandardMaterial({ color: 0x33415e, metalness: 0.4, roughness: 0.6 });
-  const beamMat = new THREE.MeshStandardMaterial({ color, metalness: 0.3, roughness: 0.5 });
-  const totalHeight = PALLET_LEVELS * LEVEL_HEIGHT + 0.6;
-
-  const corners = [
-    [-BAY_WIDTH / 2, -BAY_DEPTH / 2], [BAY_WIDTH / 2, -BAY_DEPTH / 2],
-    [-BAY_WIDTH / 2, BAY_DEPTH / 2], [BAY_WIDTH / 2, BAY_DEPTH / 2],
-  ];
-  corners.forEach(([dx, dz]) => {
-    const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, totalHeight, 0.12), postMat);
-    post.position.set(x + dx, totalHeight / 2, z + dz);
-    scene.add(post);
-  });
-  for (let lvl = 0; lvl <= PALLET_LEVELS; lvl++) {
-    const beam = new THREE.Mesh(new THREE.BoxGeometry(BAY_WIDTH, 0.08, 0.08), beamMat);
-    beam.position.set(x, lvl * LEVEL_HEIGHT + 0.4, z - BAY_DEPTH / 2);
-    scene.add(beam);
-    const beam2 = beam.clone();
-    beam2.position.z = z + BAY_DEPTH / 2;
-    scene.add(beam2);
-  }
-  // status beacon on top
-  const beacon = new THREE.Mesh(
-    new THREE.SphereGeometry(0.18, 12, 12),
-    new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x5fd685, emissiveIntensity: 0.8 })
-  );
-  beacon.position.set(x, totalHeight + 0.4, z);
-  scene.add(beacon);
-  return beacon;
-}
-
-function buildBay(skuId, x, z, zoneColor) {
-  const beacon = buildRackFrame(x, z, zoneColor);
-
-  const palletGeo = new THREE.BoxGeometry(PALLET_SIZE.w, PALLET_SIZE.h, PALLET_SIZE.d);
-  const palletMat = new THREE.MeshStandardMaterial({ color: 0x5fd685, emissive: 0x102015 });
-  const inst = new THREE.InstancedMesh(palletGeo, palletMat, PALLET_SLOTS);
-  inst.position.set(x, 0, z);
-  scene.add(inst);
-
-  const dummy = new THREE.Object3D();
-  pallSlotOffsets.forEach((off, i) => {
-    dummy.position.set(0, off.y, off.z);
-    dummy.scale.set(1, 1, 1);
-    dummy.updateMatrix();
-    inst.setMatrixAt(i, dummy.matrix);
-  });
-  inst.instanceMatrix.needsUpdate = true;
-
-  const label = makeLabelSprite(skuId);
-  label.position.set(x, PALLET_LEVELS * LEVEL_HEIGHT + 1.3, z);
-  scene.add(label);
-
-  racks[skuId] = { inst, beacon, litCount: -1 };
-}
-
-function updateBay(skuId, s) {
-  const rack = racks[skuId];
-  if (!rack) return;
-
-  const litCount = Math.max(0, Math.min(PALLET_SLOTS, Math.round(
-    (s.pallet_count / Math.max(1, s.pallet_capacity)) * PALLET_SLOTS
-  )));
-  const color = colorForStatus(s.reconciled_stock, s.reorder_point);
-
-  if (litCount === rack.litCount && rack._lastColor === color) return;
-  rack.litCount = litCount;
-  rack._lastColor = color;
-
-  const dummy = new THREE.Object3D();
-  const c = new THREE.Color(color);
-  for (let i = 0; i < PALLET_SLOTS; i++) {
-    const off = pallSlotOffsets[i];
-    const lit = i < litCount;
-    dummy.position.set(0, off.y, off.z);
-    dummy.scale.setScalar(lit ? 1 : 0.001); // empty slots collapse to invisible
-    dummy.updateMatrix();
-    rack.inst.setMatrixAt(i, dummy.matrix);
-    rack.inst.setColorAt(i, lit ? c : new THREE.Color(0x1a2235));
-  }
-  rack.inst.instanceMatrix.needsUpdate = true;
-  if (rack.inst.instanceColor) rack.inst.instanceColor.needsUpdate = true;
-
-  rack.beacon.material.color.set(color);
-  rack.beacon.material.emissive.set(color);
-}
-
-// ---- Zone layout -----------------------------------------------------
-const AISLE_WIDTH = 2.8;     // narrow aisle (VNA truck width) between facing rows
-const AISLE_PITCH = 8.5;     // spacing between aisle centres
-const BAY_PITCH = 3.2;       // spacing between bays along an aisle
-const ROW_OFFSET = AISLE_WIDTH / 2 + BAY_DEPTH / 2;
-
-function layoutVNA(skuIds, originX) {
-  // 3 aisles x (2 rows x 2 bays) = up to 12 bays
-  const baysPerAisle = 4;
-  skuIds.forEach((skuId, i) => {
-    const aisleIdx = Math.floor(i / baysPerAisle);
-    const withinAisle = i % baysPerAisle;
-    const side = withinAisle < 2 ? -1 : 1; // left/right row
-    const bayIdx = withinAisle % 2;
-
-    const aisleCenterX = originX + aisleIdx * AISLE_PITCH;
-    const x = aisleCenterX + side * ROW_OFFSET;
-    const z = (bayIdx - 0.5) * BAY_PITCH;
-    buildBay(skuId, x, z, 0x3a8df0);
-  });
-  const nAisles = Math.ceil(skuIds.length / baysPerAisle);
-  for (let a = 0; a < nAisles; a++) {
-    const aisleCenterX = originX + a * AISLE_PITCH;
-    const sign = makeZoneSign(`VNA AISLE ${a + 1}`, aisleCenterX, -6.5, 0x3a8df0);
-  }
-  return originX + (nAisles - 1) * AISLE_PITCH;
-}
-
-function layoutEnclosedZone(skuIds, centerX, centerZ, label, tint) {
-  // small enclosed room: bays in a single facing row, tinted floor + wire walls
-  const roomW = Math.max(8, skuIds.length * BAY_PITCH + 4);
-  const roomD = 7;
-  const floorPatch = new THREE.Mesh(
-    new THREE.PlaneGeometry(roomW, roomD),
-    new THREE.MeshStandardMaterial({ color: tint, transparent: true, opacity: 0.18 })
-  );
-  floorPatch.rotation.x = -Math.PI / 2;
-  floorPatch.position.set(centerX, 0.02, centerZ);
-  scene.add(floorPatch);
-
-  const wireMat = new THREE.LineBasicMaterial({ color: tint, transparent: true, opacity: 0.7 });
-  const wallHeight = 5.5;
-  const corners = [
-    [-roomW / 2, -roomD / 2], [roomW / 2, -roomD / 2],
-    [roomW / 2, roomD / 2], [-roomW / 2, roomD / 2], [-roomW / 2, -roomD / 2],
-  ];
-  const pts = corners.map(([dx, dz]) => new THREE.Vector3(centerX + dx, 0, centerZ + dz));
-  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), wireMat));
-  corners.slice(0, 4).forEach(([dx, dz]) => {
-    const pts2 = [new THREE.Vector3(centerX + dx, 0, centerZ + dz), new THREE.Vector3(centerX + dx, wallHeight, centerZ + dz)];
-    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), wireMat));
-  });
-
-  const startX = centerX - ((skuIds.length - 1) * BAY_PITCH) / 2;
-  skuIds.forEach((skuId, i) => {
-    buildBay(skuId, startX + i * BAY_PITCH, centerZ, tint);
-  });
-  makeZoneSign(label, centerX, centerZ - roomD / 2 - 1, tint);
-}
-
-function buildWarehouse(skus) {
-  const vnaIds = [], coldIds = [], cageIds = [];
-  for (const [id, s] of Object.entries(skus)) {
-    if (s.storage_mode === "COLD_VAULT") coldIds.push(id);
-    else if (s.storage_mode === "SECURE_CAGE") cageIds.push(id);
-    else vnaIds.push(id);
-  }
-  const vnaEndX = layoutVNA(vnaIds, -((Math.ceil(vnaIds.length / 4) - 1) * AISLE_PITCH) / 2 - AISLE_PITCH);
-  layoutEnclosedZone(coldIds, vnaEndX + AISLE_PITCH * 1.6, -7, "COLD VAULT · 2–8°C (VNV)", 0x7fd1ff);
-  layoutEnclosedZone(cageIds, vnaEndX + AISLE_PITCH * 1.6, 7, "SECURE CAGE · CRITICAL EQUIPMENT", 0xc98cff);
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
-}
-animate();
-
-// ---- live data polling ----
-let warehouseBuilt = false;
-let playing = true;
-
-function statusLabel(stock, rp) {
-  if (stock <= rp) return ["At/below reorder", "#ff5f6d"];
-  if (stock <= rp * 1.6) return ["Watch", "#ffb454"];
-  return ["Healthy", "#5fd685"];
-}
-
-const ZONE_LABELS = { VNA: "VNA aisle", COLD_VAULT: "Cold vault (VNV)", SECURE_CAGE: "Secure cage" };
-
-async function refreshState() {
-  const res = await fetch("/api/state");
-  const data = await res.json();
-
-  if (!warehouseBuilt) {
-    buildWarehouse(data.skus);
-    warehouseBuilt = true;
-  }
-  for (const [skuId, s] of Object.entries(data.skus)) {
-    updateBay(skuId, s);
-  }
-
-  document.getElementById("day-label").textContent = `Day ${data.day} / ${data.n_days - 1}`;
-  document.getElementById("header-day").textContent = `Day ${data.day} / ${data.n_days - 1}`;
-  playing = data.playing;
-  document.getElementById("btn-play").textContent = playing ? "⏸ Pause" : "▶ Play";
-
-  const kpis = data.site_summary;
-  document.getElementById("kpi-grid").innerHTML = `
-    <div class="kpi"><div class="v good">${kpis.digital_twin_fill_rate_pct.toFixed(2)}%</div><div class="l">Digital twin fill rate</div></div>
-    <div class="kpi"><div class="v warn">${kpis.manual_baseline_fill_rate_pct.toFixed(2)}%</div><div class="l">Manual baseline fill rate</div></div>
-    <div class="kpi"><div class="v good">${kpis.stockout_days_avoided}</div><div class="l">Stockout days avoided</div></div>
-    <div class="kpi"><div class="v good">${kpis.forecast_accuracy_improvement_pct.toFixed(1)}%</div><div class="l">Forecast accuracy gain</div></div>
-    <div class="kpi" style="grid-column:1/3"><div class="v warn">${kpis.data_inconsistency_rate_pct.toFixed(1)}%</div><div class="l">Source spreadsheet inconsistency rate (validated away by agents below)</div></div>
-  `;
-
-  const tbody = document.getElementById("sku-table-body");
-  tbody.innerHTML = Object.entries(data.skus).map(([id, s]) => {
-    const [label, color] = statusLabel(s.reconciled_stock, s.reorder_point);
-    return `<tr>
-      <td>${id}</td>
-      <td>${ZONE_LABELS[s.storage_mode] || s.storage_mode}</td>
-      <td>${s.pallet_count.toFixed(1)} / ${s.pallet_capacity}</td>
-      <td><span class="dot" style="background:${color}"></span>${label}</td>
-    </tr>`;
-  }).join("");
-}
-
-async function refreshAgentLog() {
-  const res = await fetch("/api/agent-log");
-  const events = await res.json();
-  const feed = document.getElementById("agent-feed");
-  feed.innerHTML = events.map(e => `
-    <div class="ev ${e.severity}">
-      <div class="meta"><span class="agent-tag">${e.agent}</span> · ${e.sku_id} · ${e.timestamp}</div>
-      ${e.message}
-    </div>
-  `).join("");
-}
-
-document.getElementById("btn-play").addEventListener("click", async () => {
-  await fetch("/api/control", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: playing ? "pause" : "play" }),
-  });
-  refreshState();
-});
-document.getElementById("btn-reset").addEventListener("click", async () => {
-  await fetch("/api/control", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "reset" }),
-  });
-  refreshState();
-});
-
-refreshState();
-refreshAgentLog();
-setInterval(refreshState, 1500);
-setInterval(refreshAgentLog, 1500);
+initScene();const initial=await getJSON("/api/sites");initial.sites.forEach(site=>$("site-select").insertAdjacentHTML("beforeend",`<option value="${site.site_id}">${site.site_name}</option>`));await changeSite("ALL");setInterval(refresh,1600);
 </script>
 </body>
 </html>

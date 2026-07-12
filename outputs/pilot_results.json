@@ -1,361 +1,738 @@
 {
   "simulation_config": {
     "duration_days": 30,
-    "site": "Central Distribution Hub",
-    "num_skus": 16
-  },
-  "data_quality_metrics": {
-    "total_records": 505,
-    "inconsistent_records": 46,
-    "missing_records": 19,
-    "duplicate_records": 50,
-    "inconsistency_rate_pct": 12.87
-  },
-  "forecast_accuracy_summary": {
-    "avg_manual_baseline_WMAPE_pct": 49.81,
-    "avg_digital_twin_WMAPE_pct": 29.66,
-    "forecast_accuracy_improvement_pct": 40.46
-  },
-  "operational_comparison": {
-    "digital_twin_fill_rate_pct": 99.88,
-    "manual_baseline_fill_rate_pct": 99.57,
-    "fill_rate_improvement_pct_points": 0.31,
-    "digital_twin_stockout_days": 4,
-    "manual_baseline_stockout_days": 7,
-    "stockout_days_avoided": 3
-  },
-  "kpi_summary_digital_twin": {
-    "per_sku": [
-      {
-        "sku_id": "MED-001",
-        "sku_name": "Surgical Gloves, Nitrile (Box of 100)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 644.4,
-        "total_fulfilled": 644.4
-      },
-      {
-        "sku_id": "MED-007",
-        "sku_name": "N95 Respirator Masks (Box of 20)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 752.8,
-        "total_fulfilled": 752.8
-      },
-      {
-        "sku_id": "MED-002",
-        "sku_name": "IV Cannulas, 20G (Pack of 50)",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 479.0,
-        "total_fulfilled": 479.0
-      },
-      {
-        "sku_id": "MED-008",
-        "sku_name": "IV Fluid Bags, Normal Saline 1L",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 591.4,
-        "total_fulfilled": 591.4
-      },
-      {
-        "sku_id": "MED-003",
-        "sku_name": "Paracetamol 500mg (Box of 1000 tablets)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 283.4,
-        "total_fulfilled": 283.4
-      },
-      {
-        "sku_id": "MED-009",
-        "sku_name": "Amoxicillin 500mg (Box of 500 capsules)",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 203.4,
-        "total_fulfilled": 203.4
-      },
-      {
-        "sku_id": "MED-012",
-        "sku_name": "Influenza Vaccine (Vial Pack of 10, cold-chain 2-8\u00c2\u00b0C)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 47.8,
-        "total_fulfilled": 47.8
-      },
-      {
-        "sku_id": "MED-005",
-        "sku_name": "Insulin Syringes (Pack of 100, cold-chain)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 141.7,
-        "total_fulfilled": 141.7
-      },
-      {
-        "sku_id": "MED-004",
-        "sku_name": "Wound Dressing Kits, Sterile",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 212.9,
-        "total_fulfilled": 212.9
-      },
-      {
-        "sku_id": "MED-010",
-        "sku_name": "Surgical Sutures, Absorbable (Box of 12)",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 165.0,
-        "total_fulfilled": 165.0
-      },
-      {
-        "sku_id": "MED-014",
-        "sku_name": "Urinary Catheters (Pack of 10)",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 162.7,
-        "total_fulfilled": 162.7
-      },
-      {
-        "sku_id": "MED-015",
-        "sku_name": "Blood Collection Tubes, EDTA (Box of 100)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 355.6,
-        "total_fulfilled": 355.6
-      },
-      {
-        "sku_id": "MED-011",
-        "sku_name": "Rapid Antigen Test Kits (Box of 25)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 95.2,
-        "total_fulfilled": 95.2
-      },
-      {
-        "sku_id": "MED-006",
-        "sku_name": "Defibrillator Pads, Adult (Pair)",
-        "abc_class": "C",
-        "xyz_class": "Z",
-        "fill_rate_pct": 88.29,
-        "stockout_days": 4,
-        "total_demand": 45.3,
-        "total_fulfilled": 40.0
-      },
-      {
-        "sku_id": "MED-013",
-        "sku_name": "Oxygen Masks, Adult Non-Rebreather",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 169.9,
-        "total_fulfilled": 169.9
-      },
-      {
-        "sku_id": "MED-016",
-        "sku_name": "Ventilator Circuit Kits, Single-Use",
-        "abc_class": "C",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 26.4,
-        "total_fulfilled": 26.4
-      }
+    "sites": 3,
+    "site_names": [
+      "Central Distribution Hub",
+      "North Regional Hub",
+      "East Satellite Depot"
     ],
-    "site_fill_rate_pct": 99.88,
-    "total_stockout_days": 4,
-    "total_reorders_placed": 19
+    "dataset": "Kaggle Hospital Supply Chain"
   },
-  "kpi_summary_manual_baseline": {
-    "per_sku": [
-      {
-        "sku_id": "MED-001",
-        "sku_name": "Surgical Gloves, Nitrile (Box of 100)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 644.4,
-        "total_fulfilled": 644.4
+  "sites": {
+    "SITE_A": {
+      "site_id": "SITE_A",
+      "site_name": "Central Distribution Hub",
+      "num_skus": 10,
+      "data_quality_metrics": {
+        "total_records": 313,
+        "inconsistent_records": 23,
+        "missing_records": 18,
+        "duplicate_records": 26,
+        "inconsistency_rate_pct": 13.1
       },
-      {
-        "sku_id": "MED-007",
-        "sku_name": "N95 Respirator Masks (Box of 20)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 752.8,
-        "total_fulfilled": 752.8
+      "forecast_accuracy_summary": {
+        "avg_manual_baseline_WMAPE_pct": 50.2,
+        "avg_digital_twin_WMAPE_pct": 14.92,
+        "forecast_accuracy_improvement_pct": 70.29
       },
-      {
-        "sku_id": "MED-002",
-        "sku_name": "IV Cannulas, 20G (Pack of 50)",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 479.0,
-        "total_fulfilled": 479.0
+      "operational_comparison": {
+        "digital_twin_fill_rate_pct": 57.45,
+        "manual_baseline_fill_rate_pct": 55.06,
+        "fill_rate_improvement_pct_points": 2.39,
+        "digital_twin_stockout_days": 129,
+        "manual_baseline_stockout_days": 139,
+        "stockout_days_avoided": 10
       },
-      {
-        "sku_id": "MED-008",
-        "sku_name": "IV Fluid Bags, Normal Saline 1L",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 99.11,
-        "stockout_days": 1,
-        "total_demand": 591.4,
-        "total_fulfilled": 586.2
+      "kpi_summary_digital_twin": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 66.91,
+            "stockout_days": 10,
+            "total_demand": 5647.9,
+            "total_fulfilled": 3779.1
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "Gloves",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 65.1,
+            "stockout_days": 11,
+            "total_demand": 8855.6,
+            "total_fulfilled": 5765.2
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.43,
+            "stockout_days": 13,
+            "total_demand": 6222.8,
+            "total_fulfilled": 3698.0
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 55.25,
+            "stockout_days": 14,
+            "total_demand": 7692.3,
+            "total_fulfilled": 4249.7
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.19,
+            "stockout_days": 13,
+            "total_demand": 8303.5,
+            "total_fulfilled": 4915.2
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 82.04,
+            "stockout_days": 6,
+            "total_demand": 4087.9,
+            "total_fulfilled": 3353.7
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 36.94,
+            "stockout_days": 19,
+            "total_demand": 7037.2,
+            "total_fulfilled": 2599.3
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 55.76,
+            "stockout_days": 13,
+            "total_demand": 6209.8,
+            "total_fulfilled": 3462.6
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 52.2,
+            "stockout_days": 15,
+            "total_demand": 7480.8,
+            "total_fulfilled": 3905.2
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 53.65,
+            "stockout_days": 15,
+            "total_demand": 9917.8,
+            "total_fulfilled": 5321.1
+          }
+        ],
+        "site_fill_rate_pct": 57.45,
+        "total_stockout_days": 129,
+        "total_reorders_placed": 14
       },
-      {
-        "sku_id": "MED-003",
-        "sku_name": "Paracetamol 500mg (Box of 1000 tablets)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 99.16,
-        "stockout_days": 1,
-        "total_demand": 283.4,
-        "total_fulfilled": 281.0
-      },
-      {
-        "sku_id": "MED-009",
-        "sku_name": "Amoxicillin 500mg (Box of 500 capsules)",
-        "abc_class": "A",
-        "xyz_class": "Y",
-        "fill_rate_pct": 97.14,
-        "stockout_days": 1,
-        "total_demand": 203.4,
-        "total_fulfilled": 197.6
-      },
-      {
-        "sku_id": "MED-012",
-        "sku_name": "Influenza Vaccine (Vial Pack of 10, cold-chain 2-8\u00c2\u00b0C)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 47.8,
-        "total_fulfilled": 47.8
-      },
-      {
-        "sku_id": "MED-005",
-        "sku_name": "Insulin Syringes (Pack of 100, cold-chain)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 141.7,
-        "total_fulfilled": 141.7
-      },
-      {
-        "sku_id": "MED-004",
-        "sku_name": "Wound Dressing Kits, Sterile",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 212.9,
-        "total_fulfilled": 212.9
-      },
-      {
-        "sku_id": "MED-010",
-        "sku_name": "Surgical Sutures, Absorbable (Box of 12)",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 165.0,
-        "total_fulfilled": 165.0
-      },
-      {
-        "sku_id": "MED-014",
-        "sku_name": "Urinary Catheters (Pack of 10)",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 162.7,
-        "total_fulfilled": 162.7
-      },
-      {
-        "sku_id": "MED-015",
-        "sku_name": "Blood Collection Tubes, EDTA (Box of 100)",
-        "abc_class": "A",
-        "xyz_class": "X",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 355.6,
-        "total_fulfilled": 355.6
-      },
-      {
-        "sku_id": "MED-011",
-        "sku_name": "Rapid Antigen Test Kits (Box of 25)",
-        "abc_class": "B",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 95.2,
-        "total_fulfilled": 95.2
-      },
-      {
-        "sku_id": "MED-006",
-        "sku_name": "Defibrillator Pads, Adult (Pair)",
-        "abc_class": "C",
-        "xyz_class": "Z",
-        "fill_rate_pct": 88.29,
-        "stockout_days": 4,
-        "total_demand": 45.3,
-        "total_fulfilled": 40.0
-      },
-      {
-        "sku_id": "MED-013",
-        "sku_name": "Oxygen Masks, Adult Non-Rebreather",
-        "abc_class": "B",
-        "xyz_class": "Y",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 169.9,
-        "total_fulfilled": 169.9
-      },
-      {
-        "sku_id": "MED-016",
-        "sku_name": "Ventilator Circuit Kits, Single-Use",
-        "abc_class": "C",
-        "xyz_class": "Z",
-        "fill_rate_pct": 100.0,
-        "stockout_days": 0,
-        "total_demand": 26.4,
-        "total_fulfilled": 26.4
+      "kpi_summary_manual_baseline": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 61.0,
+            "stockout_days": 12,
+            "total_demand": 5647.9,
+            "total_fulfilled": 3445.2
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "Gloves",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 58.62,
+            "stockout_days": 13,
+            "total_demand": 8855.6,
+            "total_fulfilled": 5190.9
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.43,
+            "stockout_days": 13,
+            "total_demand": 6222.8,
+            "total_fulfilled": 3698.0
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 48.72,
+            "stockout_days": 16,
+            "total_demand": 7692.3,
+            "total_fulfilled": 3747.8
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 67.46,
+            "stockout_days": 11,
+            "total_demand": 8303.5,
+            "total_fulfilled": 5601.9
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 74.29,
+            "stockout_days": 8,
+            "total_demand": 4087.9,
+            "total_fulfilled": 3036.7
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 33.47,
+            "stockout_days": 20,
+            "total_demand": 7037.2,
+            "total_fulfilled": 2355.5
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 49.73,
+            "stockout_days": 15,
+            "total_demand": 6209.8,
+            "total_fulfilled": 3088.1
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 46.83,
+            "stockout_days": 17,
+            "total_demand": 7480.8,
+            "total_fulfilled": 3503.0
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 57.25,
+            "stockout_days": 14,
+            "total_demand": 9917.8,
+            "total_fulfilled": 5677.5
+          }
+        ],
+        "site_fill_rate_pct": 55.06,
+        "total_stockout_days": 139,
+        "total_reorders_placed": 21
       }
-    ],
-    "site_fill_rate_pct": 99.57,
-    "total_stockout_days": 7,
-    "total_reorders_placed": 28
+    },
+    "SITE_B": {
+      "site_id": "SITE_B",
+      "site_name": "North Regional Hub",
+      "num_skus": 10,
+      "data_quality_metrics": {
+        "total_records": 318,
+        "inconsistent_records": 23,
+        "missing_records": 20,
+        "duplicate_records": 36,
+        "inconsistency_rate_pct": 13.52
+      },
+      "forecast_accuracy_summary": {
+        "avg_manual_baseline_WMAPE_pct": 55.65,
+        "avg_digital_twin_WMAPE_pct": 16.18,
+        "forecast_accuracy_improvement_pct": 70.92
+      },
+      "operational_comparison": {
+        "digital_twin_fill_rate_pct": 53.82,
+        "manual_baseline_fill_rate_pct": 51.56,
+        "fill_rate_improvement_pct_points": 2.26,
+        "digital_twin_stockout_days": 139,
+        "manual_baseline_stockout_days": 144,
+        "stockout_days_avoided": 5
+      },
+      "kpi_summary_digital_twin": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 67.92,
+            "stockout_days": 9,
+            "total_demand": 2806.0,
+            "total_fulfilled": 1905.8
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "Surgical Mask",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 55.63,
+            "stockout_days": 14,
+            "total_demand": 5374.6,
+            "total_fulfilled": 2990.0
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "Ventilator",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 36.0,
+            "stockout_days": 20,
+            "total_demand": 6776.4,
+            "total_fulfilled": 2439.5
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 56.24,
+            "stockout_days": 13,
+            "total_demand": 6056.1,
+            "total_fulfilled": 3405.7
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 55.4,
+            "stockout_days": 14,
+            "total_demand": 6320.5,
+            "total_fulfilled": 3501.7
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "X-ray Machine",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 61.95,
+            "stockout_days": 12,
+            "total_demand": 3813.0,
+            "total_fulfilled": 2362.1
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 54.06,
+            "stockout_days": 15,
+            "total_demand": 5675.5,
+            "total_fulfilled": 3068.4
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "Gloves",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 64.48,
+            "stockout_days": 11,
+            "total_demand": 3344.4,
+            "total_fulfilled": 2156.4
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "Ventilator",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 44.12,
+            "stockout_days": 18,
+            "total_demand": 6198.3,
+            "total_fulfilled": 2734.7
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "IV Drip",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.51,
+            "stockout_days": 13,
+            "total_demand": 6834.7,
+            "total_fulfilled": 4067.1
+          }
+        ],
+        "site_fill_rate_pct": 53.82,
+        "total_stockout_days": 139,
+        "total_reorders_placed": 13
+      },
+      "kpi_summary_manual_baseline": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "IV Drip",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 67.92,
+            "stockout_days": 9,
+            "total_demand": 2806.0,
+            "total_fulfilled": 1905.8
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "Surgical Mask",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 49.11,
+            "stockout_days": 16,
+            "total_demand": 5374.6,
+            "total_fulfilled": 2639.2
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "Ventilator",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 30.09,
+            "stockout_days": 22,
+            "total_demand": 6776.4,
+            "total_fulfilled": 2039.1
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 49.38,
+            "stockout_days": 15,
+            "total_demand": 6056.1,
+            "total_fulfilled": 2990.4
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 60.91,
+            "stockout_days": 12,
+            "total_demand": 6320.5,
+            "total_fulfilled": 3849.8
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "X-ray Machine",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 55.46,
+            "stockout_days": 14,
+            "total_demand": 3813.0,
+            "total_fulfilled": 2114.5
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.91,
+            "stockout_days": 12,
+            "total_demand": 5675.5,
+            "total_fulfilled": 3400.3
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "Gloves",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 64.48,
+            "stockout_days": 11,
+            "total_demand": 3344.4,
+            "total_fulfilled": 2156.4
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "Ventilator",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 36.55,
+            "stockout_days": 20,
+            "total_demand": 6198.3,
+            "total_fulfilled": 2265.5
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "IV Drip",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.51,
+            "stockout_days": 13,
+            "total_demand": 6834.7,
+            "total_fulfilled": 4067.1
+          }
+        ],
+        "site_fill_rate_pct": 51.56,
+        "total_stockout_days": 144,
+        "total_reorders_placed": 20
+      }
+    },
+    "SITE_C": {
+      "site_id": "SITE_C",
+      "site_name": "East Satellite Depot",
+      "num_skus": 10,
+      "data_quality_metrics": {
+        "total_records": 316,
+        "inconsistent_records": 18,
+        "missing_records": 12,
+        "duplicate_records": 32,
+        "inconsistency_rate_pct": 9.49
+      },
+      "forecast_accuracy_summary": {
+        "avg_manual_baseline_WMAPE_pct": 61.77,
+        "avg_digital_twin_WMAPE_pct": 15.47,
+        "forecast_accuracy_improvement_pct": 74.95
+      },
+      "operational_comparison": {
+        "digital_twin_fill_rate_pct": 49.17,
+        "manual_baseline_fill_rate_pct": 45.13,
+        "fill_rate_improvement_pct_points": 4.04,
+        "digital_twin_stockout_days": 160,
+        "manual_baseline_stockout_days": 171,
+        "stockout_days_avoided": 11
+      },
+      "kpi_summary_digital_twin": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 59.02,
+            "stockout_days": 13,
+            "total_demand": 4202.7,
+            "total_fulfilled": 2480.5
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 49.83,
+            "stockout_days": 16,
+            "total_demand": 4079.9,
+            "total_fulfilled": 2033.0
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "X-ray Machine",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 39.06,
+            "stockout_days": 18,
+            "total_demand": 4130.2,
+            "total_fulfilled": 1613.1
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 56.71,
+            "stockout_days": 15,
+            "total_demand": 4258.9,
+            "total_fulfilled": 2415.0
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "IV Drip",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 45.8,
+            "stockout_days": 17,
+            "total_demand": 5124.5,
+            "total_fulfilled": 2347.0
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 58.26,
+            "stockout_days": 13,
+            "total_demand": 3280.3,
+            "total_fulfilled": 1911.2
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 64.41,
+            "stockout_days": 13,
+            "total_demand": 3310.0,
+            "total_fulfilled": 2131.9
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 39.91,
+            "stockout_days": 19,
+            "total_demand": 4408.9,
+            "total_fulfilled": 1759.8
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "X-ray Machine",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 43.98,
+            "stockout_days": 18,
+            "total_demand": 3385.3,
+            "total_fulfilled": 1488.8
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "Gloves",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 41.11,
+            "stockout_days": 18,
+            "total_demand": 4846.5,
+            "total_fulfilled": 1992.1
+          }
+        ],
+        "site_fill_rate_pct": 49.17,
+        "total_stockout_days": 160,
+        "total_reorders_placed": 14
+      },
+      "kpi_summary_manual_baseline": {
+        "per_sku": [
+          {
+            "sku_id": "HSC-100",
+            "sku_name": "Ventilator",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 62.58,
+            "stockout_days": 12,
+            "total_demand": 4202.7,
+            "total_fulfilled": 2630.2
+          },
+          {
+            "sku_id": "HSC-101",
+            "sku_name": "X-ray Machine",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 42.17,
+            "stockout_days": 18,
+            "total_demand": 4079.9,
+            "total_fulfilled": 1720.3
+          },
+          {
+            "sku_id": "HSC-102",
+            "sku_name": "X-ray Machine",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 32.9,
+            "stockout_days": 20,
+            "total_demand": 4130.2,
+            "total_fulfilled": 1359.0
+          },
+          {
+            "sku_id": "HSC-103",
+            "sku_name": "Gloves",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 49.47,
+            "stockout_days": 17,
+            "total_demand": 4258.9,
+            "total_fulfilled": 2107.0
+          },
+          {
+            "sku_id": "HSC-104",
+            "sku_name": "IV Drip",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 44.31,
+            "stockout_days": 17,
+            "total_demand": 5124.5,
+            "total_fulfilled": 2270.8
+          },
+          {
+            "sku_id": "HSC-105",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 52.58,
+            "stockout_days": 15,
+            "total_demand": 3280.3,
+            "total_fulfilled": 1724.8
+          },
+          {
+            "sku_id": "HSC-106",
+            "sku_name": "Surgical Mask",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 70.43,
+            "stockout_days": 11,
+            "total_demand": 3310.0,
+            "total_fulfilled": 2331.2
+          },
+          {
+            "sku_id": "HSC-107",
+            "sku_name": "IV Drip",
+            "abc_class": "B",
+            "xyz_class": "Y",
+            "fill_rate_pct": 32.16,
+            "stockout_days": 21,
+            "total_demand": 4408.9,
+            "total_fulfilled": 1417.7
+          },
+          {
+            "sku_id": "HSC-108",
+            "sku_name": "X-ray Machine",
+            "abc_class": "C",
+            "xyz_class": "Y",
+            "fill_rate_pct": 38.1,
+            "stockout_days": 20,
+            "total_demand": 3385.3,
+            "total_fulfilled": 1289.7
+          },
+          {
+            "sku_id": "HSC-109",
+            "sku_name": "Gloves",
+            "abc_class": "A",
+            "xyz_class": "Y",
+            "fill_rate_pct": 34.33,
+            "stockout_days": 20,
+            "total_demand": 4846.5,
+            "total_fulfilled": 1663.9
+          }
+        ],
+        "site_fill_rate_pct": 45.13,
+        "total_stockout_days": 171,
+        "total_reorders_placed": 23
+      }
+    }
+  },
+  "network_summary": {
+    "digital_twin_fill_rate_pct": 53.48,
+    "manual_baseline_fill_rate_pct": 50.58,
+    "stockout_days_avoided": 26,
+    "forecast_accuracy_improvement_pct": 72.05,
+    "data_inconsistency_rate_pct": 12.04
   }
 }
