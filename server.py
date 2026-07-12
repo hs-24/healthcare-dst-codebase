@@ -193,22 +193,7 @@ def api_agent_log():
     return jsonify(twin.agent_log())
 
 
-@app.get("/api/sku-series")
-def api_sku_series():
-    sku_id = request.args.get("sku") or twin.sku_ids[0]
-    series = twin.per_sku.get(sku_id)
-    if series is None:
-        return jsonify({"error": f"Unknown SKU: {sku_id}"}), 404
 
-    return jsonify({
-        "sku_id": sku_id,
-        "sku_name": series["sku_name"],
-        "days": series["days"],
-        "dt_stock": series["digital_twin_stock"],
-        "manual_stock": series["manual_baseline_perceived_stock"],
-        "reorder_point": series["reorder_point"],
-        "demand": series["demand"],
-    })
 
 
 @app.post("/api/control")
