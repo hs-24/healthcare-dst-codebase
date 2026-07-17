@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import threading
 import time
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 from pathlib import Path
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -15,6 +18,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from digital_twin.agents import AgentWorkflow  # noqa: E402
 
 DATA_PATH = ROOT / "outputs" / "dashboard_data.json"
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434/api/chat")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:1.5b")
 app = Flask(__name__, static_folder=None)
 
 
@@ -157,6 +162,7 @@ def api_sites():
         "sites": dashboard_data["site_list"],
         "network_summary": dashboard_data["network_summary"],
         "source": dashboard_data["source"],
+        "chat_model": OLLAMA_MODEL,
     })
 
 
@@ -222,6 +228,285 @@ def api_control():
     for twin in targets:
         twin.control(body.get("action"), body.get("value"))
     return jsonify({"ok": True, "site": site_id})
+
+
+def _compact_site_state(twin: LiveTwin, question: str) -> dict:
+    state = twin.state()
+    terms = question.lower()
+    def classify(sku: dict) -> str:
+        if sku["reconciled_stock"] <= sku["reorder_point"]:
+            return "below minimum"
+        if sku["reconciled_stock"] <= sku["reorder_point"] * 1.35:
+            return "watch"
+        return "healthy"
+
+    include_manual = any(word in terms for word in ("manual", "perceived", "difference"))
+    include_expiry = any(word in terms for word in ("expiry", "expire", "batch", "cold"))
+    include_decisions = any(
+        word in terms for word in ("agent", "decision", "reorder", "expedite", "why")
+    )
+    include_pilot_metrics = any(
+        word in terms for word in (
+            "forecast", "accuracy", "wmape", "fill rate", "capacity", "pilot", "manual"
+        )
+    )
+    sku_items = list(state["skus"].items())
+    named_items = [
+        item for item in sku_items
+        if item[0].lower() in terms or item[1]["sku_name"].lower() in terms
+    ]
+    if named_items:
+        selected_items = named_items
+    elif include_expiry:
+        selected_items = sorted(
+            sku_items, key=lambda item: item[1].get("days_to_expiry") or 999999
+        )[:3]
+    else:
+        selected_items = sorted(
+            sku_items,
+            key=lambda item: item[1]["reconciled_stock"] / max(item[1]["reorder_point"], 1),
+        )[:2]
+
+    inventory = []
+    for sku_id, sku in selected_items:
+        position = {
+            "sku_id": sku_id,
+            "sku_name": sku["sku_name"],
+            "uom": sku["uom"],
+            "storage_mode": sku["storage_mode"],
+            "digital_twin_stock": sku["reconciled_stock"],
+            "forecast_daily_demand": sku["forecast_demand"],
+            "reorder_point": sku["reorder_point"],
+            "status": classify(sku),
+        }
+        if include_manual:
+            position["manual_perceived_stock"] = sku["perceived_stock"]
+        if include_expiry:
+            position.update({
+                "batch_number": sku["batch_number"],
+                "expiry_date": sku["expiry_date"],
+                "days_to_expiry": sku["days_to_expiry"],
+            })
+        if include_decisions:
+            position["decision"] = sku["decision"]
+        inventory.append(position)
+    compact = {
+        "site_id": state["site_id"],
+        "site_name": state["site_name"],
+        "simulation_day": state["day"],
+        "current_risk_summary": {
+            "below_minimum_skus": sum(classify(sku) == "below minimum" for sku in state["skus"].values()),
+            "watch_skus": sum(classify(sku) == "watch" for sku in state["skus"].values()),
+            "healthy_skus": sum(classify(sku) == "healthy" for sku in state["skus"].values()),
+        },
+        "inventory": inventory,
+    }
+    if include_pilot_metrics:
+        compact["historical_pilot_metrics"] = {
+            key: state["site_summary"][key]
+            for key in (
+                "digital_twin_fill_rate_pct",
+                "manual_baseline_fill_rate_pct",
+                "stockout_days_avoided",
+                "avg_digital_twin_WMAPE_pct",
+                "forecast_accuracy_improvement_pct",
+                "critical_skus",
+                "capacity_utilization_pct",
+            )
+        }
+    return compact
+
+
+def _chat_context(site_id: str, question: str) -> tuple[dict, list[str]]:
+    selected = list(twins.values()) if site_id == "ALL" else [twins[site_id]]
+    states = [_compact_site_state(twin, question) for twin in selected]
+    terms = question.lower()
+    include_events = any(
+        word in terms for word in ("agent", "decision", "reorder", "expedite", "why")
+    )
+    include_transfers = any(
+        word in terms for word in ("transfer", "move", "surplus", "shortage", "another site")
+    )
+    include_alerts = any(word in terms for word in ("alert", "exception", "action queue"))
+    alerts = [
+        {**alert, "site_id": key, "site_name": site["site_name"]}
+        for key, site in dashboard_data["sites"].items()
+        if site_id == "ALL" or key == site_id
+        for alert in site["alerts"]
+    ] if include_alerts else []
+    events = [
+        event
+        for twin in selected
+        for event in twin.agent_log(5)
+    ] if include_events else []
+    transfers = dashboard_data["transfers"] if include_transfers else []
+    risk_scores = {
+        state["site_id"]: (
+            state["current_risk_summary"]["below_minimum_skus"],
+            state["current_risk_summary"]["watch_skus"],
+        )
+        for state in states
+    }
+    highest_score = max(risk_scores.values())
+    highest_risk_sites = [
+        site_id for site_id, score in risk_scores.items() if score == highest_score
+    ]
+    risk_comparison = {
+        "ranking_rule": "More below-minimum SKUs ranks first; watch SKUs break ties.",
+        "site_scores": {
+            site_id: {"below_minimum_skus": score[0], "watch_skus": score[1]}
+            for site_id, score in risk_scores.items()
+        },
+        "highest_risk_sites": highest_risk_sites,
+        "result": (
+            "No site currently has a below-minimum or watch SKU."
+            if highest_score == (0, 0)
+            else "Tie between the listed sites."
+            if len(highest_risk_sites) > 1
+            else f"{highest_risk_sites[0]} has the highest current inventory risk."
+        ),
+    }
+    context = {
+        "scope": "All Sites" if site_id == "ALL" else states[0]["site_name"],
+        "field_definitions": {
+            "digital_twin_stock": "Trusted simulated current stock record for the selected day; not a demand forecast.",
+            "manual_perceived_stock": "Stock visible in the simulated manual spreadsheet baseline, which may contain errors.",
+            "forecast_daily_demand": "Expected daily consumption; separate from the current stock record.",
+            "reorder_point": "Precomputed stock threshold used to trigger replenishment review.",
+        },
+        "authoritative_current_risk_comparison": risk_comparison,
+        "sites": states,
+        "active_alerts": alerts,
+        "agent_events": events,
+        "cross_site_transfer_recommendations": transfers,
+    }
+    evidence = [f"Live digital-twin state: {context['scope']}"]
+    if alerts:
+        evidence.append(f"Active alert records: {len(alerts)}")
+    if events:
+        evidence.append(f"Recent agent events: {len(events)}")
+    if transfers:
+        evidence.append(f"Documented pilot transfer recommendations: {len(transfers)}")
+    return context, evidence
+
+
+def _verified_chat_answer(question: str, context: dict) -> str | None:
+    terms = question.lower()
+    transfers = context["cross_site_transfer_recommendations"]
+    if transfers:
+        lines = ["Documented pilot transfer recommendations:"]
+        lines.extend(
+            f"- {item['sku_id']} ({item['sku_name']}): {item['quantity']} {item['uom']} "
+            f"from {item['source_name']} to {item['destination_name']}."
+            for item in transfers
+        )
+        return "\n".join(lines)
+
+    events = context["agent_events"]
+    if events and any(term in terms for term in ("agent", "decision", "latest", "expedite")):
+        if "latest" in terms:
+            events = events[:1]
+            lines = ["Latest recorded agent event:"]
+        else:
+            lines = ["Recent recorded agent events:"]
+        lines.extend(
+            f"- {event['timestamp']} | {event['site_id']} | {event['agent']} | "
+            f"{event['sku_id']} | {event['severity']}: {event['message']}"
+            for event in events
+        )
+        return "\n".join(lines)
+
+    risk_terms = ("risk", "critical", "below minimum", "watch", "stockout")
+    if any(term in terms for term in risk_terms):
+        comparison = context["authoritative_current_risk_comparison"]
+        lines = [comparison["result"]]
+        lines.extend(
+            f"- {site_id}: {score['below_minimum_skus']} below minimum, "
+            f"{score['watch_skus']} watch."
+            for site_id, score in comparison["site_scores"].items()
+        )
+        return "\n".join(lines)
+    return None
+
+
+@app.post("/api/chat")
+def api_chat():
+    body = request.get_json(silent=True) or {}
+    message = str(body.get("message", "")).strip()
+    site_id = str(body.get("site", "ALL")).upper()
+    if not message:
+        return jsonify({"error": "Message is required."}), 400
+    if len(message) > 600:
+        return jsonify({"error": "Message must be 600 characters or fewer."}), 400
+    if site_id != "ALL" and site_id not in twins:
+        return jsonify({"error": "Unknown site."}), 404
+
+    history = []
+    submitted_history = body.get("history", [])
+    if not isinstance(submitted_history, list):
+        submitted_history = []
+    for item in submitted_history[-6:]:
+        role = item.get("role") if isinstance(item, dict) else None
+        content = str(item.get("content", ""))[:1200] if isinstance(item, dict) else ""
+        if role in {"user", "assistant"} and content:
+            history.append({"role": role, "content": content})
+
+    context, evidence = _chat_context(site_id, message)
+    verified_answer = _verified_chat_answer(message, context)
+    if verified_answer:
+        return jsonify({
+            "answer": verified_answer,
+            "evidence": [*evidence, "Verbatim or Python-verified dashboard result"],
+            "model": OLLAMA_MODEL,
+            "response_mode": "verified dashboard calculation",
+        })
+
+    system_prompt = """You are a read-only healthcare supply-chain inventory assistant.
+Answer only from the DIGITAL_TWIN_CONTEXT supplied below. Explain the recorded values
+and operational recommendations clearly and concisely. Never invent quantities, dates,
+sites, SKUs, alerts, forecasts, or agent actions. If the evidence is insufficient, say so.
+Do not provide clinical advice. Do not claim to execute orders, transfers, or data changes.
+Distinguish digital-twin stock from manual perceived stock and simulation results from
+real-world outcomes. The status and current_risk_summary fields are calculated by Python:
+copy them exactly and never recalculate or contradict them. Do not infer clinical or patient
+safety consequences. For site-risk comparisons, repeat the result in
+authoritative_current_risk_comparison exactly. If that result says no site has a risk, return
+only that sentence. Otherwise, add at most one sentence using its site_scores. Use plain text
+and short bullet points when useful.
+
+DIGITAL_TWIN_CONTEXT:
+""" + json.dumps(context, separators=(",", ":"), ensure_ascii=True)
+    payload = {
+        "model": OLLAMA_MODEL,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            *history,
+            {"role": "user", "content": message},
+        ],
+        "stream": False,
+        "options": {"temperature": 0.1, "num_predict": 180},
+    }
+    ollama_request = Request(
+        OLLAMA_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(ollama_request, timeout=90) as response:
+            result = json.loads(response.read().decode("utf-8"))
+        answer = str(result.get("message", {}).get("content", "")).strip()
+        if not answer:
+            raise ValueError("Ollama returned an empty answer")
+        return jsonify({"answer": answer, "evidence": evidence, "model": OLLAMA_MODEL})
+    except HTTPError as exc:
+        return jsonify({"error": f"Ollama rejected the request ({exc.code})."}), 502
+    except (URLError, TimeoutError):
+        return jsonify({
+            "error": "Local AI is unavailable. Start Ollama and confirm the model is installed."
+        }), 503
+    except (ValueError, json.JSONDecodeError):
+        return jsonify({"error": "Ollama returned an invalid response."}), 502
 
 
 if __name__ == "__main__":

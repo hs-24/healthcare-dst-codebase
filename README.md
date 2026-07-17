@@ -24,6 +24,16 @@ not authenticated operational data from a specific hospital.
 
 ## Run the prototype
 
+Install [Ollama](https://ollama.com/download/windows) and download the local
+chat model once on each computer:
+
+```powershell
+ollama pull qwen2.5:1.5b
+```
+
+Ollama normally starts in the background on Windows. The model is stored by
+Ollama outside this repository and must not be committed to Git.
+
 ```powershell
 python -m pip install -r requirements.txt
 python run_pilot.py
@@ -42,6 +52,11 @@ Open http://127.0.0.1:5000/.
 - Manual-versus-digital-twin evidence series
 - Batch, expiry, UOM, vendor, capacity, and data-provenance details
 - Cross-site transfer recommendations when one site has a safe surplus
+- Local read-only inventory chatbot grounded in live dashboard evidence
+
+The chatbot uses Ollama without a paid API. Risk rankings, transfer quantities,
+and agent-log answers are returned directly from verified Python data; the
+language model explains non-transactional questions and cannot alter inventory.
 
 ## Main files
 
