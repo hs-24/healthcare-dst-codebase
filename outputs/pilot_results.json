@@ -24,7 +24,11 @@
       "forecast_accuracy_summary": {
         "avg_manual_baseline_WMAPE_pct": 50.2,
         "avg_digital_twin_WMAPE_pct": 14.92,
-        "forecast_accuracy_improvement_pct": 70.29
+        "forecast_accuracy_improvement_pct": 70.29,
+        "avg_clean_stock_proxy_WMAPE_pct": 47.93,
+        "data_quality_effect_pct": 4.51,
+        "observability_effect_pct": 68.88,
+        "share_of_improvement_from_data_quality_pct": 6.42
       },
       "operational_comparison": {
         "digital_twin_fill_rate_pct": 57.45,
@@ -263,7 +267,11 @@
       "forecast_accuracy_summary": {
         "avg_manual_baseline_WMAPE_pct": 55.65,
         "avg_digital_twin_WMAPE_pct": 16.18,
-        "forecast_accuracy_improvement_pct": 70.92
+        "forecast_accuracy_improvement_pct": 70.92,
+        "avg_clean_stock_proxy_WMAPE_pct": 51.1,
+        "data_quality_effect_pct": 8.18,
+        "observability_effect_pct": 68.33,
+        "share_of_improvement_from_data_quality_pct": 11.53
       },
       "operational_comparison": {
         "digital_twin_fill_rate_pct": 53.82,
@@ -502,7 +510,11 @@
       "forecast_accuracy_summary": {
         "avg_manual_baseline_WMAPE_pct": 61.77,
         "avg_digital_twin_WMAPE_pct": 15.47,
-        "forecast_accuracy_improvement_pct": 74.95
+        "forecast_accuracy_improvement_pct": 74.95,
+        "avg_clean_stock_proxy_WMAPE_pct": 58.89,
+        "data_quality_effect_pct": 4.66,
+        "observability_effect_pct": 73.72,
+        "share_of_improvement_from_data_quality_pct": 6.21
       },
       "operational_comparison": {
         "digital_twin_fill_rate_pct": 49.17,

@@ -12,12 +12,27 @@ forecasts. This module computes two forecasts for comparison:
   2. "Digital twin"     - the same moving-average forecast computed on
      the CLEAN, centralised dataset the digital twin maintains.
 
-Comparing forecast error (MAE / MAPE / WMAPE) between the two
-isolates how much of today's forecasting problem is a *data quality*
-problem rather than a *forecasting method* problem -- both forecasts
-use an identical, simple method, so any accuracy gap is attributable
-to data centralisation alone. This is the central, defensible claim
-for the pilot's SMART objective.
+  3. "Clean-stock control" - the SAME stock-count-derived proxy method
+     as (1), but run on the CLEAN, uncorrupted stock series.
+
+All three arms use an identical moving-average method, so method is
+held constant throughout. The third arm exists because arms (1) and
+(2) do not face an identical *input signal*: the digital twin reads a
+demand series directly, whereas any spreadsheet process can only infer
+demand from periodic stock counts. That inference is structurally
+lossy regardless of data quality (see `_stock_proxy_error`), so
+comparing (1) against (2) alone would attribute the whole accuracy gap
+to data corruption when most of it is caused by the indirect
+observation of demand.
+
+Adding the control arm decomposes the total gap into:
+  * a DATA-QUALITY effect  (arm 3 vs arm 2) - what cleaning the
+    spreadsheet's errors, duplicates and blanks is actually worth; and
+  * an OBSERVABILITY effect (arm 1 vs arm 3) - what capturing demand at
+    the point of consumption is worth, over inferring it from stock.
+
+This decomposition, not the headline gap on its own, is the defensible
+claim for the pilot's SMART objective.
 """
 
 import numpy as np
@@ -28,6 +43,53 @@ def _moving_average_forecast(series: pd.Series, window: int = 7) -> pd.Series:
     """Simple trailing moving-average forecast, shifted by one day
     so a given day's forecast never uses that same day's actual value."""
     return series.rolling(window=window, min_periods=1).mean().shift(1)
+
+
+def _stock_proxy_error(stock_frame: pd.DataFrame, clean_sku: pd.DataFrame,
+                        window: int = 7) -> dict:
+    """
+    Reconstruct daily demand from a series of periodic stock counts, forecast
+    it with the same trailing moving average, and score it against true demand.
+
+    A stock-count series can only reveal demand as the day-over-day *drop* in
+    recorded stock. That reconstruction is structurally lossy in two ways that
+    have nothing to do with data quality:
+
+      * on any day a replenishment arrives, stock rises, so the clipped
+        difference reads zero demand; and
+      * throughout a stockout, stock is pinned at zero while real demand
+        continues, so the proxy again reads zero.
+
+    Both blind spots are present even when every stock count is perfectly
+    accurate. Running this same function on the clean stock series therefore
+    gives the control needed to separate this observability limit from the
+    effect of the spreadsheet corruption itself.
+    """
+    frame = stock_frame.sort_values("day").copy()
+    frame["stock_level"] = frame["stock_level"].interpolate(limit_direction="both")
+    frame["proxy_demand"] = (-frame["stock_level"].diff()).clip(lower=0)
+    frame["forecast"] = _moving_average_forecast(frame["proxy_demand"], window)
+
+    merged = frame.merge(
+        clean_sku[["day", "demand"]], on="day", how="inner"
+    ).dropna(subset=["forecast"])
+
+    if len(merged) == 0:
+        return {"abs_error": np.nan, "demand_total": np.nan,
+                "wmape": np.nan, "mae": np.nan, "mape": np.nan}
+
+    abs_error = float(np.sum(np.abs(merged["demand"] - merged["forecast"])))
+    demand_total = float(merged["demand"].sum())
+    return {
+        "abs_error": abs_error,
+        "demand_total": demand_total,
+        "wmape": abs_error / demand_total * 100 if demand_total else np.nan,
+        "mae": float(np.mean(np.abs(merged["demand"] - merged["forecast"]))),
+        "mape": float(np.mean(
+            np.abs(merged["demand"] - merged["forecast"]) /
+            merged["demand"].replace(0, np.nan)
+        ) * 100),
+    }
 
 
 def forecast_accuracy_comparison(clean_df: pd.DataFrame,
@@ -71,31 +133,18 @@ def forecast_accuracy_comparison(clean_df: pd.DataFrame,
             frag_sku.groupby("true_day", as_index=False)["stock_level"]
             .mean()  # collapse duplicate spreadsheet rows by averaging
             .rename(columns={"true_day": "day"})
-            .sort_values("day")
         )
-        frag_sku["stock_level"] = frag_sku["stock_level"].interpolate(
-            limit_direction="both"
-        )  # fill missing entries the way a human would (interpolate gaps)
-        frag_sku["proxy_demand"] = (-frag_sku["stock_level"].diff()).clip(lower=0)
-        frag_sku["forecast"] = _moving_average_forecast(frag_sku["proxy_demand"], window)
+        manual = _stock_proxy_error(frag_sku, clean_sku, window)
+        mb_mae, mb_mape, mb_wmape = manual["mae"], manual["mape"], manual["wmape"]
 
-        # Align proxy demand against true demand for error scoring
-        merged = frag_sku.merge(
-            clean_sku[["day", "demand"]], on="day", how="inner"
-        ).dropna(subset=["forecast"])
-
-        if len(merged) > 0:
-            mb_mae = float(np.mean(np.abs(merged["demand"] - merged["forecast"])))
-            mb_mape = float(np.mean(
-                np.abs(merged["demand"] - merged["forecast"]) /
-                merged["demand"].replace(0, np.nan)
-            ) * 100)
-            mb_wmape = float(
-                np.sum(np.abs(merged["demand"] - merged["forecast"])) /
-                np.sum(merged["demand"]) * 100
-            )
-        else:
-            mb_mae = mb_mape = mb_wmape = np.nan
+        # --- Clean-stock control: identical proxy method, uncorrupted stock ---
+        # Everything the manual baseline suffers from EXCEPT the corruption.
+        # The gap between this arm and the manual baseline is the true cost of
+        # fragmented data; the gap between this arm and the digital twin is the
+        # cost of never observing demand directly.
+        control = _stock_proxy_error(
+            clean_sku[["day", "stock_level"]].copy(), clean_sku, window
+        )
 
         results.append({
             "sku_id": sku_id,
@@ -106,16 +155,17 @@ def forecast_accuracy_comparison(clean_df: pd.DataFrame,
             "digital_twin_MAPE_pct": round(dt_mape, 2),
             "manual_baseline_WMAPE_pct": round(mb_wmape, 2),
             "digital_twin_WMAPE_pct": round(dt_wmape, 2),
+            "clean_stock_proxy_WMAPE_pct": round(control["wmape"], 2),
             # Raw totals retained so the overall summary can compute a
             # demand-weighted average across SKUs, rather than an
             # unweighted mean of each SKU's own WMAPE (which lets a
             # single low-volume, erratic SKU dominate the headline figure).
-            "manual_baseline_abs_error_total": float(
-                np.sum(np.abs(merged["demand"] - merged["forecast"])) if len(merged) > 0 else np.nan
-            ),
-            "manual_baseline_demand_total": float(merged["demand"].sum()) if len(merged) > 0 else np.nan,
+            "manual_baseline_abs_error_total": manual["abs_error"],
+            "manual_baseline_demand_total": manual["demand_total"],
             "digital_twin_abs_error_total": float(np.sum(np.abs(dt_eval["demand"] - dt_eval["forecast"]))),
             "digital_twin_demand_total": float(dt_eval["demand"].sum()),
+            "clean_stock_proxy_abs_error_total": control["abs_error"],
+            "clean_stock_proxy_demand_total": control["demand_total"],
         })
 
     return pd.DataFrame(results)
@@ -139,13 +189,31 @@ def summarize_accuracy_improvement(comparison_df: pd.DataFrame) -> dict:
     mb_total_demand = comparison_df["manual_baseline_demand_total"].sum()
     dt_total_error = comparison_df["digital_twin_abs_error_total"].sum()
     dt_total_demand = comparison_df["digital_twin_demand_total"].sum()
+    cs_total_error = comparison_df["clean_stock_proxy_abs_error_total"].sum()
+    cs_total_demand = comparison_df["clean_stock_proxy_demand_total"].sum()
 
     mb_wmape = (mb_total_error / mb_total_demand) * 100 if mb_total_demand else np.nan
     dt_wmape = (dt_total_error / dt_total_demand) * 100 if dt_total_demand else np.nan
+    cs_wmape = (cs_total_error / cs_total_demand) * 100 if cs_total_demand else np.nan
     improvement_pct = ((mb_wmape - dt_wmape) / mb_wmape) * 100 if mb_wmape else np.nan
+
+    # Decompose the headline improvement into its two mechanisms.
+    #   data-quality effect : manual baseline -> clean-stock control
+    #   observability effect: clean-stock control -> digital twin
+    data_quality_effect = ((mb_wmape - cs_wmape) / mb_wmape) * 100 if mb_wmape else np.nan
+    observability_effect = ((cs_wmape - dt_wmape) / cs_wmape) * 100 if cs_wmape else np.nan
+    total_gap = mb_wmape - dt_wmape
+    share_from_data_quality = (
+        ((mb_wmape - cs_wmape) / total_gap) * 100 if total_gap else np.nan
+    )
 
     return {
         "avg_manual_baseline_WMAPE_pct": round(mb_wmape, 2),
         "avg_digital_twin_WMAPE_pct": round(dt_wmape, 2),
         "forecast_accuracy_improvement_pct": round(improvement_pct, 2),
+        # --- mechanism decomposition (see module docstring) ---
+        "avg_clean_stock_proxy_WMAPE_pct": round(cs_wmape, 2),
+        "data_quality_effect_pct": round(data_quality_effect, 2),
+        "observability_effect_pct": round(observability_effect, 2),
+        "share_of_improvement_from_data_quality_pct": round(share_from_data_quality, 2),
     }

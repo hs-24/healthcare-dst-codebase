@@ -4,3 +4,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# Report deliverables (submitted via Dropbox, not part of the codebase)
+report/
+~$*.docx

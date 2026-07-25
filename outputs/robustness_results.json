@@ -1,0 +1,1013 @@
+{
+  "baseline_config": {
+    "duplicate_entry_rate": 0.05,
+    "missing_entry_rate": 0.04,
+    "manual_entry_error_rate": 0.06,
+    "reporting_lag_days": 1
+  },
+  "simulation": {
+    "duration_days": 30,
+    "random_seed": 42
+  },
+  "replication": {
+    "replications": 20,
+    "note": "Replication 0 uses the same seeds as run_pilot.py, so the pilot figures reported in the main text are one draw from this distribution.",
+    "network": {
+      "fill_rate_gain_pct_points": {
+        "n": 20,
+        "mean": 2.906,
+        "sd": 0.251,
+        "ci95_low": 2.789,
+        "ci95_high": 3.024,
+        "min": 2.427,
+        "max": 3.567
+      },
+      "stockout_days_avoided": {
+        "n": 20,
+        "mean": 27.35,
+        "sd": 2.434,
+        "ci95_low": 26.211,
+        "ci95_high": 28.489,
+        "min": 23.0,
+        "max": 31.0
+      },
+      "manual_baseline_WMAPE_pct": {
+        "n": 20,
+        "mean": 55.47,
+        "sd": 1.115,
+        "ci95_low": 54.948,
+        "ci95_high": 55.993,
+        "min": 53.357,
+        "max": 58.077
+      },
+      "clean_stock_proxy_WMAPE_pct": {
+        "n": 20,
+        "mean": 53.377,
+        "sd": 0.431,
+        "ci95_low": 53.176,
+        "ci95_high": 53.579,
+        "min": 52.64,
+        "max": 54.437
+      },
+      "digital_twin_WMAPE_pct": {
+        "n": 20,
+        "mean": 15.601,
+        "sd": 0.404,
+        "ci95_low": 15.412,
+        "ci95_high": 15.79,
+        "min": 15.013,
+        "max": 16.387
+      },
+      "forecast_improvement_pct": {
+        "n": 20,
+        "mean": 71.698,
+        "sd": 0.907,
+        "ci95_low": 71.274,
+        "ci95_high": 72.123,
+        "min": 70.013,
+        "max": 73.097
+      },
+      "data_quality_effect_pct": {
+        "n": 20,
+        "mean": 3.714,
+        "sd": 1.943,
+        "ci95_low": 2.805,
+        "ci95_high": 4.623,
+        "min": 0.02,
+        "max": 7.767
+      },
+      "observability_effect_pct": {
+        "n": 20,
+        "mean": 70.595,
+        "sd": 0.71,
+        "ci95_low": 70.262,
+        "ci95_high": 70.927,
+        "min": 68.963,
+        "max": 71.67
+      },
+      "share_from_data_quality_pct": {
+        "n": 20,
+        "mean": 5.136,
+        "sd": 2.664,
+        "ci95_low": 3.889,
+        "ci95_high": 6.383,
+        "min": -0.013,
+        "max": 10.567
+      },
+      "data_inconsistency_rate_pct": {
+        "n": 20,
+        "mean": 8.799,
+        "sd": 1.092,
+        "ci95_low": 8.288,
+        "ci95_high": 9.31,
+        "min": 7.457,
+        "max": 12.037
+      }
+    },
+    "per_site": {
+      "SITE_A": {
+        "site_name": "Central Distribution Hub",
+        "fill_rate_gain_pct_points": {
+          "n": 20,
+          "mean": 2.776,
+          "sd": 0.49,
+          "ci95_low": 2.547,
+          "ci95_high": 3.005,
+          "min": 1.83,
+          "max": 4.07
+        },
+        "manual_baseline_WMAPE_pct": {
+          "n": 20,
+          "mean": 51.722,
+          "sd": 2.813,
+          "ci95_low": 50.405,
+          "ci95_high": 53.038,
+          "min": 48.6,
+          "max": 59.1
+        },
+        "clean_stock_proxy_WMAPE_pct": {
+          "n": 20,
+          "mean": 49.348,
+          "sd": 0.742,
+          "ci95_low": 49.001,
+          "ci95_high": 49.695,
+          "min": 47.45,
+          "max": 50.52
+        },
+        "digital_twin_WMAPE_pct": {
+          "n": 20,
+          "mean": 15.499,
+          "sd": 0.596,
+          "ci95_low": 15.22,
+          "ci95_high": 15.778,
+          "min": 14.59,
+          "max": 16.54
+        },
+        "forecast_improvement_pct": {
+          "n": 20,
+          "mean": 69.959,
+          "sd": 1.852,
+          "ci95_low": 69.092,
+          "ci95_high": 70.826,
+          "min": 66.25,
+          "max": 74.32
+        },
+        "data_quality_effect_pct": {
+          "n": 20,
+          "mean": 4.363,
+          "sd": 4.488,
+          "ci95_low": 2.262,
+          "ci95_high": 6.464,
+          "min": -0.43,
+          "max": 16.68
+        },
+        "observability_effect_pct": {
+          "n": 20,
+          "mean": 68.59,
+          "sd": 1.225,
+          "ci95_low": 68.017,
+          "ci95_high": 69.163,
+          "min": 66.4,
+          "max": 70.29
+        },
+        "share_from_data_quality_pct": {
+          "n": 20,
+          "mean": 6.121,
+          "sd": 6.146,
+          "ci95_low": 3.245,
+          "ci95_high": 8.998,
+          "min": -0.65,
+          "max": 22.45
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 20,
+          "mean": 8.278,
+          "sd": 1.865,
+          "ci95_low": 7.406,
+          "ci95_high": 9.151,
+          "min": 5.84,
+          "max": 13.1
+        },
+        "stockout_days_avoided": {
+          "n": 20,
+          "mean": 9.6,
+          "sd": 1.142,
+          "ci95_low": 9.065,
+          "ci95_high": 10.135,
+          "min": 8.0,
+          "max": 12.0
+        }
+      },
+      "SITE_B": {
+        "site_name": "North Regional Hub",
+        "fill_rate_gain_pct_points": {
+          "n": 20,
+          "mean": 2.067,
+          "sd": 0.455,
+          "ci95_low": 1.854,
+          "ci95_high": 2.28,
+          "min": 1.24,
+          "max": 2.93
+        },
+        "manual_baseline_WMAPE_pct": {
+          "n": 20,
+          "mean": 53.874,
+          "sd": 2.06,
+          "ci95_low": 52.91,
+          "ci95_high": 54.839,
+          "min": 50.25,
+          "max": 58.2
+        },
+        "clean_stock_proxy_WMAPE_pct": {
+          "n": 20,
+          "mean": 51.502,
+          "sd": 0.751,
+          "ci95_low": 51.151,
+          "ci95_high": 51.854,
+          "min": 50.13,
+          "max": 53.09
+        },
+        "digital_twin_WMAPE_pct": {
+          "n": 20,
+          "mean": 15.736,
+          "sd": 0.741,
+          "ci95_low": 15.389,
+          "ci95_high": 16.083,
+          "min": 14.35,
+          "max": 16.71
+        },
+        "forecast_improvement_pct": {
+          "n": 20,
+          "mean": 70.737,
+          "sd": 1.998,
+          "ci95_low": 69.802,
+          "ci95_high": 71.673,
+          "min": 68.04,
+          "max": 75.35
+        },
+        "data_quality_effect_pct": {
+          "n": 20,
+          "mean": 4.277,
+          "sd": 3.709,
+          "ci95_low": 2.541,
+          "ci95_high": 6.013,
+          "min": -1.12,
+          "max": 10.98
+        },
+        "observability_effect_pct": {
+          "n": 20,
+          "mean": 69.452,
+          "sd": 1.286,
+          "ci95_low": 68.849,
+          "ci95_high": 70.054,
+          "min": 67.75,
+          "max": 72.31
+        },
+        "share_from_data_quality_pct": {
+          "n": 20,
+          "mean": 5.933,
+          "sd": 5.026,
+          "ci95_low": 3.581,
+          "ci95_high": 8.286,
+          "min": -1.61,
+          "max": 14.57
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 20,
+          "mean": 9.934,
+          "sd": 1.596,
+          "ci95_low": 9.187,
+          "ci95_high": 10.68,
+          "min": 6.73,
+          "max": 13.52
+        },
+        "stockout_days_avoided": {
+          "n": 20,
+          "mean": 6.35,
+          "sd": 1.899,
+          "ci95_low": 5.461,
+          "ci95_high": 7.239,
+          "min": 3.0,
+          "max": 10.0
+        }
+      },
+      "SITE_C": {
+        "site_name": "East Satellite Depot",
+        "fill_rate_gain_pct_points": {
+          "n": 20,
+          "mean": 3.876,
+          "sd": 0.594,
+          "ci95_low": 3.598,
+          "ci95_high": 4.154,
+          "min": 2.94,
+          "max": 4.94
+        },
+        "manual_baseline_WMAPE_pct": {
+          "n": 20,
+          "mean": 60.815,
+          "sd": 1.067,
+          "ci95_low": 60.316,
+          "ci95_high": 61.315,
+          "min": 59.44,
+          "max": 63.04
+        },
+        "clean_stock_proxy_WMAPE_pct": {
+          "n": 20,
+          "mean": 59.282,
+          "sd": 0.796,
+          "ci95_low": 58.909,
+          "ci95_high": 59.655,
+          "min": 57.53,
+          "max": 60.73
+        },
+        "digital_twin_WMAPE_pct": {
+          "n": 20,
+          "mean": 15.568,
+          "sd": 0.775,
+          "ci95_low": 15.206,
+          "ci95_high": 15.931,
+          "min": 14.3,
+          "max": 17.31
+        },
+        "forecast_improvement_pct": {
+          "n": 20,
+          "mean": 74.398,
+          "sd": 1.237,
+          "ci95_low": 73.819,
+          "ci95_high": 74.978,
+          "min": 72.17,
+          "max": 76.41
+        },
+        "data_quality_effect_pct": {
+          "n": 20,
+          "mean": 2.502,
+          "sd": 1.622,
+          "ci95_low": 1.743,
+          "ci95_high": 3.262,
+          "min": 0.16,
+          "max": 5.57
+        },
+        "observability_effect_pct": {
+          "n": 20,
+          "mean": 73.742,
+          "sd": 1.163,
+          "ci95_low": 73.198,
+          "ci95_high": 74.287,
+          "min": 71.5,
+          "max": 75.74
+        },
+        "share_from_data_quality_pct": {
+          "n": 20,
+          "mean": 3.353,
+          "sd": 2.144,
+          "ci95_low": 2.349,
+          "ci95_high": 4.356,
+          "min": 0.22,
+          "max": 7.31
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 20,
+          "mean": 8.184,
+          "sd": 1.557,
+          "ci95_low": 7.456,
+          "ci95_high": 8.913,
+          "min": 5.26,
+          "max": 11.39
+        },
+        "stockout_days_avoided": {
+          "n": 20,
+          "mean": 11.4,
+          "sd": 1.759,
+          "ci95_low": 10.577,
+          "ci95_high": 12.223,
+          "min": 8.0,
+          "max": 15.0
+        }
+      }
+    }
+  },
+  "sensitivity": {
+    "error_rate_multiplier": [
+      {
+        "setting": "0x",
+        "params": {
+          "manual_entry_error_rate": 0.0,
+          "missing_entry_rate": 0.0,
+          "duplicate_entry_rate": 0.0
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.809,
+          "sd": 0.183,
+          "ci95_low": 2.582,
+          "ci95_high": 3.037,
+          "min": 2.557,
+          "max": 2.99
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 26.0,
+          "sd": 2.828,
+          "ci95_low": 22.489,
+          "ci95_high": 29.511,
+          "min": 23.0,
+          "max": 29.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 0.0,
+          "sd": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 0.0,
+          "sd": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      {
+        "setting": "0.5x",
+        "params": {
+          "manual_entry_error_rate": 0.03,
+          "missing_entry_rate": 0.02,
+          "duplicate_entry_rate": 0.025
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.869,
+          "sd": 0.256,
+          "ci95_low": 2.552,
+          "ci95_high": 3.187,
+          "min": 2.49,
+          "max": 3.11
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 26.6,
+          "sd": 3.362,
+          "ci95_low": 22.427,
+          "ci95_high": 30.773,
+          "min": 23.0,
+          "max": 30.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 3.125,
+          "sd": 2.319,
+          "ci95_low": 0.246,
+          "ci95_high": 6.003,
+          "min": 0.817,
+          "max": 6.583
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 5.161,
+          "sd": 1.112,
+          "ci95_low": 3.78,
+          "ci95_high": 6.541,
+          "min": 4.133,
+          "max": 6.823
+        }
+      },
+      {
+        "setting": "1x",
+        "params": {
+          "manual_entry_error_rate": 0.06,
+          "missing_entry_rate": 0.04,
+          "duplicate_entry_rate": 0.05
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 3.005,
+          "sd": 0.362,
+          "ci95_low": 2.556,
+          "ci95_high": 3.455,
+          "min": 2.58,
+          "max": 3.567
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 27.6,
+          "sd": 3.209,
+          "ci95_low": 23.616,
+          "ci95_high": 31.584,
+          "min": 23.0,
+          "max": 31.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      },
+      {
+        "setting": "1.5x",
+        "params": {
+          "manual_entry_error_rate": 0.09,
+          "missing_entry_rate": 0.06,
+          "duplicate_entry_rate": 0.075
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.866,
+          "sd": 0.235,
+          "ci95_low": 2.574,
+          "ci95_high": 3.158,
+          "min": 2.583,
+          "max": 3.13
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 26.6,
+          "sd": 3.715,
+          "ci95_low": 21.988,
+          "ci95_high": 31.212,
+          "min": 24.0,
+          "max": 32.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 7.505,
+          "sd": 2.011,
+          "ci95_low": 5.009,
+          "ci95_high": 10.002,
+          "min": 4.187,
+          "max": 9.607
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 14.407,
+          "sd": 1.751,
+          "ci95_low": 12.233,
+          "ci95_high": 16.581,
+          "min": 11.923,
+          "max": 16.613
+        }
+      },
+      {
+        "setting": "2x",
+        "params": {
+          "manual_entry_error_rate": 0.12,
+          "missing_entry_rate": 0.08,
+          "duplicate_entry_rate": 0.1
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 3.049,
+          "sd": 0.342,
+          "ci95_low": 2.625,
+          "ci95_high": 3.473,
+          "min": 2.583,
+          "max": 3.377
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 28.4,
+          "sd": 3.578,
+          "ci95_low": 23.958,
+          "ci95_high": 32.842,
+          "min": 24.0,
+          "max": 32.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 8.749,
+          "sd": 2.438,
+          "ci95_low": 5.723,
+          "ci95_high": 11.776,
+          "min": 5.543,
+          "max": 11.223
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 18.335,
+          "sd": 1.564,
+          "ci95_low": 16.393,
+          "ci95_high": 20.276,
+          "min": 15.967,
+          "max": 20.19
+        }
+      },
+      {
+        "setting": "3x",
+        "params": {
+          "manual_entry_error_rate": 0.18,
+          "missing_entry_rate": 0.12,
+          "duplicate_entry_rate": 0.15
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 3.329,
+          "sd": 0.454,
+          "ci95_low": 2.765,
+          "ci95_high": 3.892,
+          "min": 2.97,
+          "max": 3.97
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 30.6,
+          "sd": 2.191,
+          "ci95_low": 27.88,
+          "ci95_high": 33.32,
+          "min": 28.0,
+          "max": 34.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 11.284,
+          "sd": 2.456,
+          "ci95_low": 8.235,
+          "ci95_high": 14.333,
+          "min": 7.78,
+          "max": 13.67
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 25.692,
+          "sd": 1.965,
+          "ci95_low": 23.252,
+          "ci95_high": 28.132,
+          "min": 23.353,
+          "max": 27.86
+        }
+      }
+    ],
+    "reporting_lag_days": [
+      {
+        "setting": "0 day(s)",
+        "params": {
+          "reporting_lag_days": 0
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.897,
+          "sd": 0.44,
+          "ci95_low": 2.351,
+          "ci95_high": 3.444,
+          "min": 2.323,
+          "max": 3.417
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 24.4,
+          "sd": 2.408,
+          "ci95_low": 21.41,
+          "ci95_high": 27.39,
+          "min": 21.0,
+          "max": 27.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      },
+      {
+        "setting": "1 day(s)",
+        "params": {
+          "reporting_lag_days": 1
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 3.005,
+          "sd": 0.362,
+          "ci95_low": 2.556,
+          "ci95_high": 3.455,
+          "min": 2.58,
+          "max": 3.567
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 27.6,
+          "sd": 3.209,
+          "ci95_low": 23.616,
+          "ci95_high": 31.584,
+          "min": 23.0,
+          "max": 31.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      },
+      {
+        "setting": "2 day(s)",
+        "params": {
+          "reporting_lag_days": 2
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 5.702,
+          "sd": 0.378,
+          "ci95_low": 5.233,
+          "ci95_high": 6.171,
+          "min": 5.163,
+          "max": 6.193
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 51.2,
+          "sd": 1.483,
+          "ci95_low": 49.359,
+          "ci95_high": 53.041,
+          "min": 49.0,
+          "max": 53.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      },
+      {
+        "setting": "3 day(s)",
+        "params": {
+          "reporting_lag_days": 3
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 8.209,
+          "sd": 0.436,
+          "ci95_low": 7.668,
+          "ci95_high": 8.75,
+          "min": 7.607,
+          "max": 8.65
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 73.2,
+          "sd": 3.899,
+          "ci95_low": 68.36,
+          "ci95_high": 78.04,
+          "min": 69.0,
+          "max": 79.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      },
+      {
+        "setting": "5 day(s)",
+        "params": {
+          "reporting_lag_days": 5
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 12.125,
+          "sd": 0.306,
+          "ci95_low": 11.745,
+          "ci95_high": 12.506,
+          "min": 11.67,
+          "max": 12.373
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 105.8,
+          "sd": 4.324,
+          "ci95_low": 100.431,
+          "ci95_high": 111.169,
+          "min": 102.0,
+          "max": 113.0
+        },
+        "data_quality_effect_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        },
+        "data_inconsistency_rate_pct": {
+          "n": 5,
+          "mean": 9.769,
+          "sd": 1.476,
+          "ci95_low": 7.936,
+          "ci95_high": 11.601,
+          "min": 8.03,
+          "max": 12.037
+        }
+      }
+    ]
+  },
+  "mechanism": {
+    "cases": {
+      "baseline": {
+        "params": {},
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 3.005,
+          "sd": 0.362,
+          "ci95_low": 2.556,
+          "ci95_high": 3.455,
+          "min": 2.58,
+          "max": 3.567
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 27.6,
+          "sd": 3.209,
+          "ci95_low": 23.616,
+          "ci95_high": 31.584,
+          "min": 23.0,
+          "max": 31.0
+        },
+        "data_quality_effect_on_WMAPE_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        }
+      },
+      "no_reporting_lag": {
+        "params": {
+          "reporting_lag_days": 0
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.897,
+          "sd": 0.44,
+          "ci95_low": 2.351,
+          "ci95_high": 3.444,
+          "min": 2.323,
+          "max": 3.417
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 24.4,
+          "sd": 2.408,
+          "ci95_low": 21.41,
+          "ci95_high": 27.39,
+          "min": 21.0,
+          "max": 27.0
+        },
+        "data_quality_effect_on_WMAPE_pct": {
+          "n": 5,
+          "mean": 5.213,
+          "sd": 2.551,
+          "ci95_low": 2.046,
+          "ci95_high": 8.38,
+          "min": 1.2,
+          "max": 7.767
+        }
+      },
+      "no_data_errors": {
+        "params": {
+          "manual_entry_error_rate": 0.0,
+          "missing_entry_rate": 0.0,
+          "duplicate_entry_rate": 0.0
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.809,
+          "sd": 0.183,
+          "ci95_low": 2.582,
+          "ci95_high": 3.037,
+          "min": 2.557,
+          "max": 2.99
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 26.0,
+          "sd": 2.828,
+          "ci95_low": 22.489,
+          "ci95_high": 29.511,
+          "min": 23.0,
+          "max": 29.0
+        },
+        "data_quality_effect_on_WMAPE_pct": {
+          "n": 5,
+          "mean": 0.0,
+          "sd": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "null_snapshot_only": {
+        "params": {
+          "reporting_lag_days": 0,
+          "manual_entry_error_rate": 0.0,
+          "missing_entry_rate": 0.0,
+          "duplicate_entry_rate": 0.0
+        },
+        "fill_rate_gain_pct_points": {
+          "n": 5,
+          "mean": 2.864,
+          "sd": 0.158,
+          "ci95_low": 2.668,
+          "ci95_high": 3.06,
+          "min": 2.643,
+          "max": 3.083
+        },
+        "stockout_days_avoided": {
+          "n": 5,
+          "mean": 24.4,
+          "sd": 2.074,
+          "ci95_low": 21.826,
+          "ci95_high": 26.974,
+          "min": 21.0,
+          "max": 26.0
+        },
+        "data_quality_effect_on_WMAPE_pct": {
+          "n": 5,
+          "mean": 0.0,
+          "sd": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    "attribution": {
+      "total_stockout_days_avoided": 27.6,
+      "from_snapshot_staleness": 24.4,
+      "from_reporting_lag": 3.2,
+      "from_data_errors": 1.6,
+      "share_from_snapshot_staleness_pct": 88.4,
+      "share_from_reporting_lag_pct": 11.6,
+      "share_from_data_errors_pct": 5.8
+    }
+  }
+}
